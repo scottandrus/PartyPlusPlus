@@ -11,6 +11,7 @@
 #import "SAViewManipulator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PPPDetailViewController.h"
+#import "PPPAppDelegate.h"
 
 @interface PPPViewController ()
 
@@ -18,17 +19,51 @@
 
 @implementation PPPViewController
 
+#pragma mark - Helper methods
+/*
+ * Configure the logged in versus logged out UX
+ */
+- (void)sessionStateChanged:(NSNotification*)notification {
+    if (FBSession.activeSession.isOpen) {
+        // If a deep link, go to the seleceted menu
+//        if (self.menuLink) {
+//            [self goToSelectedMenu];
+//        } else {
+            [self populateUserDetails];
+//        }
+    } else {
+        [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
+    }
+}
+
+- (void)populateUserDetails {
+    PPPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate requestUserData:^(id sender, id<FBGraphUser> user) {
+//        self.userNameLabel.text = user.name;
+//        self.userProfilePictureView.profileID = [user objectForKey:@"id"];
+        NSLog(@"%@", user.name);
+    }];
+}
+
 #pragma mark - View Controller lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    // Register for notifications on FB session state changes
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(sessionStateChanged:)
+     name:FBSessionStateChangedNotification
+     object:nil];
     
     [self customizeUI];
     [self setupMainEventsScrollView];
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
+    
+    [self.navigationController performSegueWithIdentifier:@"DisplayLoginViewController" sender:self];
 
 }
 
