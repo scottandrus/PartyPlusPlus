@@ -66,23 +66,22 @@
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
     // Present login modal if necessary after the view has been
     // displayed, not in viewWillAppear: so as to allow display
     // stack to "unwind"
     if (FBSession.activeSession.isOpen) {
-//        [self goToSelectedMenu];
+        //        [self goToSelectedMenu];
     } else if (FBSession.activeSession.isOpen ||
                FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded ||
                FBSession.activeSession.state == FBSessionStateCreatedOpening) {
     } else {
         [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,16 +113,11 @@
 
 - (void)setupMainEventsScrollView {
     
-    self.currentEvent = [[PPPEvent alloc] init];
-    
-    self.currentEvent.eventName = @"HackNashville";
-    self.currentEvent.locationString = @"Emma";
-    self.currentEvent.dateString = @"Tonight\n7 PM";
-    self.currentEvent.image = [UIImage imageNamed:@"480"];
-    [self.currentEventView loadEvent:self.currentEvent];
+    // Set up current event view
+    [self setupCurrentEventView];
     
     // Round current event
-    [self styleMainEventView:self.currentEventView];
+//    [self styleMainEventView:self.currentEventView];
     
     // Add the target to the button
     [self.currentEventView.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
@@ -136,7 +130,7 @@
     PPPEvent *event;
     
     // Create 10 events
-    for (size_t i = 1; i < 10; ++i) {
+    for (size_t i = 0; i < 10; ++i) {
         
         // Allocate and initialize the event
         view = [[PPPMainEventView alloc] init];
@@ -160,8 +154,8 @@
         view.origin = self.currentEventView.origin;
         view.left += self.mainEventsScrollView.width * i;
         
-        NSLog(@"%@", view.subviews);
-        NSLog(@"%@", view.detailButton);
+        // Style the event view
+        [self styleMainEventView:view];
         
         // Add it to the list of mutable events
         [mutableEvents addObject:event];
@@ -171,6 +165,17 @@
     self.events = [mutableEvents copy];
     
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
+}
+
+- (void)setupCurrentEventView {
+//    self.currentEvent = [[PPPEvent alloc] init];
+//    self.currentEvent.eventName = @"HackNashville";
+//    self.currentEvent.locationString = @"Emma";
+//    self.currentEvent.dateString = @"Tonight\n7 PM";
+//    self.currentEvent.image = [UIImage imageNamed:@"480"];
+//    [self.currentEventView loadEvent:self.currentEvent];
+    
+    
 }
 
 - (void)goToDetail:(UIButton *)sender {

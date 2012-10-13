@@ -35,17 +35,17 @@
                                         <rect key="frame" x="0.0" y="339" width="320" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" id="yRk-Ul-zGM" customClass="PPPTertiaryEventView">
+                                            <view hidden="YES" contentMode="scaleToFill" id="yRk-Ul-zGM" customClass="PPPTertiaryEventView">
                                                 <rect key="frame" x="20" y="5" width="84" height="61"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" id="3y8-7g-thB" customClass="PPPTertiaryEventView">
+                                            <view hidden="YES" contentMode="scaleToFill" id="3y8-7g-thB" customClass="PPPTertiaryEventView">
                                                 <rect key="frame" x="118" y="5" width="84" height="61"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" id="qOi-P3-fc3" customClass="PPPTertiaryEventView">
+                                            <view hidden="YES" contentMode="scaleToFill" id="qOi-P3-fc3" customClass="PPPTertiaryEventView">
                                                 <rect key="frame" x="216" y="5" width="84" height="61"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -193,49 +193,6 @@
             <point key="canvasLocation" x="1282" y="107"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="PPPDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backPressed:" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="PPPLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginButtonClicked:"/>
-            </relationships>
-        </class>
-        <class className="PPPMainEventView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPMainEventView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="detailButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="eventNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="placeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="thumbnailImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="thumbnailScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="PPPTertiaryEventView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPTertiaryEventView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PPPViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="backgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="currentEventView" candidateClass="PPPMainEventView"/>
-                <relationship kind="outlet" name="mainEventsScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="pageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tertiaryEventsScrollview" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
