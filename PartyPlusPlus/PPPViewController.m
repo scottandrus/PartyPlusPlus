@@ -8,6 +8,8 @@
 
 #import "PPPViewController.h"
 #import "UIView+Frame.h"
+#import "SAViewManipulator.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface PPPViewController ()
 
@@ -22,7 +24,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [self customizeUI];
     [self setupMainEventsScrollView];
+    
+    self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,13 +41,29 @@
     [self setCurrentEvent:nil];
     [self setMainEventsScrollView:nil];
     [self setTertiaryEventsScrollview:nil];
+    [self setBackgroundView:nil];
+    [self setPageLabel:nil];
     [super viewDidUnload];
 }
 
 #pragma mark - Utility methods
 
+- (void)customizeUI {
+    [SAViewManipulator setGradientBackgroundImageForView:self.backgroundView withTopColor:[UIColor colorWithRed:0.875 green:0.875 blue:0.875 alpha:1] /*#dfdfdf*/ andBottomColor:[UIColor colorWithRed:0.549 green:0.549 blue:0.549 alpha:1] /*#8c8c8c*/];
+    
+    // Set a gradient on the navigation bar
+    [SAViewManipulator setGradientBackgroundImageForView:self.navigationController.navigationBar withTopColor:nil andBottomColor:nil];
+    
+    // Round the navigation bar
+    [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
+}
+
 - (void)setupMainEventsScrollView {
     
+    // Round current event
+//    [self styleMainEventView:self.currentEvent];
+    
+    // Create a mutable array to mutate events
     NSMutableArray *mutableEvents = [NSMutableArray arrayWithObjects:self.currentEvent, nil];
     
     // Create a main event view pointer
@@ -53,26 +75,49 @@
         // Allocate and initialize the event
         view = [[PPPMainEventView alloc] init];
         
+        // Set the labels
+        view.eventNameLabel.text = [NSString stringWithFormat:@"Event %zu", i + 1];
+        view.placeLabel.text = @"Vanderbilt";
+        
+        // Add it to the subview
+        [self.mainEventsScrollView addSubview:view];
+        UIGraphicsBeginImageContext(CGSizeMake(view.width, view.height));
+        
+//        [self styleMainEventView:view];
+//        view.layer.shouldRasterize = YES;
+        
         // Grab the one from interface builder
         view.origin = self.currentEvent.origin;
         view.left += self.mainEventsScrollView.width * i;
         
-        // Set the labels
-        view.eventNameLabel.text = [NSString stringWithFormat:@"Event %zu", i + 1];
-        view.placeTimeLabel.text = @"Next Week";
-        
-        // Add it to the subview
-        [self.mainEventsScrollView addSubview:view];
         [mutableEvents addObject:view];
+        
+//        [self styleMainEventView:view];
     }
     
     // Put it into the events array
     self.events = [mutableEvents copy];
     
     self.currentEvent.eventNameLabel.text = @"HackNashville";
-    self.currentEvent.placeTimeLabel.text = @"Tonight";
+    self.currentEvent.placeLabel.text = @"Emma";
     
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
+}
+
+- (void)styleMainEventView:(PPPMainEventView *)mainEventView {
+    mainEventView.clipsToBounds = YES;
+    [SAViewManipulator addBorderToView:mainEventView withWidth:2 color:[UIColor blackColor] andRadius:10];
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender {
+    // Update the page when more than 50% of the previous/next page is visible
+    CGFloat pageWidth = self.mainEventsScrollView.width;
+    int page = floor((self.mainEventsScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+//    self.currentlySelectedWeekday = page;
+//    [self styleMainEventView:[self.events objectAtIndex:(page - 1)]];
+    self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", page + 1, self.events.count];
 }
 
 @end
