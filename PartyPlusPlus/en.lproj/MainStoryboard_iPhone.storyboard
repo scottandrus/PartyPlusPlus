@@ -71,11 +71,27 @@
                         <outlet property="mainEventsScrollView" destination="Lyc-C8-tCf" id="Z83-Ay-wvP"/>
                         <outlet property="pageLabel" destination="bZ9-e0-GYw" id="84k-ML-BCr"/>
                         <outlet property="tertiaryEventsScrollview" destination="4Ku-xV-OeP" id="MCA-P9-RID"/>
+                        <segue destination="mKA-1G-Ktm" kind="modal" identifier="goToDetail" modalTransitionStyle="flipHorizontal" id="m3I-fg-Rll"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="888" y="145"/>
+            <point key="canvasLocation" x="856" y="145"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="8Zg-ef-B3n">
+            <objects>
+                <viewController id="mKA-1G-Ktm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zgs-bI-Ath">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wzs-YX-ENS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1278" y="145"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iYG-ef-hAC">
@@ -117,9 +133,13 @@
         <class className="PPPMainEventView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPMainEventView.h"/>
             <relationships>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="eventNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="placeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="thumbnailImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="thumbnailScrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
         <class className="PPPViewController" superclassName="UIViewController">

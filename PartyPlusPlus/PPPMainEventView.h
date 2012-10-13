@@ -10,10 +10,15 @@
 
 @interface PPPMainEventView : UIView
 
+// Non-IB
+@property (strong, nonatomic) NSArray *attendingThumbnails;
+
 // IBOutlets
+@property (strong, nonatomic) IBOutlet UIButton *detailButton;
 @property (strong, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *placeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-
+@property (strong, nonatomic) IBOutlet UIScrollView *thumbnailScrollView;
+@property (strong, nonatomic) IBOutlet UIImageView *thumbnailImageView;
 @end

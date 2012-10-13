@@ -8,6 +8,7 @@
 
 #import "PPPMainEventView.h"
 #import "SAViewManipulator.h"
+#import "UIView+Frame.h"
 
 @implementation PPPMainEventView
 
@@ -40,17 +41,51 @@
 
 - (void)style {
     [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPMainEventView" owner:self options:nil] objectAtIndex:0]];
+//    [self setupAttendingScrollView];
 }
 
+- (void)setupAttendingScrollView {
+    
+    // Round current event
+    //    [self styleMainEventView:self.currentEvent];
+    
+    // Create a mutable array to mutate events
+    NSMutableArray *mutableThumbnails = [NSMutableArray arrayWithObjects:self.thumbnailImageView, nil];
+    
+    // Create a main event view pointer
+    UIImageView *view;
+    
+    // Create 10 events
+    for (size_t i = 1; i < 10; ++i) {
+        
+        // Allocate and initialize the event
+        view = [[UIImageView alloc] initWithFrame:self.imageView.frame];
+        
+        view.left -= (self.thumbnailImageView.width + 5) * i;
+        
+        // Set the labels
+        view.image = [UIImage imageNamed:@"Thumbnail.png"];
+        
+        // Add it to the subview
+        [self.thumbnailScrollView addSubview:view];
+        
+        
+        [mutableThumbnails addObject:view];
+        
+        //        [self styleMainEventView:view];
+    }
+    
+    // Put it into the events array
+    self.attendingThumbnails = [mutableThumbnails copy];
+}
 
+/*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
-    self.clipsToBounds = YES;
-    [SAViewManipulator addBorderToView:self withWidth:2 color:[UIColor blackColor] andRadius:10];
+    
 }
-
+*/
 
 @end

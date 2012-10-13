@@ -61,7 +61,7 @@
 - (void)setupMainEventsScrollView {
     
     // Round current event
-//    [self styleMainEventView:self.currentEvent];
+    [self styleMainEventView:self.currentEvent];
     
     // Create a mutable array to mutate events
     NSMutableArray *mutableEvents = [NSMutableArray arrayWithObjects:self.currentEvent, nil];
@@ -79,20 +79,17 @@
         view.eventNameLabel.text = [NSString stringWithFormat:@"Event %zu", i + 1];
         view.placeLabel.text = @"Vanderbilt";
         
+        [view.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventTouchUpInside];
+        
         // Add it to the subview
         [self.mainEventsScrollView addSubview:view];
-        UIGraphicsBeginImageContext(CGSizeMake(view.width, view.height));
-        
-//        [self styleMainEventView:view];
-//        view.layer.shouldRasterize = YES;
         
         // Grab the one from interface builder
         view.origin = self.currentEvent.origin;
         view.left += self.mainEventsScrollView.width * i;
         
+        // Add it to the list of mutable events
         [mutableEvents addObject:view];
-        
-//        [self styleMainEventView:view];
     }
     
     // Put it into the events array
@@ -102,6 +99,10 @@
     self.currentEvent.placeLabel.text = @"Emma";
     
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
+}
+
+- (void)goToDetail:(PPPMainEventView *)detail {
+    [self performSegueWithIdentifier:@"goToDetail" sender:nil];
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
@@ -115,8 +116,6 @@
     // Update the page when more than 50% of the previous/next page is visible
     CGFloat pageWidth = self.mainEventsScrollView.width;
     int page = floor((self.mainEventsScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-//    self.currentlySelectedWeekday = page;
-//    [self styleMainEventView:[self.events objectAtIndex:(page - 1)]];
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", page + 1, self.events.count];
 }
 
