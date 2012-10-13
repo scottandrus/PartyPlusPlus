@@ -65,7 +65,7 @@
     [self setupMainEventsScrollView];
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
-
+    
 }
 
 //- (void)viewDidAppear:(BOOL)animated {

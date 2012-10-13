@@ -155,33 +155,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		D2B00B6A1629E992008DF306 /* Login View Controller */ = {
-			isa = PBXGroup;
-			children = (
-				F792230416290D6400ED0964 /* PPPLoginViewController.h */,
-				F792230516290D6400ED0964 /* PPPLoginViewController.m */,
-			);
-			name = "Login View Controller";
-			sourceTree = "<group>";
-		};
-		D2B00B6B1629E99D008DF306 /* View Controller */ = {
-			isa = PBXGroup;
-			children = (
-				D2D4E333162900F9001EE23B /* PPPViewController.h */,
-				D2D4E334162900F9001EE23B /* PPPViewController.m */,
-			);
-			name = "View Controller";
-			sourceTree = "<group>";
-		};
-		D2B00B6C1629E9AA008DF306 /* Detail View Controller */ = {
-			isa = PBXGroup;
-			children = (
-				D2B00B5216293E3A008DF306 /* PPPDetailViewController.h */,
-				D2B00B5316293E3A008DF306 /* PPPDetailViewController.m */,
-			);
-			name = "Detail View Controller";
-			sourceTree = "<group>";
-		};
 		D2D4E306162900F9001EE23B = {
 			isa = PBXGroup;
 			children = (
@@ -283,9 +256,12 @@
 		D2D4E349162908EE001EE23B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2B00B6A1629E992008DF306 /* Login View Controller */,
-				D2B00B6B1629E99D008DF306 /* View Controller */,
-				D2B00B6C1629E9AA008DF306 /* Detail View Controller */,
+				F792230416290D6400ED0964 /* PPPLoginViewController.h */,
+				F792230516290D6400ED0964 /* PPPLoginViewController.m */,
+				D2D4E333162900F9001EE23B /* PPPViewController.h */,
+				D2D4E334162900F9001EE23B /* PPPViewController.m */,
+				D2B00B5216293E3A008DF306 /* PPPDetailViewController.h */,
+				D2B00B5316293E3A008DF306 /* PPPDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
