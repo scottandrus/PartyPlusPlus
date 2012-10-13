@@ -164,11 +164,6 @@
         UIButton *detailButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
         [detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventTouchUpInside];
         
-        // DEBUG: Make those views visable
-//        detailButton.layer.borderColor = [[UIColor redColor] CGColor];
-//        detailButton.layer.borderWidth = 3;
-//        view.layer.borderWidth = 6;
-        
         // Add the detail button to the view
         [view addSubview:detailButton];
         detailButton.size = view.size;
