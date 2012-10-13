@@ -10,10 +10,10 @@
 
 
 NSString *const FBSessionStateChangedNotification =
-@"com.facebook.samples.SocialCafe:FBSessionStateChangedNotification";
+@"com.partyplusplus.partyplusplus:FBSessionStateChangedNotification";
 
 NSString *const FBMenuDataChangedNotification =
-@"com.facebook.samples.SocialCafe:FBMenuDataChangedNotification";
+@"com.partyplusplus.partyplusplus:FBMenuDataChangedNotification";
 
 
 @implementation PPPAppDelegate
@@ -132,7 +132,15 @@ NSString *const FBMenuDataChangedNotification =
     }
 }
 
-
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // FBSample logic
+    // We need to handle URLs by passing them to FBSession in order for SSO authentication
+    // to work.
+    return [FBSession.activeSession handleOpenURL:url];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

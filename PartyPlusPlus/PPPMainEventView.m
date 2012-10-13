@@ -39,9 +39,17 @@
     return self;
 }
 
+- (void)loadEvent:(PPPEvent *)event {
+    self.event = event;
+    
+    self.eventNameLabel.text = self.event.eventName;
+    self.placeLabel.text = self.event.locationString;
+    self.dateLabel.text = self.event.dateString;
+    self.imageView.image = self.event.image;
+}
+
 - (void)style {
     [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPMainEventView" owner:self options:nil] objectAtIndex:0]];
-//    [self setupAttendingScrollView];
 }
 
 - (void)setupAttendingScrollView {

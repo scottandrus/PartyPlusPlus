@@ -27,7 +27,8 @@
         
         // Go to the menu page by dismissing the modal view controller
         // instead of using segues.
-        [self.presentingViewController dismissModalViewControllerAnimated:YES];
+//        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -45,6 +46,7 @@
      object:nil];
 }
 
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -55,7 +57,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation = UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Action methods
@@ -67,7 +69,7 @@
 }
 
 - (IBAction)bypassPressed {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self performSegueWithIdentifier:@"loggedIn" sender:self];
 }
 
 

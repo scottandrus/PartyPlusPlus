@@ -43,18 +43,20 @@
         
         FBRequestConnection *requester = [[FBRequestConnection alloc] init];
         [requester addRequest:[FBRequest requestForGraphPath:@"me/events"] completionHandler:^(FBRequestConnection *connection,
-                                                            id<FBGraphUser> user,
+                                                            NSArray *response,
                                                             NSError *error) {
             if (!error) {
-                NSString *userInfo = @"";
-                
-                // Example: typed access (name)
-                // - no special permissions required
-                userInfo = [userInfo
-                            stringByAppendingString:
-                            [NSString stringWithFormat:@"Name: %@\n\n",
-                             user.name]];
+                NSLog(@"%@", response);
+                for (id dict in response) {
+                    PPPEvent *event = [[PPPEvent alloc] init];
+                    [dict objectForKey:@"id"];
+                    [dict objectForKey:@"name"];
+                    [dict objectForKey:@"start_time"];
+                    [dict objectForKey:@"end_time"];
+                    [dict objectForKey:@"rsvp_status"];
+                }
             }
+            
         }];
         
         [requester start];
@@ -90,7 +92,6 @@
     [self setupMainEventsScrollView];
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -132,7 +133,7 @@
 }
 
 - (void)viewDidUnload {
-    [self setCurrentEvent:nil];
+    [self setCurrentEventView:nil];
     [self setMainEventsScrollView:nil];
     [self setTertiaryEventsScrollview:nil];
     [self setBackgroundView:nil];
@@ -154,51 +155,73 @@
 
 - (void)setupMainEventsScrollView {
     
-    // Round current event
-    [self styleMainEventView:self.currentEvent];
+    // Set up current event view
+    [self setupCurrentEventView];
     
-    [self.currentEvent.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
+    // Round current event
+//    [self styleMainEventView:self.currentEventView];
+    
+    // Add the target to the button
+    [self.currentEventView.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
     
     // Create a mutable array to mutate events
     NSMutableArray *mutableEvents = [NSMutableArray arrayWithObjects:self.currentEvent, nil];
     
     // Create a main event view pointer
     PPPMainEventView *view;
+    PPPEvent *event;
     
     // Create 10 events
-    for (size_t i = 1; i < 10; ++i) {
+    for (size_t i = 0; i < 10; ++i) {
         
         // Allocate and initialize the event
         view = [[PPPMainEventView alloc] init];
+        event = [[PPPEvent alloc] init];
         
         // Set the labels
-        view.eventNameLabel.text = [NSString stringWithFormat:@"Event %zu", i + 1];
-        view.placeLabel.text = @"Vanderbilt";
+        event.eventName = [NSString stringWithFormat:@"Event %zu", i + 1];
+        event.locationString = @"Vanderbilt";
+        event.dateString = @"Next Week\n7 PM";
+        event.image = [UIImage imageNamed:@"480"];
         
-        [view.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
+        [view loadEvent:event];
         
         // Add it to the subview
         [self.mainEventsScrollView addSubview:view];
         
+        // Add a target to the button
+        [view.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
+        
         // Grab the one from interface builder
-        view.origin = self.currentEvent.origin;
+        view.origin = self.currentEventView.origin;
         view.left += self.mainEventsScrollView.width * i;
         
+        // Style the event view
+        [self styleMainEventView:view];
+        
         // Add it to the list of mutable events
-        [mutableEvents addObject:view];
+        [mutableEvents addObject:event];
     }
     
     // Put it into the events array
     self.events = [mutableEvents copy];
     
-    self.currentEvent.eventNameLabel.text = @"HackNashville";
-    self.currentEvent.placeLabel.text = @"Emma";
-    
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
 }
 
-- (void)goToDetail:(PPPMainEventView *)detail {
-    [self performSegueWithIdentifier:@"goToDetail" sender:nil];
+- (void)setupCurrentEventView {
+//    self.currentEvent = [[PPPEvent alloc] init];
+//    self.currentEvent.eventName = @"HackNashville";
+//    self.currentEvent.locationString = @"Emma";
+//    self.currentEvent.dateString = @"Tonight\n7 PM";
+//    self.currentEvent.image = [UIImage imageNamed:@"480"];
+//    [self.currentEventView loadEvent:self.currentEvent];
+    
+    
+}
+
+- (void)goToDetail:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"goToDetail" sender:self.currentEvent];
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
@@ -218,14 +241,15 @@
 
 #pragma mark - Storyboard methods
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"goToDetail"]) {
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
         PPPDetailViewController *dvc = (PPPDetailViewController *)nav.topViewController;
+        dvc.event = sender;
         dvc.delegate = self;
     } else if ([segue.identifier isEqualToString:@"segueToLogin"]) {
         
     }
-
 }
 
 @end

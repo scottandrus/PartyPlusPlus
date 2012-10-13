@@ -23,4 +23,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIScrollView *thumbnailScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *thumbnailImageView;
+
+// Public methods
+- (void)loadEvent:(PPPEvent *)event;
+
 @end
