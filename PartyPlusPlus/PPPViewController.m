@@ -111,21 +111,25 @@
     
     // Create a main event view pointer
     PPPMainEventView *view;
+    PPPEvent *event;
     
     // Create 10 events
     for (size_t i = 1; i < 10; ++i) {
         
         // Allocate and initialize the event
         view = [[PPPMainEventView alloc] init];
+        event = [[PPPEvent alloc] init];
         
         // Set the labels
-        view.eventNameLabel.text = [NSString stringWithFormat:@"Event %zu", i + 1];
-        view.placeLabel.text = @"Vanderbilt";
+        event.eventName = [NSString stringWithFormat:@"Event %zu", i + 1];
+        event.locationString = @"Vanderbilt";
         
-        [view.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
+        [view loadEvent:event];
         
         // Add it to the subview
         [self.mainEventsScrollView addSubview:view];
+        
+        [view.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
         
         // Grab the one from interface builder
         view.origin = self.currentEvent.origin;
@@ -144,8 +148,9 @@
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
 }
 
-- (void)goToDetail:(PPPMainEventView *)detail {
-    [self performSegueWithIdentifier:@"goToDetail" sender:nil];
+- (void)goToDetail:(UIButton *)sender {
+    PPPMainEventView *mev = (PPPMainEventView *)sender.superview;
+    [self performSegueWithIdentifier:@"goToDetail" sender:mev.event];
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
@@ -167,6 +172,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
     PPPDetailViewController *dvc = (PPPDetailViewController *)nav.topViewController;
+    dvc.event = sender;
     dvc.delegate = self;
 }
 

@@ -10,4 +10,11 @@
 
 @implementation PPPEvent
 
+@synthesize peopleAttending;
+@synthesize eventName;
+@synthesize date;
+@synthesize dateString;
+@synthesize locationString;
+@synthesize location;
+
 @end

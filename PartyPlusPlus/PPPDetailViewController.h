@@ -11,6 +11,8 @@
 
 @interface PPPDetailViewController : UIViewController
 
+@property (strong, nonatomic) PPPEvent *event;
+
 @property (strong, nonatomic) PPPViewController *delegate;
 
 @end
