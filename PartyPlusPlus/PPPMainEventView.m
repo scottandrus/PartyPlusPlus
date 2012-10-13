@@ -50,7 +50,6 @@
 
 - (void)style {
     [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPMainEventView" owner:self options:nil] objectAtIndex:0]];
-//    [self setupAttendingScrollView];
 }
 
 - (void)setupAttendingScrollView {

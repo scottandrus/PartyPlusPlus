@@ -79,7 +79,7 @@
 }
 
 - (void)viewDidUnload {
-    [self setCurrentEvent:nil];
+    [self setCurrentEventView:nil];
     [self setMainEventsScrollView:nil];
     [self setTertiaryEventsScrollview:nil];
     [self setBackgroundView:nil];
@@ -101,10 +101,19 @@
 
 - (void)setupMainEventsScrollView {
     
-    // Round current event
-    [self styleMainEventView:self.currentEvent];
+    self.currentEvent = [[PPPEvent alloc] init];
     
-    [self.currentEvent.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
+    self.currentEvent.eventName = @"HackNashville";
+    self.currentEvent.locationString = @"Emma";
+    self.currentEvent.dateString = @"Tonight\n7 PM";
+    self.currentEvent.image = [UIImage imageNamed:@"480"];
+    [self.currentEventView loadEvent:self.currentEvent];
+    
+    // Round current event
+    [self styleMainEventView:self.currentEventView];
+    
+    // Add the target to the button
+    [self.currentEventView.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
     
     // Create a mutable array to mutate events
     NSMutableArray *mutableEvents = [NSMutableArray arrayWithObjects:self.currentEvent, nil];
@@ -123,34 +132,36 @@
         // Set the labels
         event.eventName = [NSString stringWithFormat:@"Event %zu", i + 1];
         event.locationString = @"Vanderbilt";
+        event.dateString = @"Next Week\n7 PM";
+        event.image = [UIImage imageNamed:@"480"];
         
         [view loadEvent:event];
         
         // Add it to the subview
         [self.mainEventsScrollView addSubview:view];
         
+        // Add a target to the button
         [view.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
         
         // Grab the one from interface builder
-        view.origin = self.currentEvent.origin;
+        view.origin = self.currentEventView.origin;
         view.left += self.mainEventsScrollView.width * i;
         
+        NSLog(@"%@", view.subviews);
+        NSLog(@"%@", view.detailButton);
+        
         // Add it to the list of mutable events
-        [mutableEvents addObject:view];
+        [mutableEvents addObject:event];
     }
     
     // Put it into the events array
     self.events = [mutableEvents copy];
     
-    self.currentEvent.eventNameLabel.text = @"HackNashville";
-    self.currentEvent.placeLabel.text = @"Emma";
-    
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
 }
 
 - (void)goToDetail:(UIButton *)sender {
-    PPPMainEventView *mev = (PPPMainEventView *)sender.superview;
-    [self performSegueWithIdentifier:@"goToDetail" sender:mev.event];
+    [self performSegueWithIdentifier:@"goToDetail" sender:self.currentEvent];
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
