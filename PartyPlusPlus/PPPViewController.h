@@ -11,8 +11,11 @@
 
 @interface PPPViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet PPPMainEventView *currentEvent;
+// Non-IB
 @property (strong, nonatomic) NSArray *events;
+
+// IBOutlets
+@property (strong, nonatomic) IBOutlet PPPMainEventView *currentEvent;
 @property (strong, nonatomic) IBOutlet UIScrollView *mainEventsScrollView;
 @property (strong, nonatomic) IBOutlet UIScrollView *tertiaryEventsScrollview;
 

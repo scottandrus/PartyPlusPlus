@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D282555D162914E500A498A6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825554162914E500A498A6 /* OBGradientView.m */; };
+		D282555E162914E500A498A6 /* SAImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAImageManipulator.m */; };
+		D282555F162914E500A498A6 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825558162914E500A498A6 /* UIImage+Color.m */; };
+		D2825560162914E500A498A6 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D282555A162914E500A498A6 /* UIView+Frame.m */; };
+		D2825561162914E500A498A6 /* UIViewController+Overview.m in Sources */ = {isa = PBXBuildFile; fileRef = D282555C162914E500A498A6 /* UIViewController+Overview.m */; };
+		D28255661629158500A498A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28255651629158500A498A6 /* QuartzCore.framework */; };
+		D2825569162916AB00A498A6 /* PlaceKitten.png in Resources */ = {isa = PBXBuildFile; fileRef = D2825568162916AB00A498A6 /* PlaceKitten.png */; };
 		D2D4E316162900F9001EE23B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E315162900F9001EE23B /* UIKit.framework */; };
 		D2D4E318162900F9001EE23B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E317162900F9001EE23B /* Foundation.framework */; };
 		D2D4E31A162900F9001EE23B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E319162900F9001EE23B /* CoreGraphics.framework */; };
@@ -20,11 +27,22 @@
 		D2D4E332162900F9001EE23B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E330162900F9001EE23B /* MainStoryboard_iPad.storyboard */; };
 		D2D4E335162900F9001EE23B /* PPPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E334162900F9001EE23B /* PPPViewController.m */; };
 		D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E341162908AA001EE23B /* PPPMainEventView.m */; };
-		D2D4E344162908C6001EE23B /* PPPMainEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E343162908C6001EE23B /* PPPMainEventView.xib */; };
 		F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F792230516290D6400ED0964 /* PPPLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2825553162914E500A498A6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
+		D2825554162914E500A498A6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
+		D2825555162914E500A498A6 /* SAImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAImageManipulator.h; sourceTree = "<group>"; };
+		D2825556162914E500A498A6 /* SAImageManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAImageManipulator.m; sourceTree = "<group>"; };
+		D2825557162914E500A498A6 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		D2825558162914E500A498A6 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		D2825559162914E500A498A6 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		D282555A162914E500A498A6 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		D282555B162914E500A498A6 /* UIViewController+Overview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Overview.h"; sourceTree = "<group>"; };
+		D282555C162914E500A498A6 /* UIViewController+Overview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Overview.m"; sourceTree = "<group>"; };
+		D28255651629158500A498A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D2825568162916AB00A498A6 /* PlaceKitten.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceKitten.png; sourceTree = "<group>"; };
 		D2D4E311162900F9001EE23B /* PartyPlusPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyPlusPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D4E315162900F9001EE23B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D2D4E317162900F9001EE23B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,7 +62,6 @@
 		D2D4E334162900F9001EE23B /* PPPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PPPViewController.m; sourceTree = "<group>"; };
 		D2D4E340162908AA001EE23B /* PPPMainEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPMainEventView.h; sourceTree = "<group>"; };
 		D2D4E341162908AA001EE23B /* PPPMainEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPMainEventView.m; sourceTree = "<group>"; };
-		D2D4E343162908C6001EE23B /* PPPMainEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPMainEventView.xib; sourceTree = "<group>"; };
 		F792230416290D6400ED0964 /* PPPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPLoginViewController.h; sourceTree = "<group>"; };
 		F792230516290D6400ED0964 /* PPPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28255661629158500A498A6 /* QuartzCore.framework in Frameworks */,
 				D2D4E316162900F9001EE23B /* UIKit.framework in Frameworks */,
 				D2D4E318162900F9001EE23B /* Foundation.framework in Frameworks */,
 				D2D4E31A162900F9001EE23B /* CoreGraphics.framework in Frameworks */,
@@ -63,6 +81,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2825563162914EB00A498A6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D2825553162914E500A498A6 /* OBGradientView.h */,
+				D2825554162914E500A498A6 /* OBGradientView.m */,
+				D2825555162914E500A498A6 /* SAImageManipulator.h */,
+				D2825556162914E500A498A6 /* SAImageManipulator.m */,
+				D2825564162914FB00A498A6 /* Categories */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		D2825564162914FB00A498A6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				D2825557162914E500A498A6 /* UIImage+Color.h */,
+				D2825558162914E500A498A6 /* UIImage+Color.m */,
+				D2825559162914E500A498A6 /* UIView+Frame.h */,
+				D282555A162914E500A498A6 /* UIView+Frame.m */,
+				D282555B162914E500A498A6 /* UIViewController+Overview.h */,
+				D282555C162914E500A498A6 /* UIViewController+Overview.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		D2825567162916AB00A498A6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D2825568162916AB00A498A6 /* PlaceKitten.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		D2D4E306162900F9001EE23B = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +134,7 @@
 		D2D4E314162900F9001EE23B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D28255651629158500A498A6 /* QuartzCore.framework */,
 				D2D4E315162900F9001EE23B /* UIKit.framework */,
 				D2D4E317162900F9001EE23B /* Foundation.framework */,
 				D2D4E319162900F9001EE23B /* CoreGraphics.framework */,
@@ -95,9 +147,11 @@
 			children = (
 				D2D4E346162908D5001EE23B /* App Delegate */,
 				D2D4E345162908CB001EE23B /* Storyboards */,
+				D2825563162914EB00A498A6 /* Utilities */,
 				D2D4E348162908E5001EE23B /* Views */,
 				D2D4E349162908EE001EE23B /* View Controller */,
 				D2D4E31C162900F9001EE23B /* Supporting Files */,
+				D2825567162916AB00A498A6 /* Images */,
 			);
 			path = PartyPlusPlus;
 			sourceTree = "<group>";
@@ -139,7 +193,6 @@
 			children = (
 				D2D4E340162908AA001EE23B /* PPPMainEventView.h */,
 				D2D4E341162908AA001EE23B /* PPPMainEventView.m */,
-				D2D4E343162908C6001EE23B /* PPPMainEventView.xib */,
 			);
 			name = "Main Event View";
 			sourceTree = "<group>";
@@ -221,7 +274,7 @@
 				D2D4E32C162900F9001EE23B /* Default-568h@2x.png in Resources */,
 				D2D4E32F162900F9001EE23B /* MainStoryboard_iPhone.storyboard in Resources */,
 				D2D4E332162900F9001EE23B /* MainStoryboard_iPad.storyboard in Resources */,
-				D2D4E344162908C6001EE23B /* PPPMainEventView.xib in Resources */,
+				D2825569162916AB00A498A6 /* PlaceKitten.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +290,11 @@
 				D2D4E335162900F9001EE23B /* PPPViewController.m in Sources */,
 				D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */,
 				F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */,
+				D282555D162914E500A498A6 /* OBGradientView.m in Sources */,
+				D282555E162914E500A498A6 /* SAImageManipulator.m in Sources */,
+				D282555F162914E500A498A6 /* UIImage+Color.m in Sources */,
+				D2825560162914E500A498A6 /* UIView+Frame.m in Sources */,
+				D2825561162914E500A498A6 /* UIViewController+Overview.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

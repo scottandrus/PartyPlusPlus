@@ -7,12 +7,15 @@
 //
 
 #import "PPPViewController.h"
+#import "UIView+Frame.h"
 
 @interface PPPViewController ()
 
 @end
 
 @implementation PPPViewController
+
+#pragma mark - View Controller lifecycle
 
 - (void)viewDidLoad
 {
@@ -32,4 +35,11 @@
     [self setTertiaryEventsScrollview:nil];
     [super viewDidUnload];
 }
+
+#pragma mark - Utility methods
+
+- (void)setupMainEventsScrollView {
+    self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
+}
+
 @end
