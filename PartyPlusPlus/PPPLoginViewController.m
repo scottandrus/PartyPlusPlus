@@ -60,10 +60,15 @@
 }
 
 #pragma mark - Action methods
+
 - (IBAction)loginButtonClicked:(id)sender {
     PPPAppDelegate *appDelegate =
     [[UIApplication sharedApplication] delegate];
     [appDelegate openSessionWithAllowLoginUI:YES];
+}
+
+- (IBAction)bypassPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
