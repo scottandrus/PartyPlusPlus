@@ -21,6 +21,7 @@
 		D2D4E335162900F9001EE23B /* PPPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E334162900F9001EE23B /* PPPViewController.m */; };
 		D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E341162908AA001EE23B /* PPPMainEventView.m */; };
 		D2D4E344162908C6001EE23B /* PPPMainEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E343162908C6001EE23B /* PPPMainEventView.xib */; };
+		F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F792230516290D6400ED0964 /* PPPLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		D2D4E340162908AA001EE23B /* PPPMainEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPMainEventView.h; sourceTree = "<group>"; };
 		D2D4E341162908AA001EE23B /* PPPMainEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPMainEventView.m; sourceTree = "<group>"; };
 		D2D4E343162908C6001EE23B /* PPPMainEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPMainEventView.xib; sourceTree = "<group>"; };
+		F792230416290D6400ED0964 /* PPPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPLoginViewController.h; sourceTree = "<group>"; };
+		F792230516290D6400ED0964 /* PPPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,8 @@
 		D2D4E349162908EE001EE23B /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F792230416290D6400ED0964 /* PPPLoginViewController.h */,
+				F792230516290D6400ED0964 /* PPPLoginViewController.m */,
 				D2D4E333162900F9001EE23B /* PPPViewController.h */,
 				D2D4E334162900F9001EE23B /* PPPViewController.m */,
 			);
@@ -231,6 +236,7 @@
 				D2D4E326162900F9001EE23B /* PPPAppDelegate.m in Sources */,
 				D2D4E335162900F9001EE23B /* PPPViewController.m in Sources */,
 				D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */,
+				F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
