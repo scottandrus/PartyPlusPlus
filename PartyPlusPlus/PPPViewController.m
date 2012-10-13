@@ -6,10 +6,13 @@
 //  Copyright (c) 2012 Tapatory. All rights reserved.
 //
 
+// Frameworks
+#import <QuartzCore/QuartzCore.h>
+
+// Class files
 #import "PPPViewController.h"
 #import "UIView+Frame.h"
 #import "SAViewManipulator.h"
-#import <QuartzCore/QuartzCore.h>
 #import "PPPDetailViewController.h"
 #import "PPPAppDelegate.h"
 
@@ -160,7 +163,8 @@
 
 #pragma mark - Storyboard methods
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    PPPDetailViewController *dvc = segue.destinationViewController;
+    UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+    PPPDetailViewController *dvc = (PPPDetailViewController *)nav.topViewController;
     dvc.delegate = self;
 }
 

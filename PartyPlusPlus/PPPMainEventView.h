@@ -11,6 +11,7 @@
 @interface PPPMainEventView : UIView
 
 // Non-IB
+@property (strong, nonatomic) PPPEvent *event;
 @property (strong, nonatomic) NSArray *attendingThumbnails;
 
 // IBOutlets

@@ -7,6 +7,7 @@
 //
 
 #import "PPPDetailViewController.h"
+#import "SAViewManipulator.h"
 
 @interface PPPDetailViewController ()
 
@@ -27,6 +28,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // Round the navigation bar
+    [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,4 +45,7 @@
     [self.delegate dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
 @end
