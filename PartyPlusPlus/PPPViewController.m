@@ -68,9 +68,22 @@
     
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    
-//}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Present login modal if necessary after the view has been
+    // displayed, not in viewWillAppear: so as to allow display
+    // stack to "unwind"
+    if (FBSession.activeSession.isOpen) {
+//        [self goToSelectedMenu];
+    } else if (FBSession.activeSession.isOpen ||
+               FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded ||
+               FBSession.activeSession.state == FBSessionStateCreatedOpening) {
+    } else {
+        [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -170,10 +183,15 @@
 
 #pragma mark - Storyboard methods
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
-    PPPDetailViewController *dvc = (PPPDetailViewController *)nav.topViewController;
-    dvc.event = sender;
-    dvc.delegate = self;
+    
+    if ([segue.identifier isEqualToString:@"goToDetail"]) {
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        PPPDetailViewController *dvc = (PPPDetailViewController *)nav.topViewController;
+        dvc.event = sender;
+        dvc.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"segueToLogin"]) {
+        
+    }
 }
 
 @end
