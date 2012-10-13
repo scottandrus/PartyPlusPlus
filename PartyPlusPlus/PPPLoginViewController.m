@@ -53,24 +53,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    // Present login modal if necessary after the view has been
-    // displayed, not in viewWillAppear: so as to allow display
-    // stack to "unwind"
-    if (FBSession.activeSession.isOpen) {
-        //;
-    } else if (FBSession.activeSession.isOpen ||
-               FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded ||
-               FBSession.activeSession.state == FBSessionStateCreatedOpening) {
-    } else {
-        [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
-    }
-}
-
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation = UIInterfaceOrientationPortrait);
