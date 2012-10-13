@@ -22,6 +22,13 @@
 		D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E341162908AA001EE23B /* PPPMainEventView.m */; };
 		D2D4E344162908C6001EE23B /* PPPMainEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E343162908C6001EE23B /* PPPMainEventView.xib */; };
 		F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F792230516290D6400ED0964 /* PPPLoginViewController.m */; };
+		F7F561DE16293497007AA6D6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F561DD16293497007AA6D6 /* FacebookSDK.framework */; };
+		F7F561E316293975007AA6D6 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7F561E016293975007AA6D6 /* FacebookSDKResources.bundle */; };
+		F7F561E416293975007AA6D6 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7F561E116293975007AA6D6 /* FBUserSettingsViewResources.bundle */; };
+		F7F561E516293975007AA6D6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7F561E216293975007AA6D6 /* Info.plist */; };
+		F7F561E916293991007AA6D6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F561E616293991007AA6D6 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F7F561EA16293991007AA6D6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F561E716293991007AA6D6 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F7F561EB16293991007AA6D6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F561E816293991007AA6D6 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +54,13 @@
 		D2D4E343162908C6001EE23B /* PPPMainEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPMainEventView.xib; sourceTree = "<group>"; };
 		F792230416290D6400ED0964 /* PPPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPLoginViewController.h; sourceTree = "<group>"; };
 		F792230516290D6400ED0964 /* PPPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPLoginViewController.m; sourceTree = "<group>"; };
+		F7F561DD16293497007AA6D6 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		F7F561E016293975007AA6D6 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		F7F561E116293975007AA6D6 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
+		F7F561E216293975007AA6D6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7F561E616293991007AA6D6 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		F7F561E716293991007AA6D6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		F7F561E816293991007AA6D6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +68,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7F561E916293991007AA6D6 /* Accounts.framework in Frameworks */,
+				F7F561EA16293991007AA6D6 /* AdSupport.framework in Frameworks */,
+				F7F561EB16293991007AA6D6 /* Social.framework in Frameworks */,
 				D2D4E316162900F9001EE23B /* UIKit.framework in Frameworks */,
 				D2D4E318162900F9001EE23B /* Foundation.framework in Frameworks */,
 				D2D4E31A162900F9001EE23B /* CoreGraphics.framework in Frameworks */,
+				F7F561DE16293497007AA6D6 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +84,9 @@
 		D2D4E306162900F9001EE23B = {
 			isa = PBXGroup;
 			children = (
+				F7F561E616293991007AA6D6 /* Accounts.framework */,
+				F7F561E716293991007AA6D6 /* AdSupport.framework */,
+				F7F561E816293991007AA6D6 /* Social.framework */,
 				D2D4E31B162900F9001EE23B /* PartyPlusPlus */,
 				D2D4E314162900F9001EE23B /* Frameworks */,
 				D2D4E312162900F9001EE23B /* Products */,
@@ -83,6 +104,8 @@
 		D2D4E314162900F9001EE23B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F7F561DF16293975007AA6D6 /* Resources */,
+				F7F561DD16293497007AA6D6 /* FacebookSDK.framework */,
 				D2D4E315162900F9001EE23B /* UIKit.framework */,
 				D2D4E317162900F9001EE23B /* Foundation.framework */,
 				D2D4E319162900F9001EE23B /* CoreGraphics.framework */,
@@ -163,6 +186,17 @@
 			name = "View Controller";
 			sourceTree = "<group>";
 		};
+		F7F561DF16293975007AA6D6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F7F561E016293975007AA6D6 /* FacebookSDKResources.bundle */,
+				F7F561E116293975007AA6D6 /* FBUserSettingsViewResources.bundle */,
+				F7F561E216293975007AA6D6 /* Info.plist */,
+			);
+			name = Resources;
+			path = ../../../Documents/FacebookSDK/FacebookSDK.framework/Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -222,6 +256,9 @@
 				D2D4E32F162900F9001EE23B /* MainStoryboard_iPhone.storyboard in Resources */,
 				D2D4E332162900F9001EE23B /* MainStoryboard_iPad.storyboard in Resources */,
 				D2D4E344162908C6001EE23B /* PPPMainEventView.xib in Resources */,
+				F7F561E316293975007AA6D6 /* FacebookSDKResources.bundle in Resources */,
+				F7F561E416293975007AA6D6 /* FBUserSettingsViewResources.bundle in Resources */,
+				F7F561E516293975007AA6D6 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,10 +362,16 @@
 		D2D4E339162900F9001EE23B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Documents/FacebookSDK\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PartyPlusPlus/PartyPlusPlus-Prefix.pch";
 				INFOPLIST_FILE = "PartyPlusPlus/PartyPlusPlus-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -337,10 +380,16 @@
 		D2D4E33A162900F9001EE23B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Documents/FacebookSDK\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PartyPlusPlus/PartyPlusPlus-Prefix.pch";
 				INFOPLIST_FILE = "PartyPlusPlus/PartyPlusPlus-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
