@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C4675162A0DA7007D8307 /* PPPTertiaryEventView.m */; };
+		D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21C4679162A0DD0007D8307 /* PPPTertiaryEventView.xib */; };
 		D282555D162914E500A498A6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825554162914E500A498A6 /* OBGradientView.m */; };
 		D282555E162914E500A498A6 /* SAViewManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAViewManipulator.m */; };
 		D282555F162914E500A498A6 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825558162914E500A498A6 /* UIImage+Color.m */; };
@@ -43,6 +45,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D21C4674162A0DA7007D8307 /* PPPTertiaryEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPTertiaryEventView.h; sourceTree = "<group>"; };
+		D21C4675162A0DA7007D8307 /* PPPTertiaryEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPTertiaryEventView.m; sourceTree = "<group>"; };
+		D21C4679162A0DD0007D8307 /* PPPTertiaryEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPTertiaryEventView.xib; sourceTree = "<group>"; };
 		D2825553162914E500A498A6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
 		D2825554162914E500A498A6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		D2825555162914E500A498A6 /* SAViewManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewManipulator.h; sourceTree = "<group>"; };
@@ -111,6 +116,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D21C4678162A0DAA007D8307 /* Tertiary Event View */ = {
+			isa = PBXGroup;
+			children = (
+				D21C4674162A0DA7007D8307 /* PPPTertiaryEventView.h */,
+				D21C4675162A0DA7007D8307 /* PPPTertiaryEventView.m */,
+				D21C4679162A0DD0007D8307 /* PPPTertiaryEventView.xib */,
+			);
+			name = "Tertiary Event View";
+			sourceTree = "<group>";
+		};
 		D2825563162914EB00A498A6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				D2D4E347162908DF001EE23B /* Main Event View */,
+				D21C4678162A0DAA007D8307 /* Tertiary Event View */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -342,6 +358,7 @@
 				F7E53BD61629EDA70044B9A7 /* FacebookSDKResources.bundle in Resources */,
 				F7E53BD71629EDA70044B9A7 /* FBUserSettingsViewResources.bundle in Resources */,
 				F7E53BD81629EDA70044B9A7 /* Info.plist in Resources */,
+				D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +381,7 @@
 				D2825561162914E500A498A6 /* UIViewController+Overview.m in Sources */,
 				D2B00B5416293E3A008DF306 /* PPPDetailViewController.m in Sources */,
 				D2B00B671629E970008DF306 /* PPPEvent.m in Sources */,
+				D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

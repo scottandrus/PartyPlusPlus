@@ -32,28 +32,28 @@
                                         </connections>
                                     </scrollView>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="4Ku-xV-OeP">
-                                        <rect key="frame" x="0.0" y="345" width="320" height="71"/>
+                                        <rect key="frame" x="0.0" y="339" width="320" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" id="yRk-Ul-zGM">
-                                                <rect key="frame" x="20" y="11" width="84" height="50"/>
+                                            <view contentMode="scaleToFill" id="yRk-Ul-zGM" customClass="PPPTertiaryEventView">
+                                                <rect key="frame" x="20" y="5" width="84" height="61"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" id="P10-d1-2Eg">
-                                                <rect key="frame" x="118" y="11" width="84" height="50"/>
+                                            <view contentMode="scaleToFill" id="3y8-7g-thB" customClass="PPPTertiaryEventView">
+                                                <rect key="frame" x="118" y="5" width="84" height="61"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" id="gRW-q0-xle">
-                                                <rect key="frame" x="216" y="11" width="84" height="50"/>
+                                            <view contentMode="scaleToFill" id="qOi-P3-fc3" customClass="PPPTertiaryEventView">
+                                                <rect key="frame" x="216" y="5" width="84" height="61"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </view>
                                         </subviews>
                                     </scrollView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="X out of Y" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bZ9-e0-GYw">
-                                        <rect key="frame" x="89" y="318" width="142" height="22"/>
+                                        <rect key="frame" x="89" y="309" width="142" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="0.14923469387755106" green="0.14923469387755106" blue="0.14923469387755106" alpha="1" colorSpace="calibratedRGB"/>
@@ -216,6 +216,13 @@
                 <relationship kind="outlet" name="placeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="thumbnailImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="thumbnailScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="PPPTertiaryEventView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPTertiaryEventView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="PPPViewController" superclassName="UIViewController">
