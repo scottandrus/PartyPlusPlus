@@ -85,8 +85,8 @@ NSString *const FBMenuDataChangedNotification =
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
     // Ask for permissions for getting info about uploaded
     // custom photos.
-    NSArray *permissions = [NSArray arrayWithObjects:
-                            @"user_photos",
+    NSArray *permissions = [[NSArray alloc] initWithObjects:
+                            @"user_events",
                             nil];
     
     return [FBSession openActiveSessionWithReadPermissions:permissions
