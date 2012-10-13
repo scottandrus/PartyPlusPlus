@@ -18,6 +18,7 @@
 		D2B00B4D162932E6008DF306 /* 480.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B00B4C162932E6008DF306 /* 480.png */; };
 		D2B00B5116293AD5008DF306 /* Thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B00B5016293AD5008DF306 /* Thumbnail.png */; };
 		D2B00B5416293E3A008DF306 /* PPPDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B00B5316293E3A008DF306 /* PPPDetailViewController.m */; };
+		D2B00B671629E970008DF306 /* PPPEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B00B661629E970008DF306 /* PPPEvent.m */; };
 		D2D4E316162900F9001EE23B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E315162900F9001EE23B /* UIKit.framework */; };
 		D2D4E318162900F9001EE23B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E317162900F9001EE23B /* Foundation.framework */; };
 		D2D4E31A162900F9001EE23B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E319162900F9001EE23B /* CoreGraphics.framework */; };
@@ -59,6 +60,8 @@
 		D2B00B5016293AD5008DF306 /* Thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail.png; sourceTree = "<group>"; };
 		D2B00B5216293E3A008DF306 /* PPPDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPDetailViewController.h; sourceTree = "<group>"; };
 		D2B00B5316293E3A008DF306 /* PPPDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPDetailViewController.m; sourceTree = "<group>"; };
+		D2B00B651629E970008DF306 /* PPPEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPEvent.h; sourceTree = "<group>"; };
+		D2B00B661629E970008DF306 /* PPPEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPEvent.m; sourceTree = "<group>"; };
 		D2D4E311162900F9001EE23B /* PartyPlusPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyPlusPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D4E315162900F9001EE23B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D2D4E317162900F9001EE23B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -143,6 +146,42 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		D2B00B691629E978008DF306 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D2B00B651629E970008DF306 /* PPPEvent.h */,
+				D2B00B661629E970008DF306 /* PPPEvent.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D2B00B6A1629E992008DF306 /* Login View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F792230416290D6400ED0964 /* PPPLoginViewController.h */,
+				F792230516290D6400ED0964 /* PPPLoginViewController.m */,
+			);
+			name = "Login View Controller";
+			sourceTree = "<group>";
+		};
+		D2B00B6B1629E99D008DF306 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D2D4E333162900F9001EE23B /* PPPViewController.h */,
+				D2D4E334162900F9001EE23B /* PPPViewController.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		D2B00B6C1629E9AA008DF306 /* Detail View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D2B00B5216293E3A008DF306 /* PPPDetailViewController.h */,
+				D2B00B5316293E3A008DF306 /* PPPDetailViewController.m */,
+			);
+			name = "Detail View Controller";
+			sourceTree = "<group>";
+		};
 		D2D4E306162900F9001EE23B = {
 			isa = PBXGroup;
 			children = (
@@ -181,9 +220,10 @@
 			children = (
 				D2D4E346162908D5001EE23B /* App Delegate */,
 				D2D4E345162908CB001EE23B /* Storyboards */,
+				D2B00B691629E978008DF306 /* Model */,
 				D2825563162914EB00A498A6 /* Utilities */,
 				D2D4E348162908E5001EE23B /* Views */,
-				D2D4E349162908EE001EE23B /* View Controller */,
+				D2D4E349162908EE001EE23B /* Controllers */,
 				D2D4E31C162900F9001EE23B /* Supporting Files */,
 				D2825567162916AB00A498A6 /* Images */,
 			);
@@ -240,17 +280,14 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		D2D4E349162908EE001EE23B /* View Controller */ = {
+		D2D4E349162908EE001EE23B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F792230416290D6400ED0964 /* PPPLoginViewController.h */,
-				F792230516290D6400ED0964 /* PPPLoginViewController.m */,
-				D2D4E333162900F9001EE23B /* PPPViewController.h */,
-				D2D4E334162900F9001EE23B /* PPPViewController.m */,
-				D2B00B5216293E3A008DF306 /* PPPDetailViewController.h */,
-				D2B00B5316293E3A008DF306 /* PPPDetailViewController.m */,
+				D2B00B6A1629E992008DF306 /* Login View Controller */,
+				D2B00B6B1629E99D008DF306 /* View Controller */,
+				D2B00B6C1629E9AA008DF306 /* Detail View Controller */,
 			);
-			name = "View Controller";
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		F73B6AFB1629E63900F7A832 /* Resources */ = {
@@ -350,6 +387,7 @@
 				D2825560162914E500A498A6 /* UIView+Frame.m in Sources */,
 				D2825561162914E500A498A6 /* UIViewController+Overview.m in Sources */,
 				D2B00B5416293E3A008DF306 /* PPPDetailViewController.m in Sources */,
+				D2B00B671629E970008DF306 /* PPPEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
