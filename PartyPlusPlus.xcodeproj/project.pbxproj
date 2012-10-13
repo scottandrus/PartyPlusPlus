@@ -19,6 +19,8 @@
 		D2D4E32F162900F9001EE23B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E32D162900F9001EE23B /* MainStoryboard_iPhone.storyboard */; };
 		D2D4E332162900F9001EE23B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E330162900F9001EE23B /* MainStoryboard_iPad.storyboard */; };
 		D2D4E335162900F9001EE23B /* PPPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E334162900F9001EE23B /* PPPViewController.m */; };
+		D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E341162908AA001EE23B /* PPPMainEventView.m */; };
+		D2D4E344162908C6001EE23B /* PPPMainEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E343162908C6001EE23B /* PPPMainEventView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,9 @@
 		D2D4E331162900F9001EE23B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		D2D4E333162900F9001EE23B /* PPPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PPPViewController.h; sourceTree = "<group>"; };
 		D2D4E334162900F9001EE23B /* PPPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PPPViewController.m; sourceTree = "<group>"; };
+		D2D4E340162908AA001EE23B /* PPPMainEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPMainEventView.h; sourceTree = "<group>"; };
+		D2D4E341162908AA001EE23B /* PPPMainEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPMainEventView.m; sourceTree = "<group>"; };
+		D2D4E343162908C6001EE23B /* PPPMainEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPMainEventView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,12 +90,10 @@
 		D2D4E31B162900F9001EE23B /* PartyPlusPlus */ = {
 			isa = PBXGroup;
 			children = (
-				D2D4E324162900F9001EE23B /* PPPAppDelegate.h */,
-				D2D4E325162900F9001EE23B /* PPPAppDelegate.m */,
-				D2D4E32D162900F9001EE23B /* MainStoryboard_iPhone.storyboard */,
-				D2D4E330162900F9001EE23B /* MainStoryboard_iPad.storyboard */,
-				D2D4E333162900F9001EE23B /* PPPViewController.h */,
-				D2D4E334162900F9001EE23B /* PPPViewController.m */,
+				D2D4E346162908D5001EE23B /* App Delegate */,
+				D2D4E345162908CB001EE23B /* Storyboards */,
+				D2D4E348162908E5001EE23B /* Views */,
+				D2D4E349162908EE001EE23B /* View Controller */,
 				D2D4E31C162900F9001EE23B /* Supporting Files */,
 			);
 			path = PartyPlusPlus;
@@ -108,6 +111,51 @@
 				D2D4E32B162900F9001EE23B /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D2D4E345162908CB001EE23B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D2D4E32D162900F9001EE23B /* MainStoryboard_iPhone.storyboard */,
+				D2D4E330162900F9001EE23B /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		D2D4E346162908D5001EE23B /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				D2D4E324162900F9001EE23B /* PPPAppDelegate.h */,
+				D2D4E325162900F9001EE23B /* PPPAppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		D2D4E347162908DF001EE23B /* Main Event View */ = {
+			isa = PBXGroup;
+			children = (
+				D2D4E340162908AA001EE23B /* PPPMainEventView.h */,
+				D2D4E341162908AA001EE23B /* PPPMainEventView.m */,
+				D2D4E343162908C6001EE23B /* PPPMainEventView.xib */,
+			);
+			name = "Main Event View";
+			sourceTree = "<group>";
+		};
+		D2D4E348162908E5001EE23B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2D4E347162908DF001EE23B /* Main Event View */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D2D4E349162908EE001EE23B /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D2D4E333162900F9001EE23B /* PPPViewController.h */,
+				D2D4E334162900F9001EE23B /* PPPViewController.m */,
+			);
+			name = "View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +216,7 @@
 				D2D4E32C162900F9001EE23B /* Default-568h@2x.png in Resources */,
 				D2D4E32F162900F9001EE23B /* MainStoryboard_iPhone.storyboard in Resources */,
 				D2D4E332162900F9001EE23B /* MainStoryboard_iPad.storyboard in Resources */,
+				D2D4E344162908C6001EE23B /* PPPMainEventView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +230,7 @@
 				D2D4E322162900F9001EE23B /* main.m in Sources */,
 				D2D4E326162900F9001EE23B /* PPPAppDelegate.m in Sources */,
 				D2D4E335162900F9001EE23B /* PPPViewController.m in Sources */,
+				D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +322,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PartyPlusPlus/PartyPlusPlus-Prefix.pch";
 				INFOPLIST_FILE = "PartyPlusPlus/PartyPlusPlus-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -283,6 +334,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PartyPlusPlus/PartyPlusPlus-Prefix.pch";
 				INFOPLIST_FILE = "PartyPlusPlus/PartyPlusPlus-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -307,6 +359,7 @@
 				D2D4E33A162900F9001EE23B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

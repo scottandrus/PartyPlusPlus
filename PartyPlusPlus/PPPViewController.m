@@ -26,4 +26,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload {
+    [self setCurrentEvent:nil];
+    [self setMainEventsScrollView:nil];
+    [self setTertiaryEventsScrollview:nil];
+    [super viewDidUnload];
+}
 @end
