@@ -7,8 +7,9 @@
 //
 
 #import "PPPAppDelegate.h"
-NSString *const FBSessionStateChangedNotification = @"FBSessionStateChangedNotification";
 
+NSString *const FBSessionStateChangedNotification =
+@"com.facebook.samples.SocialCafe:FBSessionStateChangedNotification";
 
 @interface PPPAppDelegate ()
 
@@ -49,7 +50,7 @@ NSString *const FBSessionStateChangedNotification = @"FBSessionStateChangedNotif
         case FBSessionStateOpen:
             if (!error) {
                 // We have a valid session
-                //NSLog(@"User session found");
+                NSLog(@"User session found");
             }
             break;
         case FBSessionStateClosed:

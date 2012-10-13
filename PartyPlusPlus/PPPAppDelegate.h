@@ -10,6 +10,8 @@
 #import "PPPViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+extern NSString *const FBSessionStateChangedNotification;
+
 typedef void(^UserDataLoadedHandler)(id sender, id<FBGraphUser> user);
 
 @interface PPPAppDelegate : UIResponder <UIApplicationDelegate>
