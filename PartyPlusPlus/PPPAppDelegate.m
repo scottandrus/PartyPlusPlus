@@ -14,7 +14,9 @@
 {
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightTextColor], UITextAttributeTextColor, [UIColor darkTextColor], UITextAttributeTextShadowColor, nil]];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightTextColor], UITextAttributeTextColor, [UIColor darkTextColor], UITextAttributeTextShadowColor, nil] forState:UIControlStateNormal];
     
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1] /*#ebebeb*/];
     
     return YES;
 }
