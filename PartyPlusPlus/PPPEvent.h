@@ -11,7 +11,9 @@
 
 @interface PPPEvent : NSObject
 
+@property (strong, nonatomic) NSNumber *eventId;
 @property (strong, nonatomic) NSArray *peopleAttending;
+@property (strong, nonatomic) NSString *rsvpStatus;
 @property (strong, nonatomic) NSString *eventName;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *dateString;
@@ -19,5 +21,8 @@
 @property (strong, nonatomic) UIImage *image;
 
 @property (assign, nonatomic) CLLocationCoordinate2D location;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)eventDictionary;
 
 @end

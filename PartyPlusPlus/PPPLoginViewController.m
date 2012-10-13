@@ -28,7 +28,6 @@
         // Go to the menu page by dismissing the modal view controller
         // instead of using segues.
 //        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//        [self performSegueWithIdentifier:@"loggedIn" sender:self];
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -70,7 +69,7 @@
 }
 
 - (IBAction)bypassPressed {
-    [self performSegueWithIdentifier:@"loggedIn" sender:self];
+//    [self performSegueWithIdentifier:@"loggedIn" sender:self];
 }
 
 

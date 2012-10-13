@@ -165,13 +165,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <segue destination="hlB-0z-TZK" kind="modal" identifier="loggedIn" modalTransitionStyle="flipHorizontal" id="t6v-T4-lbo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y8M-q3-yps" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443" y="757"/>
+            <point key="canvasLocation" x="489" y="857"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vFE-Ak-Ay4">
@@ -193,49 +190,6 @@
             <point key="canvasLocation" x="1282" y="107"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="PPPDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backPressed:" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="PPPLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginButtonClicked:"/>
-            </relationships>
-        </class>
-        <class className="PPPMainEventView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPMainEventView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="detailButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="eventNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="placeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="thumbnailImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="thumbnailScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="PPPTertiaryEventView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPTertiaryEventView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PPPViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="backgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="currentEventView" candidateClass="PPPMainEventView"/>
-                <relationship kind="outlet" name="mainEventsScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="pageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tertiaryEventsScrollview" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
