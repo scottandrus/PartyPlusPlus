@@ -27,16 +27,41 @@
  * Configure the logged in versus logged out UX
  */
 - (void)sessionStateChanged:(NSNotification*)notification {
+//    if (FBSession.activeSession.isOpen) {
+//        [self populateUserDetails];
+//        FBSession *session = notification.object;
+//        NSLog(@"%@", session);
+//        FBRequest *request = [[FBRequest alloc] initWithSession:[FBSession activeSession] restMethod:@"GET" parameters:[NSDictionary dictionary] HTTPMethod:@"GET"];
+//        [delegate facebook];
+//    } else {
+//        [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
+//    }
+    
     if (FBSession.activeSession.isOpen) {
-        // If a deep link, go to the seleceted menu
-//        if (self.menuLink) {
-//            [self goToSelectedMenu];
-//        } else {
-            [self populateUserDetails];
-//        }
-    } else {
-        [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
+//        [self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
+//        self.userInfoTextView.hidden = NO;
+        
+        FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+        [requester addRequest:[FBRequest requestForGraphPath:@"me/events"] completionHandler:^(FBRequestConnection *connection,
+                                                            id<FBGraphUser> user,
+                                                            NSError *error) {
+            if (!error) {
+                NSString *userInfo = @"";
+                
+                // Example: typed access (name)
+                // - no special permissions required
+                userInfo = [userInfo
+                            stringByAppendingString:
+                            [NSString stringWithFormat:@"Name: %@\n\n",
+                             user.name]];
+            }
+        }];
+        
+        [requester start];
     }
+    
+
+        
 }
 
 - (void)populateUserDetails {
@@ -66,6 +91,21 @@
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (FBSession.activeSession.isOpen) {
+        // If the user's session is active, personalize, but
+        // only if this is not deep linking into the order view.
+        [self populateUserDetails];
+    } else if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        // Check the session for a cached token to show the proper authenticated
+        // UI. However, since this is not user intitiated, do not show the login UX.
+        PPPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        [appDelegate openSessionWithAllowLoginUI:NO];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
