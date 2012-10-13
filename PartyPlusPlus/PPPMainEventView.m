@@ -10,11 +10,29 @@
 
 @implementation PPPMainEventView
 
-- (id)initWithFrame:(CGRect)frame
+//- (id)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        // Initialization code
+//        
+//        
+//    }
+//    return self;
+//}
+
+- (id)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
-        // Initialization code
+        [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPMainEventView" owner:self options:nil] objectAtIndex:0]];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if ((self = [super initWithCoder:aDecoder])){
+        [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPMainEventView" owner:self options:nil] objectAtIndex:0]];
     }
     return self;
 }

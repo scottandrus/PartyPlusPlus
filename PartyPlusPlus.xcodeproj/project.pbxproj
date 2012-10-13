@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D282555D162914E500A498A6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825554162914E500A498A6 /* OBGradientView.m */; };
-		D282555E162914E500A498A6 /* SAImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAImageManipulator.m */; };
+		D282555E162914E500A498A6 /* SAViewManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAViewManipulator.m */; };
 		D282555F162914E500A498A6 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825558162914E500A498A6 /* UIImage+Color.m */; };
 		D2825560162914E500A498A6 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D282555A162914E500A498A6 /* UIView+Frame.m */; };
 		D2825561162914E500A498A6 /* UIViewController+Overview.m in Sources */ = {isa = PBXBuildFile; fileRef = D282555C162914E500A498A6 /* UIViewController+Overview.m */; };
 		D28255661629158500A498A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D28255651629158500A498A6 /* QuartzCore.framework */; };
 		D2825569162916AB00A498A6 /* PlaceKitten.png in Resources */ = {isa = PBXBuildFile; fileRef = D2825568162916AB00A498A6 /* PlaceKitten.png */; };
+		D282556B1629175700A498A6 /* PPPMainEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D282556A1629175700A498A6 /* PPPMainEventView.xib */; };
 		D2D4E316162900F9001EE23B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E315162900F9001EE23B /* UIKit.framework */; };
 		D2D4E318162900F9001EE23B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E317162900F9001EE23B /* Foundation.framework */; };
 		D2D4E31A162900F9001EE23B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4E319162900F9001EE23B /* CoreGraphics.framework */; };
@@ -33,8 +34,8 @@
 /* Begin PBXFileReference section */
 		D2825553162914E500A498A6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
 		D2825554162914E500A498A6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
-		D2825555162914E500A498A6 /* SAImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAImageManipulator.h; sourceTree = "<group>"; };
-		D2825556162914E500A498A6 /* SAImageManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAImageManipulator.m; sourceTree = "<group>"; };
+		D2825555162914E500A498A6 /* SAViewManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewManipulator.h; sourceTree = "<group>"; };
+		D2825556162914E500A498A6 /* SAViewManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAViewManipulator.m; sourceTree = "<group>"; };
 		D2825557162914E500A498A6 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		D2825558162914E500A498A6 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		D2825559162914E500A498A6 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -43,6 +44,7 @@
 		D282555C162914E500A498A6 /* UIViewController+Overview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Overview.m"; sourceTree = "<group>"; };
 		D28255651629158500A498A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D2825568162916AB00A498A6 /* PlaceKitten.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceKitten.png; sourceTree = "<group>"; };
+		D282556A1629175700A498A6 /* PPPMainEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPMainEventView.xib; sourceTree = "<group>"; };
 		D2D4E311162900F9001EE23B /* PartyPlusPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyPlusPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D4E315162900F9001EE23B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D2D4E317162900F9001EE23B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,8 +88,8 @@
 			children = (
 				D2825553162914E500A498A6 /* OBGradientView.h */,
 				D2825554162914E500A498A6 /* OBGradientView.m */,
-				D2825555162914E500A498A6 /* SAImageManipulator.h */,
-				D2825556162914E500A498A6 /* SAImageManipulator.m */,
+				D2825555162914E500A498A6 /* SAViewManipulator.h */,
+				D2825556162914E500A498A6 /* SAViewManipulator.m */,
 				D2825564162914FB00A498A6 /* Categories */,
 			);
 			name = Utilities;
@@ -193,6 +195,7 @@
 			children = (
 				D2D4E340162908AA001EE23B /* PPPMainEventView.h */,
 				D2D4E341162908AA001EE23B /* PPPMainEventView.m */,
+				D282556A1629175700A498A6 /* PPPMainEventView.xib */,
 			);
 			name = "Main Event View";
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				D2D4E32F162900F9001EE23B /* MainStoryboard_iPhone.storyboard in Resources */,
 				D2D4E332162900F9001EE23B /* MainStoryboard_iPad.storyboard in Resources */,
 				D2825569162916AB00A498A6 /* PlaceKitten.png in Resources */,
+				D282556B1629175700A498A6 /* PPPMainEventView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +295,7 @@
 				D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */,
 				F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */,
 				D282555D162914E500A498A6 /* OBGradientView.m in Sources */,
-				D282555E162914E500A498A6 /* SAImageManipulator.m in Sources */,
+				D282555E162914E500A498A6 /* SAViewManipulator.m in Sources */,
 				D282555F162914E500A498A6 /* UIImage+Color.m in Sources */,
 				D2825560162914E500A498A6 /* UIView+Frame.m in Sources */,
 				D2825561162914E500A498A6 /* UIViewController+Overview.m in Sources */,
