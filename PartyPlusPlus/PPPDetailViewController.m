@@ -35,4 +35,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark IBActions
+
+- (IBAction)backPressed:(UIBarButtonItem *)sender {
+    [self.delegate dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

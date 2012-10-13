@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPPViewController.h"
 
 @interface PPPDetailViewController : UIViewController
+
+@property (strong, nonatomic) PPPViewController *delegate;
 
 @end
