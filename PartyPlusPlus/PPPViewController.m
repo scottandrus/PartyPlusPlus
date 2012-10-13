@@ -66,8 +66,6 @@
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
     
-    [self.navigationController performSegueWithIdentifier:@"DisplayLoginViewController" sender:self];
-
 }
 
 - (void)didReceiveMemoryWarning

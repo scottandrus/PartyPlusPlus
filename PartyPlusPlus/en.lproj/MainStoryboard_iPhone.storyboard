@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hlB-0z-TZK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C54" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hlB-0z-TZK">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
         <!--View Controller - PartyPlusPlus-->
@@ -72,6 +72,7 @@
                         <outlet property="pageLabel" destination="bZ9-e0-GYw" id="84k-ML-BCr"/>
                         <outlet property="tertiaryEventsScrollview" destination="4Ku-xV-OeP" id="MCA-P9-RID"/>
                         <segue destination="fbr-lu-avH" kind="modal" identifier="goToDetail" modalTransitionStyle="flipHorizontal" id="m3I-fg-Rll"/>
+                        <segue destination="rDA-2q-sjN" kind="modal" identifier="SegueToLogin" id="mMv-0b-Grh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -113,7 +114,6 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="2" kind="relationship" relationship="rootViewController" id="7Dw-rI-QRh"/>
-                        <segue destination="rDA-2q-sjN" kind="modal" identifier="DisplayLoginViewController" id="mnV-mD-q6p"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oRS-ow-lJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -164,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y8M-q3-yps" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215" y="781"/>
+            <point key="canvasLocation" x="833" y="791"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vFE-Ak-Ay4">
@@ -189,6 +189,9 @@
     <classes>
         <class className="PPPDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backPressed:" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="PPPLoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPLoginViewController.h"/>
