@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPPEvent.h"
 
 @interface PPPMainEventView : UIView
 
