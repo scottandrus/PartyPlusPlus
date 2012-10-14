@@ -19,6 +19,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 #define EVENT_PARAMS @"name,picture.type(large),attending,description,location"
+#define PHOTO_PARAMS @"source"
 
 @interface PPPViewController ()
 
@@ -403,8 +404,7 @@
 
 // For responding to the user tapping Cancel.
 - (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker {
-    
-    [[picker parentViewController] dismissModalViewControllerAnimated: YES];
+    [self dismissModalViewControllerAnimated: YES];
 }
 
 // For responding to the user accepting a newly-captured picture or movie
@@ -431,6 +431,9 @@
         
         // Save the new image (original or edited) to the Camera Roll
         UIImageWriteToSavedPhotosAlbum (imageToSave, nil, nil , nil);
+        
+        //Upload image to event
+        [self uploadImage:imageToSave];
     }
     
     // Handle a movie capture
@@ -446,6 +449,25 @@
         }
     }
     
-    [[picker parentViewController] dismissModalViewControllerAnimated: YES];
+    [self dismissModalViewControllerAnimated: YES];
+}
+
+#pragma mark - Facebook Uploading Methods
+
+- (void)uploadImage:(UIImage *)image {
+    
+    FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+    NSString *graphPath = [NSString stringWithFormat:@"/%@/photos", self.currentEvent.eventId];
+    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:[NSDictionary dictionaryWithObject:image forKey:PHOTO_PARAMS] HTTPMethod:@"POST"];
+    [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                      FBGraphObject *response,
+                                                      NSError *error) {
+        if (!error) {
+            //
+        }
+    }];
+    
+    [requester start];
+
 }
 @end
