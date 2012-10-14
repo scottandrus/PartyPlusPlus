@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PPPMainEventView.h"
 #import "PPPTertiaryEventView.h"
+#import "SAContentViewController.h"
 
-@interface PPPViewController : UIViewController <UIScrollViewDelegate>
+@interface PPPViewController : SAContentViewController <UIScrollViewDelegate>
 
 // Non-IB
 @property (strong, nonatomic) NSArray *events;

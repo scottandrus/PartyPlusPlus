@@ -20,6 +20,61 @@ NSString *const FBMenuDataChangedNotification =
 @synthesize user = _user;
 
 
+# pragma mark - Application lifecycle
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Override point for customization after application launch.
+    
+    // Set the title text attributes of navigation bar
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightTextColor], UITextAttributeTextColor, [UIColor darkTextColor], UITextAttributeTextShadowColor, nil]];
+    
+    // Set title text attributes of bar buttons
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightTextColor], UITextAttributeTextColor, [UIColor darkTextColor], UITextAttributeTextShadowColor, nil] forState:UIControlStateNormal];
+    
+    // Sets tint colors for nav bar
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1] /*#ebebeb*/];
+    
+    self.menuViewController = [[SAMenuViewController alloc] initWithNibName:@"SAMenuViewController" bundle:nil];
+    
+    return YES;
+}
+							
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
 #pragma mark - Helper methods
 /**
  * A function for parsing URL parameters.
@@ -132,52 +187,81 @@ NSString *const FBMenuDataChangedNotification =
     }
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-    // FBSample logic
-    // We need to handle URLs by passing them to FBSession in order for SSO authentication
-    // to work.
-    return [FBSession.activeSession handleOpenURL:url];
-}
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (UIImage*)screenshot
 {
-    // Override point for customization after application launch.
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightTextColor], UITextAttributeTextColor, [UIColor darkTextColor], UITextAttributeTextShadowColor, nil]];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightTextColor], UITextAttributeTextColor, [UIColor darkTextColor], UITextAttributeTextShadowColor, nil] forState:UIControlStateNormal];
+    // Create a graphics context with the target size
+    // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
+    // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
+    CGSize imageSize = CGSizeMake([[UIScreen mainScreen] applicationFrame].size.width, [[UIScreen mainScreen] applicationFrame].size.height);
+    if (NULL != UIGraphicsBeginImageContextWithOptions)
+        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 1.0);
+    else
+        UIGraphicsBeginImageContext(imageSize);
     
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1] /*#ebebeb*/];
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
-    return YES;
-}
-							
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    // Iterate over every window from back to front
+    for (UIWindow *window in [[UIApplication sharedApplication] windows])
+    {
+        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
+        {
+            // -renderInContext: renders in the coordinate space of the layer,
+            // so we must first apply the layer's geometry to the graphics context
+            CGContextSaveGState(context);
+            // Center the context around the window's anchor point
+            CGContextTranslateCTM(context, [window center].x, [window center].y - 20);
+            // Apply the window's transform about the anchor point
+            CGContextConcatCTM(context, [window transform]);
+            // Offset by the portion of the bounds left of and above the anchor point
+            CGContextTranslateCTM(context,
+                                  -[window bounds].size.width * [[window layer] anchorPoint].x,
+                                  -[window bounds].size.height * [[window layer] anchorPoint].y);
+            
+            // Render the layer hierarchy to the current context
+            [[window layer] renderInContext:context];
+            
+            // Restore the context
+            CGContextRestoreGState(context);
+        }
+    }
+    
+    // Retrieve the screenshot image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+# pragma mark - Slide-out interface
+- (void)showSideMenuWithSender:(SAContentViewController *)sender andNavigationController:(UINavigationController *)navigationController {
+    self.contentViewController = sender;
+    self.contentNavigationController = navigationController;
+    
+//    // Render the CALayer into an ImageContext
+//    if (![[UIApplication sharedApplication] isStatusBarHidden]) {
+//        UIGraphicsBeginImageContextWithOptions(CGSizeMake([[UIScreen mainScreen] applicationFrame].size.width, [[UIScreen mainScreen] applicationFrame].size.height + 40), NO, 1.0);
+//        
+//        CGContextRef c = UIGraphicsGetCurrentContext();
+//        CGContextTranslateCTM(c, 0, -20);
+//    } else UIGraphicsBeginImageContextWithOptions([[UIScreen mainScreen] applicationFrame].size, NO, 1.0);
+//    
+//    [self.window.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    // Read the UIImage object
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    
+    // Pass this image off to the MenuViewController then swap it in as the rootViewController
+    self.menuViewController.screenShotImage = [self screenshot];
+    self.window.rootViewController = self.menuViewController;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)hideSideMenu {
+    // All animation takes place elsewhere. When this gets called just swap the contentViewController in
+    if (self.contentNavigationController) {
+        self.window.rootViewController = self.contentNavigationController;
+    } else self.window.rootViewController = self.contentViewController;
 }
 
 @end
