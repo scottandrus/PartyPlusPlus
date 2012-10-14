@@ -11,22 +11,26 @@
 #define ID_KEY @"id"
 #define PEOPLE_ATTENDING_KEY @"attending"
 #define EVENT_NAME_KEY @"name"
-#define DATE_STRING_KEY @"start_time"
+#define DATE_STRING_KEY @"date"
 #define LOCATION_STRING_KEY @"location"
 
 
 @implementation PPPEvent
 
-
+<<<<<<< HEAD
 @synthesize eventId;
 @synthesize peopleAttending;
 @synthesize rsvpStatus;
+=======
+@synthesize peopleAttending;
+>>>>>>> 7f6346000597a1fd246b9683990a15618ad46c13
 @synthesize eventName;
 @synthesize date;
 @synthesize dateString;
 @synthesize locationString;
 @synthesize location;
 
+<<<<<<< HEAD
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	self = [super init];
@@ -37,7 +41,7 @@
 //		self.date =
 		self.dateString = [dictionary objectForKey:DATE_STRING_KEY];
 //		self.location = [dictionary objectForKey:LOCATION_KEY];
-		self.locationString = [dictionary objectForKey:LOCATION_STRING_KEY] ? [dictionary objectForKey:LOCATION_STRING_KEY] : [[NSNull alloc] init];
+		self.locationString = [dictionary objectForKey:LOCATION_STRING_KEY];
 	}
 	return self;
 }
@@ -57,4 +61,6 @@
 }
 
 
+=======
+>>>>>>> 7f6346000597a1fd246b9683990a15618ad46c13
 @end

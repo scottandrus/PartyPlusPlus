@@ -80,6 +80,7 @@
      object:nil];
     
     [self customizeUI];
+    [self generateEvents];
     [self setupMainEventsScrollView];
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
@@ -87,7 +88,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     if (FBSession.activeSession.isOpen) {
         // If the user's session is active, personalize, but
         // only if this is not deep linking into the order view.
@@ -108,7 +109,7 @@
     // displayed, not in viewWillAppear: so as to allow display
     // stack to "unwind"
     if (FBSession.activeSession.isOpen) {
-//        [self goToSelectedMenu];
+        //        [self goToSelectedMenu];
     } else if (FBSession.activeSession.isOpen ||
                FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded ||
                FBSession.activeSession.state == FBSessionStateCreatedOpening) {
@@ -144,51 +145,20 @@
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
 }
 
-- (void)setupMainEventsScrollView {
-    
-    // Set up current event view
-    [self setupCurrentEventView];
-    
-    // Round current event
-//    [self styleMainEventView:self.currentEventView];
-    
-    // Add the target to the button
-    [self.currentEventView.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
-    
+- (void)generateEvents {
     // Create a mutable array to mutate events
-    NSMutableArray *mutableEvents = [NSMutableArray arrayWithObjects:self.currentEvent, nil];
-    
-    // Create a main event view pointer
-    PPPMainEventView *view;
+    NSMutableArray *mutableEvents = [NSMutableArray array];
+
     PPPEvent *event;
     
-    // Create 10 events
     for (size_t i = 0; i < 10; ++i) {
-        
-        // Allocate and initialize the event
-        view = [[PPPMainEventView alloc] init];
         event = [[PPPEvent alloc] init];
-        
-        // Set the labels
-        event.eventName = [NSString stringWithFormat:@"Event %zu", i + 1];
-        event.locationString = @"Vanderbilt";
-        event.dateString = @"Next Week\n7 PM";
+        // Set the event properties
+        // TODO: Change this to dynamic events
+        event.eventName = [NSString stringWithFormat:@"HackNashville %zu", i + 1];
+        event.locationString = @"7 Lea Ave.";
+        event.dateString = @"Tonight\n7 PM";
         event.image = [UIImage imageNamed:@"480"];
-        
-        [view loadEvent:event];
-        
-        // Add it to the subview
-        [self.mainEventsScrollView addSubview:view];
-        
-        // Add a target to the button
-        [view.detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventAllEvents];
-        
-        // Grab the one from interface builder
-        view.origin = self.currentEventView.origin;
-        view.left += self.mainEventsScrollView.width * i;
-        
-        // Style the event view
-        [self styleMainEventView:view];
         
         // Add it to the list of mutable events
         [mutableEvents addObject:event];
@@ -196,19 +166,54 @@
     
     // Put it into the events array
     self.events = [mutableEvents copy];
-    
-    self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
 }
 
-- (void)setupCurrentEventView {
-//    self.currentEvent = [[PPPEvent alloc] init];
-//    self.currentEvent.eventName = @"HackNashville";
-//    self.currentEvent.locationString = @"Emma";
-//    self.currentEvent.dateString = @"Tonight\n7 PM";
-//    self.currentEvent.image = [UIImage imageNamed:@"480"];
-//    [self.currentEventView loadEvent:self.currentEvent];
+- (void)setupMainEventsScrollView {
     
+    // Set the content size first
+    self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);
     
+    // Create a mutable array of event views
+    NSMutableArray *mutableEventViews = [NSMutableArray array];
+    
+    // Create an event view pointer
+    PPPMainEventView *view;
+    
+    // For each event
+    for (size_t i = 0; i < self.events.count; ++i) {
+
+        // Allocate and initialize the associated view
+        view = [[PPPMainEventView alloc] init];
+        [view addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPMainEventView" owner:view options:nil] objectAtIndex:0]];
+        
+        // Grab the one from interface builder
+        view.frame = self.currentEventView.frame;
+        view.left += self.mainEventsScrollView.width * i;
+        
+        // Load the corresponding event
+        [view loadEvent:[self.events objectAtIndex:i]];
+
+        
+        // Add a target to the button
+        UIButton *detailButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
+        [detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Add the detail button to the view
+        [view addSubview:detailButton];
+        detailButton.size = view.size;
+        
+        // Add it to the scroll view
+        [self.mainEventsScrollView addSubview:view];
+        
+        // Style the event view
+        [self styleMainEventView:view];
+        
+        // Add object to the mutable event views array
+        [mutableEventViews addObject:view];
+    }
+    
+    // Copy into the event views property
+    self.eventViews = [mutableEventViews copy];
 }
 
 - (void)goToDetail:(UIButton *)sender {
@@ -216,8 +221,8 @@
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
-    mainEventView.clipsToBounds = YES;
     [SAViewManipulator addBorderToView:mainEventView withWidth:2 color:[UIColor blackColor] andRadius:10];
+    mainEventView.clipsToBounds = YES;
 }
 
 #pragma mark - UIScrollView delegate
@@ -227,6 +232,8 @@
     CGFloat pageWidth = self.mainEventsScrollView.width;
     int page = floor((self.mainEventsScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", page + 1, self.events.count];
+    
+    self.currentEvent = [self.events objectAtIndex:page];
 }
 
 

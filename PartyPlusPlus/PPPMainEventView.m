@@ -27,14 +27,12 @@
 {
     self = [super init];
     if (self) {
-        [self style];
     }
     return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
-    if ((self = [super initWithCoder:aDecoder])){
-        [self style];
+    if ((self = [super initWithCoder:aDecoder])) {
     }
     return self;
 }
@@ -48,9 +46,6 @@
     self.imageView.image = self.event.image;
 }
 
-- (void)style {
-    [self addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPMainEventView" owner:self options:nil] objectAtIndex:0]];
-}
 
 - (void)setupAttendingScrollView {
     

@@ -16,7 +16,6 @@
 @property (strong, nonatomic) NSArray *attendingThumbnails;
 
 // IBOutlets
-@property (strong, nonatomic) IBOutlet UIButton *detailButton;
 @property (strong, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *placeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;

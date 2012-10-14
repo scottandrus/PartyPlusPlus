@@ -13,6 +13,7 @@
 
 // Non-IB
 @property (strong, nonatomic) NSArray *events;
+@property (strong, nonatomic) NSArray *eventViews;
 @property (strong, nonatomic) PPPEvent *currentEvent;
 
 // IBOutlets
