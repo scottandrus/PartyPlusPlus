@@ -44,8 +44,8 @@
         [self setupAttendingScrollView];
     }];
 
-    // Round the navigation bar
-    [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
+    
+    [self customizeUI];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,13 +54,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Utility methods 
+
+- (void)customizeUI {
+    [SAViewManipulator setGradientBackgroundImageForView:self.view withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.69 green:0.69 blue:0.69 alpha:1]];
+    
+    [SAViewManipulator setGradientBackgroundImageForView:self.attendingScrollViewBackgroundView withTopColor:[UIColor colorWithRed:0.11 green:0.11 blue:0.11 alpha:1] /*#1c1c1c*/ andBottomColor:[UIColor colorWithRed:0.278 green:0.278 blue:0.278 alpha:1] /*#474747*/];
+    [SAViewManipulator setGradientBackgroundImageForView:self.feedScrollViewBackgroundView withTopColor:[UIColor colorWithRed:0.11 green:0.11 blue:0.11 alpha:1] /*#1c1c1c*/ andBottomColor:[UIColor colorWithRed:0.278 green:0.278 blue:0.278 alpha:1] /*#474747*/];
+    
+    [SAViewManipulator setGradientBackgroundImageForView:self.friendsHeaderView withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1]];
+    [SAViewManipulator addBorderToView:self.friendsHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
+    
+    [SAViewManipulator setGradientBackgroundImageForView:self.photoStreamHeaderView withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1]];
+    [SAViewManipulator addBorderToView:self.photoStreamHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
+    
+//    [SAViewManipulator setGradientBackgroundImageForView:self.feedScrollView withTopColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1] andBottomColor:[UIColor colorWithRed:0.81 green:0.81 blue:0.81 alpha:1]];
+    
+    // Round the navigation bar
+    [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
+}
+
 #pragma mark - ScrollView Methods
 - (void)setupAttendingScrollView {
     
     // Create a main event view pointer
     UIImageView *view;
     
-    self.attendingScrollView.contentSize = CGSizeMake(self.thumbnailImageView.width * self.attendingFriendsUrls.count, self.thumbnailImageView.height);
+    self.attendingScrollView.contentSize = CGSizeMake((self.thumbnailImageView.width + 5) * self.attendingFriendsUrls.count, self.thumbnailImageView.height);
 
     
     // Create 10 events
@@ -73,7 +93,6 @@
         
         // Set the labels
         [self downloadPhoto:[self.attendingFriendsUrls objectAtIndex:i] forImageView:view];
-
         
         // Add it to the subview
         [self.attendingScrollView addSubview:view];
@@ -88,7 +107,7 @@
     // Create a main event view pointer
     UIImageView *view;
     
-    self.feedScrollView.contentSize = CGSizeMake(self.wallPhotoImageView.width, self.wallPhotoImageView.height * self.wallPhotoURLs.count);
+    self.feedScrollView.contentSize = CGSizeMake((self.wallPhotoImageView.width + 10) * self.wallPhotoURLs.count, self.wallPhotoImageView.height);
     
     
     // Create 10 events
@@ -97,7 +116,7 @@
         // Allocate and initialize the event
         view = [[UIImageView alloc] initWithFrame:self.wallPhotoImageView.frame];
         
-        view.top = (self.wallPhotoImageView.height + 10) * i;
+        view.left = (self.wallPhotoImageView.width + 10) * i;
         
         // Set the labels
 //        view.image = [UIImage imageNamed:@"Thumbnail.png"];
@@ -241,6 +260,10 @@
     [self setThumbnailImageView:nil];
     [self setFeedScrollView:nil];
     [self setWallPhotoImageView:nil];
+    [self setFriendsHeaderView:nil];
+    [self setPhotoStreamHeaderView:nil];
+    [self setAttendingScrollViewBackgroundView:nil];
+    [self setFeedScrollViewBackgroundView:nil];
     [super viewDidUnload];
 }
 @end

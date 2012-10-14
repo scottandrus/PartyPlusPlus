@@ -361,6 +361,7 @@
         PPPDetailViewController *dvc = (PPPDetailViewController *)nav.topViewController;
         dvc.event = sender;
         dvc.delegate = self;
+        dvc.title = self.currentEvent.eventName;
     } else if ([segue.identifier isEqualToString:@"segueToLogin"]) {
         
     }
