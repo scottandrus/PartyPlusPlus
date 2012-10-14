@@ -16,6 +16,8 @@
 #import "PPPDetailViewController.h"
 #import "PPPAppDelegate.h"
 
+#define EVENT_PARAMS @"name,picture,attending,description"
+
 @interface PPPViewController ()
 
 @end
@@ -26,35 +28,24 @@
 /*
  * Configure the logged in versus logged out UX
  */
-- (void)sessionStateChanged:(NSNotification*)notification {
-//    if (FBSession.activeSession.isOpen) {
-//        [self populateUserDetails];
-//        FBSession *session = notification.object;
-//        NSLog(@"%@", session);
-//        FBRequest *request = [[FBRequest alloc] initWithSession:[FBSession activeSession] restMethod:@"GET" parameters:[NSDictionary dictionary] HTTPMethod:@"GET"];
-//        [delegate facebook];
-//    } else {
-//        [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
-//    }
-    
+- (void)sessionStateChanged:(NSNotification*)notification {    
     if (FBSession.activeSession.isOpen) {
 //        [self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
 //        self.userInfoTextView.hidden = NO;
         
         FBRequestConnection *requester = [[FBRequestConnection alloc] init];
-        [requester addRequest:[FBRequest requestForGraphPath:@"me/events"] completionHandler:^(FBRequestConnection *connection,
-                                                            NSArray *response,
+        FBRequest *request = [FBRequest requestWithGraphPath:@"me/events" parameters:[NSDictionary dictionaryWithObject:EVENT_PARAMS forKey:@"fields"] HTTPMethod:@"GET"];
+        [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                            FBGraphObject *response,
                                                             NSError *error) {
             if (!error) {
-                NSLog(@"%@", response);
-                for (id dict in response) {
-                    PPPEvent *event = [[PPPEvent alloc] init];
-                    [dict objectForKey:@"id"];
-                    [dict objectForKey:@"name"];
-                    [dict objectForKey:@"start_time"];
-                    [dict objectForKey:@"end_time"];
-                    [dict objectForKey:@"rsvp_status"];
+                NSArray *eventArrayFromGraphObject = [response objectForKey:@"data"];
+                NSMutableArray *tempEventArray = [[NSMutableArray alloc] initWithCapacity:4];
+                for (id dict in eventArrayFromGraphObject) {
+                    PPPEvent *event = [[PPPEvent alloc] initWithDictionary:dict];
+                    [tempEventArray addObject:event];
                 }
+                self.events = tempEventArray;
             }
             
         }];

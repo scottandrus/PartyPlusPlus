@@ -11,7 +11,7 @@
 #define ID_KEY @"id"
 #define PEOPLE_ATTENDING_KEY @"attending"
 #define EVENT_NAME_KEY @"name"
-#define DATE_STRING_KEY @"date"
+#define DATE_STRING_KEY @"start_time"
 #define LOCATION_STRING_KEY @"location"
 
 
@@ -36,7 +36,7 @@
 //		self.date =
 		self.dateString = [dictionary objectForKey:DATE_STRING_KEY];
 //		self.location = [dictionary objectForKey:LOCATION_KEY];
-		self.locationString = [dictionary objectForKey:LOCATION_STRING_KEY];
+		self.locationString = [dictionary objectForKey:LOCATION_STRING_KEY] ? [dictionary objectForKey:LOCATION_STRING_KEY] : [[NSNull alloc] init];
 	}
 	return self;
 }
