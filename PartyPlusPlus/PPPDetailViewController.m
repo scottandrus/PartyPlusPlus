@@ -9,7 +9,8 @@
 #import "PPPDetailViewController.h"
 #import "SAViewManipulator.h"
 #import "UIView+Frame.h"
-#import "PPPPost.h"
+#import "PPPImagePost.h"
+#import "PPPMessagePost.h"
 
 #define WALL_PHOTO_PARAMS @"source"
 #define ATTENDING_PARAMS @"picture"
@@ -124,8 +125,8 @@
         view.left = (self.wallPhotoImageView.width + 10) * i;
         
         // Set the labels
-        PPPPost *post = [self.imagePosts objectAtIndex:i];
-        [self downloadPhoto:post.imageURL forImageView:view];
+        PPPImagePost *imagePost = [self.imagePosts objectAtIndex:i];
+        [self downloadPhoto:imagePost.imageURL forImageView:view];
         
         // Add it to the subview
         [self.photosScrollView addSubview:view];
@@ -187,8 +188,8 @@
                     NSString *poster = [[dict objectForKey:@"from"] objectForKey:@"name"];
                     NSString *message = [dict objectForKey:@"message"];
                     NSString *dateString = [dict objectForKey:@"created_time"];
-                    PPPPost *post = [[PPPPost alloc] initWithMessage:message andDateString:dateString andPoster:poster];
-                    [tempPostArray addObject:post];
+                    PPPMessagePost *messagePost = [[PPPMessagePost alloc] initWithMessage:message andDateString:dateString andPoster:poster];
+                    [tempPostArray addObject:messagePost];
                 }
                 
             }
@@ -223,8 +224,8 @@
                 NSString *photoURL = [dict objectForKey:@"source"];
                 NSString *dateString = [dict objectForKey:@"created_time"];
                 NSString *poster = [[dict objectForKey:@"from"] objectForKey:@"name"];
-                PPPPost *post = [[PPPPost alloc] initWithImageUrl:photoURL andDateString:dateString andPoster:poster];
-                [tempPostArray addObject:post];
+                PPPImagePost *imagePost = [[PPPImagePost alloc] initWithImageUrl:photoURL andDateString:dateString andPoster:poster];
+                [tempPostArray addObject:imagePost];
             }
             
             // Create an immutable copy for the property

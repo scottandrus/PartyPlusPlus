@@ -48,6 +48,8 @@
 		F73B6B061629E65100F7A832 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B031629E65100F7A832 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F73B6B071629E65100F7A832 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B041629E65100F7A832 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F73B6B0D1629ED4400F7A832 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B0C1629ED4400F7A832 /* FacebookSDK.framework */; };
+		F7898248162B1200003FDFF3 /* PPPMessagePost.m in Sources */ = {isa = PBXBuildFile; fileRef = F7898247162B1200003FDFF3 /* PPPMessagePost.m */; };
+		F789824C162B1227003FDFF3 /* PPPImagePost.m in Sources */ = {isa = PBXBuildFile; fileRef = F789824B162B1227003FDFF3 /* PPPImagePost.m */; };
 		F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F792230516290D6400ED0964 /* PPPLoginViewController.m */; };
 		F79ABF47162AB53200881A86 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79ABF46162AB53200881A86 /* MobileCoreServices.framework */; };
 		F79ABF4E162ABE0200881A86 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = F79ABF4D162ABE0200881A86 /* UIImage+fixOrientation.m */; };
@@ -116,6 +118,10 @@
 		F73B6B031629E65100F7A832 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		F73B6B041629E65100F7A832 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F73B6B0C1629ED4400F7A832 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		F7898246162B1200003FDFF3 /* PPPMessagePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPMessagePost.h; sourceTree = "<group>"; };
+		F7898247162B1200003FDFF3 /* PPPMessagePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPMessagePost.m; sourceTree = "<group>"; };
+		F789824A162B1227003FDFF3 /* PPPImagePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPImagePost.h; sourceTree = "<group>"; };
+		F789824B162B1227003FDFF3 /* PPPImagePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPImagePost.m; sourceTree = "<group>"; };
 		F792230416290D6400ED0964 /* PPPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPLoginViewController.h; sourceTree = "<group>"; };
 		F792230516290D6400ED0964 /* PPPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPLoginViewController.m; sourceTree = "<group>"; };
 		F79ABF46162AB53200881A86 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -206,6 +212,10 @@
 			children = (
 				D2B00B651629E970008DF306 /* PPPEvent.h */,
 				D2B00B661629E970008DF306 /* PPPEvent.m */,
+				F7898246162B1200003FDFF3 /* PPPMessagePost.h */,
+				F7898247162B1200003FDFF3 /* PPPMessagePost.m */,
+				F789824A162B1227003FDFF3 /* PPPImagePost.h */,
+				F789824B162B1227003FDFF3 /* PPPImagePost.m */,
 				F79ABF4F162AC2AF00881A86 /* PPPPost.h */,
 				F79ABF50162AC2AF00881A86 /* PPPPost.m */,
 			);
@@ -452,6 +462,8 @@
 				D21C471E162AA934007D8307 /* SAMenuViewController.m in Sources */,
 				F79ABF4E162ABE0200881A86 /* UIImage+fixOrientation.m in Sources */,
 				F79ABF51162AC2AF00881A86 /* PPPPost.m in Sources */,
+				F7898248162B1200003FDFF3 /* PPPMessagePost.m in Sources */,
+				F789824C162B1227003FDFF3 /* PPPImagePost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

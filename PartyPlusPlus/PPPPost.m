@@ -9,28 +9,8 @@
 #import "PPPPost.h"
 
 @implementation PPPPost
-@synthesize imageURL = _imageUrl;
-@synthesize text = _text;
 @synthesize date = _date;
-
-- (id)initWithImageUrl:(NSString *)image andDateString:(NSString *)date andPoster:(NSString *)poster {
-    self.imageURL = image;
-    self.dateString = date;
-    self.text = nil;
-    self.date = nil;
-    self.posterName = poster;
-    
-    return self;
-}
-- (id)initWithMessage:(NSString *)text andDateString:(NSString *)date andPoster:(NSString *)poster {
-    self.imageURL = nil;
-    self.dateString = date;
-    self.text = text;
-    self.date = nil;
-    self.posterName = poster;
-    
-    return self;
-}
+@synthesize dateString = _dateString;
 
 
 
