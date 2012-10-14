@@ -90,7 +90,7 @@
                 self.pageControl.numberOfPages = self.events.count;
                 
                 // Set initial current event
-                self.currentEvent = [self.events objectAtIndex:0];
+//                self.currentEvent = [self.events objectAtIndex:0];
                 
                 self.tertiaryEventsScrollView.hidden = NO;
                 
@@ -166,6 +166,9 @@
     [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
                                                       FBGraphObject *response,
                                                       NSError *error) {
+        if (!error) {
+            //
+        }
     }];
     
     [requester start];
@@ -413,7 +416,7 @@
                 self.pageControl.numberOfPages = self.events.count;
                 
                 // Set initial current event
-//                self.currentEvent = [self.events objectAtIndex:0];
+                self.currentEvent = [self.events objectAtIndex:0];
                 
                 self.tertiaryEventsScrollView.hidden = NO;
                 
@@ -677,12 +680,17 @@
         // Save the new image (original or edited) to the Camera Roll
         UIImageWriteToSavedPhotosAlbum (imageToSave, nil, nil , nil);
         
-        dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
-        dispatch_async(downloadQueue, ^{
-            //Upload image to event
-            [self uploadImage:imageToSave];
-        });
-        dispatch_release(downloadQueue);
+        // Attempted multithreading, but broke photo upload
+        
+//        dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+//        dispatch_async(downloadQueue, ^{
+//            //Upload image to event
+//            [self uploadImage:imageToSave];
+//        });
+//        dispatch_release(downloadQueue);
+        
+        
+        [self uploadImage:imageToSave];
 
 
     }
