@@ -55,8 +55,8 @@
     self.imageView.left = CGRectGetMidX(self.bounds) - CGRectGetMidX(self.imageView.bounds);
     self.imageView.top = CGRectGetMidY(self.bounds) - CGRectGetMidY(self.imageView.bounds);
     
-    self.eventNameLabel.size = [self.eventNameLabel.text sizeWithFont:self.eventNameLabel.font constrainedToSize:CGSizeMake(self.eventNameLabel.width, self.eventNameLabel.height)];
-    self.placeLabel.size = [self.placeLabel.text sizeWithFont:self.placeLabel.font constrainedToSize:CGSizeMake(self.placeLabel.width, self.placeLabel.height)];
+    self.eventNameLabel.size = [self.eventNameLabel.text sizeWithFont:self.eventNameLabel.font constrainedToSize:CGSizeMake(self.topOverlayView.width - 15, self.eventNameLabel.height)];
+    self.placeLabel.size = [self.placeLabel.text sizeWithFont:self.placeLabel.font constrainedToSize:CGSizeMake(self.topOverlayView.width - 15, self.placeLabel.height)];
     self.dateLabel.size = [self.dateLabel.text sizeWithFont:self.dateLabel.font constrainedToSize:CGSizeMake(self.dateLabel.width, self.dateLabel.height)];
     self.timeLabel.size = [self.timeLabel.text sizeWithFont:self.timeLabel.font constrainedToSize:CGSizeMake(self.timeLabel.width, self.timeLabel.height)];
 
@@ -67,8 +67,14 @@
     self.bottomOverlayView.width = MAX(self.dateLabel.width, self.timeLabel.width) + 15;
     self.bottomOverlayView.layer.cornerRadius = 10;
     
-
-
+    if (!self.eventNameLabel.text && !self.placeLabel.text) {
+        self.topOverlayView.hidden = YES;
+    } else self.topOverlayView.hidden = NO;
+    
+    if (!self.dateLabel.text && !self.timeLabel.text) {
+        self.bottomOverlayView.hidden = YES;
+    } else self.bottomOverlayView.hidden = NO;
+    
     self.imageView.image = self.event.image;
     [self downloadPhoto:event.imageURL];
 }

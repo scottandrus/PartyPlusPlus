@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UILabel *label;
 
+- (void)loadEvent:(PPPEvent *)event;
+
 @end
