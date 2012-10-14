@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C4675162A0DA7007D8307 /* PPPTertiaryEventView.m */; };
 		D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21C4679162A0DD0007D8307 /* PPPTertiaryEventView.xib */; };
+		D21C46C2162A4AAF007D8307 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D21C46B0162A4AAF007D8307 /* SVProgressHUD.bundle */; };
+		D21C46C3162A4AAF007D8307 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C46B2162A4AAF007D8307 /* SVProgressHUD.m */; };
 		D282555D162914E500A498A6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825554162914E500A498A6 /* OBGradientView.m */; };
 		D282555E162914E500A498A6 /* SAViewManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAViewManipulator.m */; };
 		D282555F162914E500A498A6 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825558162914E500A498A6 /* UIImage+Color.m */; };
@@ -48,6 +50,9 @@
 		D21C4674162A0DA7007D8307 /* PPPTertiaryEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPTertiaryEventView.h; sourceTree = "<group>"; };
 		D21C4675162A0DA7007D8307 /* PPPTertiaryEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPTertiaryEventView.m; sourceTree = "<group>"; };
 		D21C4679162A0DD0007D8307 /* PPPTertiaryEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPTertiaryEventView.xib; sourceTree = "<group>"; };
+		D21C46B0162A4AAF007D8307 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		D21C46B1162A4AAF007D8307 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		D21C46B2162A4AAF007D8307 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		D2825553162914E500A498A6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
 		D2825554162914E500A498A6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		D2825555162914E500A498A6 /* SAViewManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewManipulator.h; sourceTree = "<group>"; };
@@ -126,9 +131,21 @@
 			name = "Tertiary Event View";
 			sourceTree = "<group>";
 		};
+		D21C46AF162A4AAF007D8307 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D21C46B0162A4AAF007D8307 /* SVProgressHUD.bundle */,
+				D21C46B1162A4AAF007D8307 /* SVProgressHUD.h */,
+				D21C46B2162A4AAF007D8307 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			path = SVProgressHUD/SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		D2825563162914EB00A498A6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D21C46AF162A4AAF007D8307 /* SVProgressHUD */,
 				D2825553162914E500A498A6 /* OBGradientView.h */,
 				D2825554162914E500A498A6 /* OBGradientView.m */,
 				D2825555162914E500A498A6 /* SAViewManipulator.h */,
@@ -359,6 +376,7 @@
 				F7E53BD71629EDA70044B9A7 /* FBUserSettingsViewResources.bundle in Resources */,
 				F7E53BD81629EDA70044B9A7 /* Info.plist in Resources */,
 				D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */,
+				D21C46C2162A4AAF007D8307 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +400,7 @@
 				D2B00B5416293E3A008DF306 /* PPPDetailViewController.m in Sources */,
 				D2B00B671629E970008DF306 /* PPPEvent.m in Sources */,
 				D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */,
+				D21C46C3162A4AAF007D8307 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

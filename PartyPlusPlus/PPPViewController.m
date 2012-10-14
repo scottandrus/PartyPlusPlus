@@ -15,6 +15,7 @@
 #import "SAViewManipulator.h"
 #import "PPPDetailViewController.h"
 #import "PPPAppDelegate.h"
+#import "SVProgressHUD.h"
 
 #define EVENT_PARAMS @"name,picture,attending,description,location"
 
@@ -48,6 +49,8 @@
                 self.events = [tempEventArray copy];
                 [self setupMainEventsScrollView];
                 self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
+                self.pageLabel.hidden = NO;
+                [SVProgressHUD showSuccessWithStatus:@"Done!"];
             }
             
         }];
@@ -116,6 +119,8 @@
     } else {
         [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
     }
+    
+    [SVProgressHUD showWithStatus:@"Loading..."];
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,6 +145,8 @@
     
     // Set a gradient on the navigation bar
 //    [SAViewManipulator setGradientBackgroundImageForView:self.navigationController.navigationBar withTopColor:[UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1] /*#f7f7f7*/ andBottomColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] /*#e8e8e8*/];
+    
+    self.pageLabel.hidden = YES;
     
     // Round the navigation bar
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
