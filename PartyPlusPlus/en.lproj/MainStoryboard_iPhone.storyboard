@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C54" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hlB-0z-TZK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hlB-0z-TZK">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
-        <!--View Controller - PartyPlusPlus-->
+        <!--View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="PPPViewController" sceneMemberID="viewController">
@@ -69,7 +69,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="PartyPlusPlus" id="zkW-2b-UpU">
+                    <navigationItem key="navigationItem" id="zkW-2b-UpU">
                         <barButtonItem key="leftBarButtonItem" image="three_lines@2x.png" id="DAj-JQ-YFh">
                             <connections>
                                 <action selector="slideMenuButtonTouched" destination="2" id="EQ6-Od-Gey"/>
@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="XuI-mm-kct">
-                                <rect key="frame" x="0.0" y="24" width="320" height="46"/>
+                                <rect key="frame" x="0.0" y="109" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="tTT-EV-5al">
@@ -115,7 +115,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="bbz-ua-WJb">
-                                                <rect key="frame" x="10" y="0.0" width="46" height="47"/>
+                                                <rect key="frame" x="0.0" y="1" width="45" height="45"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
@@ -124,7 +124,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="cT1-rc-BOd">
-                                <rect key="frame" x="0.0" y="95" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="180" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="nrl-SX-Bxw">
@@ -132,16 +132,25 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="lRL-qN-1mt">
-                                                <rect key="frame" x="10" y="0.0" width="98" height="100"/>
+                                                <rect key="frame" x="0.0" y="2" width="96" height="96"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No photos posted!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Vr-Go-V6y">
+                                                <rect key="frame" x="19" y="24" width="282" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <size key="shadowOffset" width="0.0" height="1"/>
+                                            </label>
                                         </subviews>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="NwU-qX-IfA">
-                                <rect key="frame" x="0.0" y="71" width="320" height="25"/>
+                                <rect key="frame" x="0.0" y="156" width="320" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Stream" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yIn-Q3-1mf">
@@ -151,29 +160,29 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" cocoaTouchSystemColor="lightTextColor"/>
-                                        <size key="shadowOffset" width="-1" height="-1"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="xpj-ND-FUZ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                                <rect key="frame" x="0.0" y="85" width="320" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eWn-Zn-gy5">
-                                        <rect key="frame" x="9" y="0.0" width="114" height="21"/>
+                                        <rect key="frame" x="9" y="2" width="114" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" cocoaTouchSystemColor="lightTextColor"/>
-                                        <size key="shadowOffset" width="-1" height="-1"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9SF-sq-pYZ">
-                                <rect key="frame" x="20" y="204" width="131" height="36"/>
+                                <rect key="frame" x="8" y="302" width="144" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Post to Twitter">
@@ -185,10 +194,10 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="orr-fc-CGf">
-                                <rect key="frame" x="169" y="204" width="131" height="36"/>
+                                <rect key="frame" x="8" y="361" width="144" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Post to Twitter">
+                                <state key="normal" title="Post to Facebook">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -196,6 +205,15 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PqE-Ud-zfL">
+                                <rect key="frame" x="160" y="280" width="160" height="136"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="jFi-bY-IXr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -210,7 +228,9 @@
                     <connections>
                         <outlet property="attendingScrollView" destination="tTT-EV-5al" id="Vdz-jm-AW1"/>
                         <outlet property="attendingScrollViewBackgroundView" destination="XuI-mm-kct" id="XVp-Gx-FFQ"/>
+                        <outlet property="coverImageView" destination="jFi-bY-IXr" id="Rba-T4-EzY"/>
                         <outlet property="friendsHeaderView" destination="xpj-ND-FUZ" id="oJF-eJ-gaw"/>
+                        <outlet property="noPhotosLabel" destination="1Vr-Go-V6y" id="NDi-dm-krk"/>
                         <outlet property="photoStreamHeaderView" destination="NwU-qX-IfA" id="hdk-qF-o5S"/>
                         <outlet property="photosScrollView" destination="nrl-SX-Bxw" id="u79-HN-9iq"/>
                         <outlet property="photosScrollViewBackgroundView" destination="cT1-rc-BOd" id="hLi-xJ-rUX"/>
@@ -318,12 +338,15 @@
         <class className="PPPDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="backPressed:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="attendingScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="attendingScrollViewBackgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="feedScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="feedScrollViewBackgroundView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="coverImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="friendsHeaderView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="noPhotosLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="photoStreamHeaderView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="photosScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="photosScrollViewBackgroundView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="thumbnailImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="wallPhotoImageView" candidateClass="UIImageView"/>
             </relationships>
@@ -331,6 +354,7 @@
         <class className="PPPLoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPLoginViewController.h"/>
             <relationships>
+                <relationship kind="action" name="loginButtonClicked:"/>
                 <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
             </relationships>
         </class>

@@ -198,6 +198,7 @@
         [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
     }    
     
+    [self loadNavBarLogo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -218,6 +219,22 @@
 }
 
 #pragma mark - Utility methods
+
+- (void)loadNavBarLogo {
+    // Set the logo on the navigation bar
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PlusPlus"]];
+    if ([[self.navigationController.navigationBar subviews] count] > 2) {
+        NSArray *navSubviews = [self.navigationController.navigationBar subviews];
+        
+        for (UIView * subview in navSubviews) {
+            if ([subview isKindOfClass:[UIImageView class]] && subview != [navSubviews objectAtIndex:0]) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+    [self.navigationController.navigationBar addSubview:logo];
+    logo.centerX = self.navigationController.navigationBar.centerX;
+}
 
 - (void)customizeUI {
     // Set a gradient on the background
