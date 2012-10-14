@@ -13,6 +13,7 @@
 #import "PPPMessagePost.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImage+fixOrientation.h"
+#import "PhotoDetailViewController.h"
 
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
@@ -170,6 +171,8 @@
 
 #pragma mark - ScrollView Methods
 - (void)setupPhotosScrollView {
+    self.imageDict = [NSMutableArray array];
+    self.buttonDict = [NSMutableArray array];
     
     if (imagePosts.count == 0) {
         self.noPhotosLabel.hidden = NO;
@@ -186,7 +189,11 @@
         // Allocate and initialize the event
         view = [[UIImageView alloc] initWithFrame:self.wallPhotoImageView.frame];
         
-        view.left = (self.wallPhotoImageView.width + 10) * i;
+        
+        UIView *containerView = [[UIView alloc] initWithFrame:view.frame];
+        [containerView addSubview:view];
+        
+        containerView.left = (self.wallPhotoImageView.width + 10) * i;
         
         // Set the labels
         view.hidden = YES;
@@ -194,19 +201,20 @@
         [self downloadPhoto:imagePost.imageURL forImageView:view];
         
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
-        [button addTarget:self action:@selector(showPhoto) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
+        [button addTarget:self action:@selector(showPhoto:) forControlEvents:UIControlEventTouchUpInside];
+        [containerView addSubview:button];
         
-        [SAViewManipulator addBorderToView:view withWidth:3 color:[UIColor whiteColor] andRadius:0];
-        [SAViewManipulator addShadowToView:view withOpacity:.8 radius:3 andOffset:CGSizeMake(1, 1)];
-        view.clipsToBounds = YES;
+        [self.imageDict addObject:view];
+        [self.buttonDict addObject:button];
+        
+        [SAViewManipulator addBorderToView:containerView withWidth:3 color:[UIColor whiteColor] andRadius:0];
+        [SAViewManipulator addShadowToView:containerView withOpacity:.8 radius:3 andOffset:CGSizeMake(1, 1)];
+        containerView.clipsToBounds = YES;
         
         view.contentMode = UIViewContentModeScaleAspectFill;
         
         // Add it to the subview
-        [self.photosScrollView addSubview:view];
-        
-       
+        [self.photosScrollView addSubview:containerView];
         
     }
     
@@ -215,8 +223,13 @@
     
 }
 
-- (void)showPhoto {
-    
+- (void)showPhoto:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"displayPhoto" sender:[self.imageDict objectAtIndex:[self.buttonDict indexOfObject:sender]]];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    PhotoDetailViewController *pdvc = (PhotoDetailViewController *)[segue.destinationViewController topViewController];
+    pdvc.image = [sender image];
 }
 
 - (void)downloadPhoto:(NSString *)urlStr {

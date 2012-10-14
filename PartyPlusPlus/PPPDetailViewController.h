@@ -34,4 +34,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *coverImageView;
 @property (strong, nonatomic) IBOutlet UIButton *twitterButton;
 
+@property (strong, nonatomic) NSMutableArray *imageDict;
+@property (strong, nonatomic) NSMutableArray *buttonDict;
+
 @end
