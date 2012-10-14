@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C4675162A0DA7007D8307 /* PPPTertiaryEventView.m */; };
 		D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21C4679162A0DD0007D8307 /* PPPTertiaryEventView.xib */; };
-		D21C46C2162A4AAF007D8307 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D21C46B0162A4AAF007D8307 /* SVProgressHUD.bundle */; };
-		D21C46C3162A4AAF007D8307 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C46B2162A4AAF007D8307 /* SVProgressHUD.m */; };
 		D282555D162914E500A498A6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825554162914E500A498A6 /* OBGradientView.m */; };
 		D282555E162914E500A498A6 /* SAViewManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAViewManipulator.m */; };
 		D282555F162914E500A498A6 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825558162914E500A498A6 /* UIImage+Color.m */; };
@@ -36,6 +34,8 @@
 		D2D4E332162900F9001EE23B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D4E330162900F9001EE23B /* MainStoryboard_iPad.storyboard */; };
 		D2D4E335162900F9001EE23B /* PPPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E334162900F9001EE23B /* PPPViewController.m */; };
 		D2D4E342162908AA001EE23B /* PPPMainEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4E341162908AA001EE23B /* PPPMainEventView.m */; };
+		F710382F162A7EA0005848CC /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F710382C162A7EA0005848CC /* SVProgressHUD.bundle */; };
+		F7103830162A7EA0005848CC /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F710382E162A7EA0005848CC /* SVProgressHUD.m */; };
 		F73B6B051629E65100F7A832 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B021629E65100F7A832 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F73B6B061629E65100F7A832 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B031629E65100F7A832 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F73B6B071629E65100F7A832 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B041629E65100F7A832 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -50,9 +50,6 @@
 		D21C4674162A0DA7007D8307 /* PPPTertiaryEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPTertiaryEventView.h; sourceTree = "<group>"; };
 		D21C4675162A0DA7007D8307 /* PPPTertiaryEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPTertiaryEventView.m; sourceTree = "<group>"; };
 		D21C4679162A0DD0007D8307 /* PPPTertiaryEventView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPPTertiaryEventView.xib; sourceTree = "<group>"; };
-		D21C46B0162A4AAF007D8307 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		D21C46B1162A4AAF007D8307 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		D21C46B2162A4AAF007D8307 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		D2825553162914E500A498A6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
 		D2825554162914E500A498A6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		D2825555162914E500A498A6 /* SAViewManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewManipulator.h; sourceTree = "<group>"; };
@@ -91,6 +88,9 @@
 		D2D4E334162900F9001EE23B /* PPPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PPPViewController.m; sourceTree = "<group>"; };
 		D2D4E340162908AA001EE23B /* PPPMainEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPMainEventView.h; sourceTree = "<group>"; };
 		D2D4E341162908AA001EE23B /* PPPMainEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPMainEventView.m; sourceTree = "<group>"; };
+		F710382C162A7EA0005848CC /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		F710382D162A7EA0005848CC /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		F710382E162A7EA0005848CC /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		F73B6B021629E65100F7A832 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		F73B6B031629E65100F7A832 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		F73B6B041629E65100F7A832 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -131,20 +131,10 @@
 			name = "Tertiary Event View";
 			sourceTree = "<group>";
 		};
-		D21C46AF162A4AAF007D8307 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				D21C46B0162A4AAF007D8307 /* SVProgressHUD.bundle */,
-				D21C46B1162A4AAF007D8307 /* SVProgressHUD.h */,
-				D21C46B2162A4AAF007D8307 /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		D2825563162914EB00A498A6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				D21C46AF162A4AAF007D8307 /* SVProgressHUD */,
+				F710382B162A7EA0005848CC /* SVProgressHUD */,
 				D2825553162914E500A498A6 /* OBGradientView.h */,
 				D2825554162914E500A498A6 /* OBGradientView.m */,
 				D2825555162914E500A498A6 /* SAViewManipulator.h */,
@@ -298,6 +288,16 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		F710382B162A7EA0005848CC /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F710382C162A7EA0005848CC /* SVProgressHUD.bundle */,
+				F710382D162A7EA0005848CC /* SVProgressHUD.h */,
+				F710382E162A7EA0005848CC /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		F7E53BD21629EDA70044B9A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,7 +375,7 @@
 				F7E53BD71629EDA70044B9A7 /* FBUserSettingsViewResources.bundle in Resources */,
 				F7E53BD81629EDA70044B9A7 /* Info.plist in Resources */,
 				D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */,
-				D21C46C2162A4AAF007D8307 /* SVProgressHUD.bundle in Resources */,
+				F710382F162A7EA0005848CC /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +399,7 @@
 				D2B00B5416293E3A008DF306 /* PPPDetailViewController.m in Sources */,
 				D2B00B671629E970008DF306 /* PPPEvent.m in Sources */,
 				D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */,
-				D21C46C3162A4AAF007D8307 /* SVProgressHUD.m in Sources */,
+				F7103830162A7EA0005848CC /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
