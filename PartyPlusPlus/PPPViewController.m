@@ -677,8 +677,14 @@
         // Save the new image (original or edited) to the Camera Roll
         UIImageWriteToSavedPhotosAlbum (imageToSave, nil, nil , nil);
         
-        //Upload image to event
-        [self uploadImage:imageToSave];
+        dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            //Upload image to event
+            [self uploadImage:imageToSave];
+        });
+        dispatch_release(downloadQueue);
+
+
     }
     
     // Handle a movie capture

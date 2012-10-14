@@ -14,6 +14,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImage+fixOrientation.h"
 #import "PhotoDetailViewController.h"
+#import <dispatch/dispatch.h>
 
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
@@ -528,7 +529,16 @@
         UIImageWriteToSavedPhotosAlbum (imageToSave, nil, nil , nil);
         
         //Upload image to event
-        [self uploadImage:imageToSave];
+        dispatch_queue_t backgroundQueue;
+        
+        // 1) Add to bottom of initWithHTML:delegate
+        backgroundQueue = dispatch_queue_create("downloadQueue", NULL);
+        
+        // 3) Modify process to be the following
+            dispatch_async(backgroundQueue, ^(void) {
+                [self uploadImage:imageToSave];
+            });
+        
     }
     
     // Handle a movie capture
