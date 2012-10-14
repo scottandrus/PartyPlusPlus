@@ -22,6 +22,8 @@
 
 #define EVENT_PARAMS @"name,picture.type(large),attending,description,location"
 #define PHOTO_PARAMS @"source"
+#define ATTENDING_PARAMS @"picture"
+
 
 @interface PPPViewController ()
 
@@ -74,6 +76,7 @@
                 NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)];
                 self.events = [tempEventArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
                 
+                [self pullAttendingPhotoURLsWithCallBack:^{}];
                 // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
 
@@ -146,6 +149,44 @@
                               }
                               block();
                           }];
+}
+
+- (void)pullAttendingPhotoURLsWithCallBack:(void (^)(void))callback; {
+    for (size_t i = 0; i < self.events.count; ++i) {
+        FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+        NSString *graphPath = [NSString stringWithFormat:@"/%@/attending", [[self.events objectAtIndex:i] eventId]];
+        FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:[NSDictionary dictionaryWithObject:ATTENDING_PARAMS forKey:@"fields"] HTTPMethod:@"GET"];
+        [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                          FBGraphObject *response,
+                                                          NSError *error) {
+            if (!error) {
+                
+                // Ok, so grab an event array
+                NSArray *eventArrayFromGraphObject = [response objectForKey:@"data"];
+                
+                // temp event array to hold
+                NSMutableArray *tempPhotoArray = [NSMutableArray array];
+                for (size_t j = 0; j < MIN(eventArrayFromGraphObject.count, 3); j++) {
+                    NSDictionary *dict = [eventArrayFromGraphObject objectAtIndex:j];
+                    NSString *photoURL = [[[dict objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+                    
+                    [tempPhotoArray addObject:photoURL];
+                }
+                
+                
+                callback();
+                // Create an immutable copy for the property
+                    [[self.eventViews objectAtIndex:i] setAttendingThumbnails:[tempPhotoArray copy]];
+                [[self.eventViews objectAtIndex:i] showThumbnails];
+                
+            }
+            
+        }];
+        
+        [requester start];
+    }
+    
+    
 }
 
 #pragma mark - View Controller lifecycle
@@ -295,7 +336,21 @@
     self.events = [mutableEvents copy];
 }
 
+- (void)refresh {
+    [self setupMainEventsScrollView];
+}
+
 - (void)setupMainEventsScrollView {
+    
+    // Remove all drafts currently in the scrollview
+    for (UIView *view in self.mainEventsScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    // Flush the local drafts set
+    NSMutableArray *mutableEvents = [self.eventViews mutableCopy];
+    [mutableEvents removeAllObjects];
+    self.eventViews = [mutableEvents copy];
     
     // Set the content size first
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);

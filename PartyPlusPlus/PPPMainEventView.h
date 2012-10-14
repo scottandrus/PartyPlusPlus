@@ -31,4 +31,6 @@
 // Public methods
 - (void)loadEvent:(PPPEvent *)event;
 
+- (void)showThumbnails;
+
 @end

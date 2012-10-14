@@ -46,6 +46,13 @@
 
 }
 
+- (IBAction)refreshPressed:(id)sender {
+    PPPAppDelegate *delegate =[UIApplication sharedApplication].delegate;
+    PPPViewController *vc = (PPPViewController *)delegate.contentViewController;
+    [self slideThenHide];
+    [vc refresh];
+}
+
 - (void)downloadPhoto:(NSString *)urlStr {
     self.userProfilePictureView.clipsToBounds = YES;
     // Download photo
@@ -100,6 +107,8 @@
     [self.screenShotImageView addGestureRecognizer:self.panGesture];
     
     [SAViewManipulator addShadowToView:self.screenShotImageView withOpacity:1 radius:2 andOffset:CGSizeMake(-3, 0)];
+    self.screenShotImageView.layer.rasterizationScale = 1;
+    self.screenShotImageView.layer.shouldRasterize = YES;
     
     [self populateUserDetails];
     [self customizeUI];

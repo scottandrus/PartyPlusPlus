@@ -11,6 +11,8 @@
 #import "UIView+Frame.h"
 #import "PPPImagePost.h"
 #import "PPPMessagePost.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "UIImage+fixOrientation.h"
 
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
@@ -18,6 +20,8 @@
 #define WALL_PHOTO_PARAMS @"source"
 #define ATTENDING_PARAMS @"picture"
 #define FEED_PARAMS @"message,from"
+#define PHOTO_PARAMS @"source"
+
 
 @interface PPPDetailViewController ()
 
@@ -97,6 +101,22 @@
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
     
     [self downloadPhoto:self.event.imageURL];
+    
+    /* Gloss twitter button */
+    
+    [SAViewManipulator setGradientBackgroundImageForView:self.twitterButton withTopColor:[UIColor colorWithRed:0.286 green:0.894 blue:0.961 alpha:1] /*#49e4f5*/ andBottomColor:[UIColor colorWithRed:0.055 green:0.698 blue:0.769 alpha:1] /*#0eb2c4*/];
+    [SAViewManipulator addBorderToView:self.twitterButton withWidth:.5 color:[UIColor blackColor] andRadius:10];
+    self.twitterButton.clipsToBounds = YES;
+    
+    //    UIImageView *fbIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fb64"]];
+    //    [self.loginButton addSubview:fbIcon];
+    //    fbIcon.frame = CGRectMake(8, self.loginButton.height / 2, 80, 80);
+    //    fbIcon.centerY = self.loginButton.centerY;
+    
+    // Round the navigation bar
+    //    [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
+    
+    self.view.clipsToBounds = YES;
 }
 
 #pragma mark - ScrollView Methods
@@ -130,6 +150,24 @@
     
 }
 
+#pragma mark - TableView Methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return messagePosts.count;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    }
+    cell.textLabel.text = [self.messagePosts objectAtIndex:indexPath.row];
+    return cell;
+}
+
 #pragma mark - ScrollView Methods
 - (void)setupPhotosScrollView {
     
@@ -155,6 +193,10 @@
         PPPImagePost *imagePost = [self.imagePosts objectAtIndex:i];
         [self downloadPhoto:imagePost.imageURL forImageView:view];
         
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
+        [button addTarget:self action:@selector(showPhoto) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:button];
+        
         [SAViewManipulator addBorderToView:view withWidth:3 color:[UIColor whiteColor] andRadius:0];
         [SAViewManipulator addShadowToView:view withOpacity:.8 radius:3 andOffset:CGSizeMake(1, 1)];
         view.clipsToBounds = YES;
@@ -164,6 +206,8 @@
         // Add it to the subview
         [self.photosScrollView addSubview:view];
         
+       
+        
     }
     
     
@@ -171,10 +215,15 @@
     
 }
 
+- (void)showPhoto {
+    
+}
+
 - (void)downloadPhoto:(NSString *)urlStr {
     self.coverImageView.clipsToBounds = YES;
     if (!self.event.image) {
         // Download photo
+        UIBarButtonItem *oldItem = self.navigationController.navigationItem.rightBarButtonItem;
         UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [loading startAnimating];
         [self.navigationController.navigationItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithCustomView:loading]];
@@ -198,6 +247,7 @@
                 [self.coverImageView setImage:[UIImage imageWithData:imgUrl]];
                 [loading stopAnimating];
                 [loading removeFromSuperview];
+                [self.navigationController.navigationItem setRightBarButtonItem:oldItem];
             });
         });
         dispatch_release(downloadQueue);
@@ -211,7 +261,14 @@
     TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
     
     // Optional: set an image, url and initial text
-    [twitter setInitialText:[NSString stringWithFormat:@"#%@", self.event.eventName]];
+    NSArray *firstWords = [self.event.eventName componentsSeparatedByString:@" "];// subarrayWithRange:wordRange];
+    
+    NSString *twitterTags = [NSString string];
+    for (NSString *word in firstWords) {
+        twitterTags = [twitterTags stringByAppendingString:[NSString stringWithFormat:@"#%@ ", word]];
+    }
+    
+    [twitter setInitialText:twitterTags];
     
     // Show the controller
     [self presentModalViewController:twitter animated:YES];
@@ -235,6 +292,7 @@
 //        [self dismissModalViewControllerAnimated:YES];
 //    };
 }
+
 
 
 #pragma mark - Facebook API Calls
@@ -374,6 +432,126 @@
     
 }
 
+#pragma mark - Camera Methods
+- (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
+                                   usingDelegate: (id <UIImagePickerControllerDelegate,
+                                                   UINavigationControllerDelegate>) delegate {
+    
+    if (([UIImagePickerController isSourceTypeAvailable:
+          UIImagePickerControllerSourceTypeCamera] == NO)
+        || (delegate == nil)
+        || (controller == nil))
+        return NO;
+    
+    
+    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+    cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    // Displays a control that allows the user to choose picture or
+    // movie capture, if both are available:
+    cameraUI.mediaTypes =
+    [UIImagePickerController availableMediaTypesForSourceType:
+     UIImagePickerControllerSourceTypeCamera];
+    
+    // Hides the controls for moving & scaling pictures, or for
+    // trimming movies. To instead show the controls, use YES.
+    cameraUI.allowsEditing = NO;
+    
+    cameraUI.delegate = delegate;
+    
+    cameraUI.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [controller presentViewController:cameraUI animated:YES completion:nil];
+    return YES;
+}
+
+- (IBAction)showCameraUI:(id)sender {
+    [self startCameraControllerFromViewController: self
+                                    usingDelegate: self];
+    [self getWritePermissions];
+}
+
+#pragma mark - Helper methods
+// Get write permissions
+- (void)getWritePermissions {
+    // include any of the "publish" or "manage" permissions
+    NSArray *writePermissions = [NSArray arrayWithObjects:@"publish_stream", nil];
+    [[FBSession activeSession] reauthorizeWithPublishPermissions:writePermissions
+                                                 defaultAudience:FBSessionDefaultAudienceFriends
+                                               completionHandler:^(FBSession *session, NSError *error) {
+                                                   /* handle success + failure in block */
+                                               }];
+}
+
+#pragma mark - Camera Delegate Methods
+
+// For responding to the user tapping Cancel.
+- (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker {
+    [self dismissModalViewControllerAnimated: YES];
+}
+
+// For responding to the user accepting a newly-captured picture or movie
+- (void) imagePickerController: (UIImagePickerController *) picker
+ didFinishPickingMediaWithInfo: (NSDictionary *) info {
+    
+    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+    UIImage *originalImage, *editedImage, *imageToSave;
+    
+    // Handle a still image capture
+    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0)
+        == kCFCompareEqualTo) {
+        
+        editedImage = (UIImage *) [info objectForKey:
+                                   UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *) [info objectForKey:
+                                     UIImagePickerControllerOriginalImage];
+        
+        if (editedImage) {
+            imageToSave = editedImage;
+        } else {
+            imageToSave = originalImage;
+        }
+        
+        // Save the new image (original or edited) to the Camera Roll
+        UIImageWriteToSavedPhotosAlbum (imageToSave, nil, nil , nil);
+        
+        //Upload image to event
+        [self uploadImage:imageToSave];
+    }
+    
+    // Handle a movie capture
+    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeMovie, 0)
+        == kCFCompareEqualTo) {
+        
+        NSString *moviePath = [[info objectForKey:
+                                UIImagePickerControllerMediaURL] path];
+        
+        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum (moviePath)) {
+            UISaveVideoAtPathToSavedPhotosAlbum (
+                                                 moviePath, nil, nil, nil);
+        }
+    }
+    
+    [self dismissModalViewControllerAnimated: YES];
+}
+
+#pragma mark - Facebook Uploading Methods
+
+- (void)uploadImage:(UIImage *)image {
+    
+    image = image.fixOrientation;
+    FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+    NSString *graphPath = [NSString stringWithFormat:@"/%@/photos", self.event.eventId];
+    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:[NSDictionary dictionaryWithObject:image forKey:PHOTO_PARAMS] HTTPMethod:@"POST"];
+    [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                      FBGraphObject *response,
+                                                      NSError *error) {
+    }];
+    
+    [requester start];
+    
+}
+
+
 #pragma mark - IBActions
 
 - (IBAction)backPressed:(UIBarButtonItem *)sender {
@@ -392,6 +570,7 @@
     [self setPhotosScrollViewBackgroundView:nil];
     [self setNoPhotosLabel:nil];
     [self setCoverImageView:nil];
+    [self setTwitterButton:nil];
      [super viewDidUnload];
 }
 @end

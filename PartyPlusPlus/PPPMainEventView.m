@@ -89,6 +89,10 @@
     [self downloadPhoto:event.imageURL];
 }
 
+- (void)showThumbnails {
+    [self setupAttendingScrollView];
+}
+
 - (void)downloadPhoto:(NSString *)urlStr {
     if (!self.event.image) {
         // Download photo
@@ -122,39 +126,68 @@
     }
 }
 
+- (void)downloadPhoto:(NSString *)urlStr forImageView:(UIImageView*)imageView {
+    if (!self.event.image) {
+        // Download photo
+        UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [loading startAnimating];
+        //        [self addSubview:loading];
+        //        loading.center = self.center;
+        
+        dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            // TODO: Add a different image for each location
+            NSData *imgUrl;
+            if (!urlStr) {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://placekitten.com/g/480/480"]];
+            } else {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [imageView setImage:[UIImage imageWithData:imgUrl]];
+                imageView.hidden = NO;
+                [loading stopAnimating];
+                [loading removeFromSuperview];
+            });
+        });
+        dispatch_release(downloadQueue);
+    }
+}
+
+
 - (void)setupAttendingScrollView {
-    
-    // Round current event
-    //    [self styleMainEventView:self.currentEvent];
-    
-    // Create a mutable array to mutate events
-    NSMutableArray *mutableThumbnails = [NSMutableArray arrayWithObjects:self.thumbnailImageView, nil];
     
     // Create a main event view pointer
     UIImageView *view;
     
-    // Create 10 events
-    for (size_t i = 1; i < 10; ++i) {
+    self.thumbnailScrollView.contentSize = CGSizeMake((self.thumbnailImageView.width + 5) * self.attendingThumbnails.count - 5, self.thumbnailImageView.height);
+    
+    
+    // Create events
+    for (size_t i = 0; i < self.attendingThumbnails.count; ++i) {
         
         // Allocate and initialize the event
-        view = [[UIImageView alloc] initWithFrame:self.imageView.frame];
+        view = [[UIImageView alloc] initWithFrame:self.thumbnailImageView.frame];
         
-        view.left -= (self.thumbnailImageView.width + 5) * i;
+        view.left += -1 * (self.thumbnailImageView.width + 5) * i;
+        
+//        NSLog(@"%@", [self.attendingThumbnails objectAtIndex:i]);
         
         // Set the labels
-        view.image = [UIImage imageNamed:@"Thumbnail.png"];
+        [self downloadPhoto:[self.attendingThumbnails objectAtIndex:i] forImageView:view];
+        
+        [SAViewManipulator addBorderToView:view withWidth:1.5 color:[UIColor whiteColor] andRadius:22];
+        view.clipsToBounds = YES;
+        //        [SAViewManipulator addShadowToView:view withOpacity:.8 radius:3 andOffset:CGSizeMake(1, 1)];
         
         // Add it to the subview
         [self.thumbnailScrollView addSubview:view];
+//        [self addSubview:view];
         
-        
-        [mutableThumbnails addObject:view];
-        
-        //        [self styleMainEventView:view];
     }
-    
-    // Put it into the events array
-    self.attendingThumbnails = [mutableThumbnails copy];
 }
 
 /*

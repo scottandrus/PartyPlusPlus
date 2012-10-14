@@ -10,7 +10,7 @@
 #import "PPPViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface PPPDetailViewController : UIViewController
+@interface PPPDetailViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) PPPEvent *event;
 @property (strong, nonatomic) NSArray *messagePosts;
@@ -32,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *wallPhotoImageView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *coverImageView;
+@property (strong, nonatomic) IBOutlet UIButton *twitterButton;
 
 @end
