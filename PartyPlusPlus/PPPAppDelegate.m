@@ -145,6 +145,7 @@ NSString *const FBMenuDataChangedNotification =
                             @"user_photos",
                             @"friends_events",
                             @"friends_photos",
+                            @"read_stream",
                             nil];
     
     return [FBSession openActiveSessionWithReadPermissions:permissions
