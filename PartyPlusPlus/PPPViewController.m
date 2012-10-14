@@ -16,7 +16,7 @@
 #import "PPPDetailViewController.h"
 #import "PPPAppDelegate.h"
 
-#define EVENT_PARAMS @"name,picture,attending,description,location"
+#define EVENT_PARAMS @"name,picture.type(large),attending,description,location"
 
 @interface PPPViewController ()
 
