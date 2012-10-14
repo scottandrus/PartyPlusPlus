@@ -16,7 +16,7 @@
 #import "PPPDetailViewController.h"
 #import "PPPAppDelegate.h"
 
-#define EVENT_PARAMS @"name,picture,attending,description"
+#define EVENT_PARAMS @"name,picture,attending,description,location"
 
 @interface PPPViewController ()
 
@@ -45,7 +45,9 @@
                     PPPEvent *event = [[PPPEvent alloc] initWithDictionary:dict];
                     [tempEventArray addObject:event];
                 }
-                self.events = tempEventArray;
+                self.events = [tempEventArray copy];
+                [self setupMainEventsScrollView];
+                self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
             }
             
         }];
@@ -80,10 +82,8 @@
      object:nil];
     
     [self customizeUI];
-    [self generateEvents];
-    [self setupMainEventsScrollView];
-    
-    self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
+//    [self generateEvents];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

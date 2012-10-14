@@ -41,7 +41,12 @@
     self.event = event;
     
     self.eventNameLabel.text = self.event.eventName;
-    self.placeLabel.text = self.event.locationString;
+    if ([self.event.locationString isKindOfClass:[NSNull class]]) {
+         self.placeLabel.text =  @"";
+    } else {
+        self.placeLabel.text = self.event.locationString;
+    }
+   
     self.dateLabel.text = self.event.dateString;
     self.imageView.image = self.event.image;
 }
