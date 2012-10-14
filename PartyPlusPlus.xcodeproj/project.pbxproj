@@ -20,6 +20,7 @@
 		D21C471E162AA934007D8307 /* SAMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C471D162AA934007D8307 /* SAMenuViewController.m */; };
 		D21C4720162AB2D0007D8307 /* SAMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21C471F162AB2D0007D8307 /* SAMenuViewController.xib */; };
 		D220CCA2162B2CCF00392F4F /* PlusPlus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D220CCA1162B2CCF00392F4F /* PlusPlus@2x.png */; };
+		D220CCB5162B42C700392F4F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D220CCB4162B42C700392F4F /* Twitter.framework */; };
 		D282555D162914E500A498A6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825554162914E500A498A6 /* OBGradientView.m */; };
 		D282555E162914E500A498A6 /* SAViewManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAViewManipulator.m */; };
 		D282555F162914E500A498A6 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825558162914E500A498A6 /* UIImage+Color.m */; };
@@ -78,6 +79,7 @@
 		D21C471D162AA934007D8307 /* SAMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMenuViewController.m; sourceTree = "<group>"; };
 		D21C471F162AB2D0007D8307 /* SAMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMenuViewController.xib; sourceTree = "<group>"; };
 		D220CCA1162B2CCF00392F4F /* PlusPlus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlusPlus@2x.png"; sourceTree = "<group>"; };
+		D220CCB4162B42C700392F4F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		D2825553162914E500A498A6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
 		D2825554162914E500A498A6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		D2825555162914E500A498A6 /* SAViewManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewManipulator.h; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D220CCB5162B42C700392F4F /* Twitter.framework in Frameworks */,
 				F79ABF47162AB53200881A86 /* MobileCoreServices.framework in Frameworks */,
 				F73B6B051629E65100F7A832 /* Accounts.framework in Frameworks */,
 				F73B6B061629E65100F7A832 /* AdSupport.framework in Frameworks */,
@@ -291,6 +294,7 @@
 		D2D4E314162900F9001EE23B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D220CCB4162B42C700392F4F /* Twitter.framework */,
 				F79ABF46162AB53200881A86 /* MobileCoreServices.framework */,
 				F7E53BD21629EDA70044B9A7 /* Resources */,
 				F73B6B0C1629ED4400F7A832 /* FacebookSDK.framework */,

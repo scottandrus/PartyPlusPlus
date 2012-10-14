@@ -22,6 +22,8 @@
 
 #define EVENT_PARAMS @"name,picture.type(large),attending,description,location"
 #define PHOTO_PARAMS @"source"
+#define ATTENDING_PARAMS @"picture"
+
 
 @interface PPPViewController ()
 
@@ -78,6 +80,7 @@
                 NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)];
                 self.events = [tempEventArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
                 
+                [self pullAttendingPhotoURLsWithCallBack:^{}];
                 // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
 
@@ -89,6 +92,7 @@
                 // Set initial current event
                 self.currentEvent = [self.events objectAtIndex:0];
                 
+                self.tertiaryEventsScrollView.hidden = NO;
                 
                 // Show that page control
                 self.pageControl.hidden = NO;
@@ -180,6 +184,43 @@
     }];
     
     [requester start];
+}
+
+- (void)pullAttendingPhotoURLsWithCallBack:(void (^)(void))callback; {
+    for (size_t i = 0; i < self.events.count; ++i) {
+        FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+        NSString *graphPath = [NSString stringWithFormat:@"/%@/attending", [[self.events objectAtIndex:i] eventId]];
+        FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:[NSDictionary dictionaryWithObject:ATTENDING_PARAMS forKey:@"fields"] HTTPMethod:@"GET"];
+        [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                          FBGraphObject *response,
+                                                          NSError *error) {
+            if (!error) {
+                
+                // Ok, so grab an event array
+                NSArray *eventArrayFromGraphObject = [response objectForKey:@"data"];
+                
+                // temp event array to hold
+                NSMutableArray *tempPhotoArray = [NSMutableArray array];
+                for (size_t j = 0; j < MIN(eventArrayFromGraphObject.count, 3); j++) {
+                    NSDictionary *dict = [eventArrayFromGraphObject objectAtIndex:j];
+                    NSString *photoURL = [[[dict objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+                    
+                    [tempPhotoArray addObject:photoURL];
+                }
+                
+                
+                callback();
+                // Create an immutable copy for the property
+                    [[self.eventViews objectAtIndex:i] setAttendingThumbnails:[tempPhotoArray copy]];
+                [[self.eventViews objectAtIndex:i] showThumbnails];
+                
+            }
+            
+        }];
+        
+        [requester start];
+    }
+    
     
 }
 
@@ -331,7 +372,80 @@
     self.events = [mutableEvents copy];
 }
 
+- (void)refresh {
+    if (FBSession.activeSession.isOpen) {
+        //        [self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
+        //        self.userInfoTextView.hidden = NO;
+        
+        
+        FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+        FBRequest *request = [FBRequest requestWithGraphPath:@"me/events" parameters:[NSDictionary dictionaryWithObject:EVENT_PARAMS forKey:@"fields"] HTTPMethod:@"GET"];
+        [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                          FBGraphObject *response,
+                                                          NSError *error) {
+            if (!error) {
+                
+                // Ok, so grab an event array
+                NSArray *eventArrayFromGraphObject = [response objectForKey:@"data"];
+                
+                // temp event array to hold
+                NSMutableArray *tempEventArray = [NSMutableArray array];
+                for (id dict in eventArrayFromGraphObject) {
+                    PPPEvent *event = [[PPPEvent alloc] initWithGraphDictionary:dict];
+                    [tempEventArray addObject:event];
+                }
+                
+                // Create an immutable copy for the property
+                //                self.events = [tempEventArray copy];
+                
+                
+                NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)];
+                self.events = [tempEventArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+                
+                [self pullAttendingPhotoURLsWithCallBack:^{}];
+                // Ok, events are loaded, set up the Main Events scroll view
+                [self setupMainEventsScrollView];
+                
+                
+                // Grab the current page and number of pages while we're here
+                self.pageControl.currentPage = 0;
+                self.pageControl.numberOfPages = self.events.count;
+                
+                // Set initial current event
+                self.currentEvent = [self.events objectAtIndex:0];
+                
+                self.tertiaryEventsScrollView.hidden = NO;
+                
+                // Show that page control
+                self.pageControl.hidden = NO;
+                
+                // Dismiss our SVProgressHUD
+                [SVProgressHUD showSuccessWithStatus:@"Done!"];
+                
+            }
+            
+        }];
+        
+        [requester start];
+        [self pullOtherEventsWithCompetionBlock:^{
+            [self setupTertiaryEventsScrollView];
+        }];
+        
+    }
+    [self setupMainEventsScrollView];
+}
+
 - (void)setupMainEventsScrollView {
+    
+    // Remove all drafts currently in the scrollview
+    for (UIView *view in self.mainEventsScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    // Flush the local drafts set
+    NSMutableArray *mutableEvents = [self.eventViews mutableCopy];
+    [mutableEvents removeAllObjects];
+    self.eventViews = [mutableEvents copy];
     
     // Set the content size first
     self.mainEventsScrollView.contentSize = CGSizeMake(self.events.count * self.mainEventsScrollView.width, self.mainEventsScrollView.height);

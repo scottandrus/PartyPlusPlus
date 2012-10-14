@@ -38,5 +38,6 @@
 // IBActions
 - (IBAction)showCameraUI:(id)sender;
 
+- (void)refresh;
 
 @end
