@@ -48,6 +48,7 @@
 		F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F792230516290D6400ED0964 /* PPPLoginViewController.m */; };
 		F79ABF47162AB53200881A86 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79ABF46162AB53200881A86 /* MobileCoreServices.framework */; };
 		F79ABF4E162ABE0200881A86 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = F79ABF4D162ABE0200881A86 /* UIImage+fixOrientation.m */; };
+		F79ABF51162AC2AF00881A86 /* PPPPost.m in Sources */ = {isa = PBXBuildFile; fileRef = F79ABF50162AC2AF00881A86 /* PPPPost.m */; };
 		F7E53BD61629EDA70044B9A7 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7E53BD31629EDA70044B9A7 /* FacebookSDKResources.bundle */; };
 		F7E53BD71629EDA70044B9A7 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7E53BD41629EDA70044B9A7 /* FBUserSettingsViewResources.bundle */; };
 		F7E53BD81629EDA70044B9A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7E53BD51629EDA70044B9A7 /* Info.plist */; };
@@ -112,6 +113,8 @@
 		F79ABF46162AB53200881A86 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F79ABF4C162ABE0200881A86 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		F79ABF4D162ABE0200881A86 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		F79ABF4F162AC2AF00881A86 /* PPPPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPPost.h; sourceTree = "<group>"; };
+		F79ABF50162AC2AF00881A86 /* PPPPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPPost.m; sourceTree = "<group>"; };
 		F7E53BD31629EDA70044B9A7 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		F7E53BD41629EDA70044B9A7 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		F7E53BD51629EDA70044B9A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 			children = (
 				D2B00B651629E970008DF306 /* PPPEvent.h */,
 				D2B00B661629E970008DF306 /* PPPEvent.m */,
+				F79ABF4F162AC2AF00881A86 /* PPPPost.h */,
+				F79ABF50162AC2AF00881A86 /* PPPPost.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */,
 				D21C4701162A803E007D8307 /* SVProgressHUD.m in Sources */,
 				F79ABF4E162ABE0200881A86 /* UIImage+fixOrientation.m in Sources */,
+				F79ABF51162AC2AF00881A86 /* PPPPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
