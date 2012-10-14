@@ -13,19 +13,21 @@
 @synthesize text = _text;
 @synthesize date = _date;
 
-- (id)initWithImageUrl:(NSString *)image andDateString:(NSString *)date {
+- (id)initWithImageUrl:(NSString *)image andDateString:(NSString *)date andPoster:(NSString *)poster {
     self.imageURL = image;
     self.dateString = date;
     self.text = nil;
     self.date = nil;
+    self.posterName = poster;
     
     return self;
 }
-- (id)initWithText:(NSString *)text andDateString:(NSString *)date {
+- (id)initWithMessage:(NSString *)text andDateString:(NSString *)date andPoster:(NSString *)poster {
     self.imageURL = nil;
     self.dateString = date;
     self.text = text;
     self.date = nil;
+    self.posterName = poster;
     
     return self;
 }

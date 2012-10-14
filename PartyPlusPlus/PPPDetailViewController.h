@@ -13,7 +13,8 @@
 @interface PPPDetailViewController : UIViewController
 
 @property (strong, nonatomic) PPPEvent *event;
-@property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) NSArray *messagePosts;
+@property (strong ,nonatomic) NSArray *imagePosts;
 
 @property (strong, nonatomic) PPPViewController *delegate;
 

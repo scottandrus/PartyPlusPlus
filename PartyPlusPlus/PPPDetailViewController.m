@@ -13,13 +13,15 @@
 
 #define WALL_PHOTO_PARAMS @"source"
 #define ATTENDING_PARAMS @"picture"
+#define FEED_PARAMS @"message,from"
 
 @interface PPPDetailViewController ()
 
 @end
 
 @implementation PPPDetailViewController
-@synthesize posts;
+@synthesize messagePosts;
+@synthesize imagePosts;
 @synthesize attendingScrollView;
 @synthesize attendingFriendsUrls;
 @synthesize feedScrollView;
@@ -89,26 +91,26 @@
     // Create a main event view pointer
     UIImageView *view;
     
-    self.feedScrollView.contentSize = CGSizeMake(self.wallPhotoImageView.width, self.wallPhotoImageView.height * self.posts.count);
+//    self.feedScrollView.contentSize = CGSizeMake(self.wallPhotoImageView.width, self.wallPhotoImageView.height * self.posts.count);
     
     
-    // Create 10 events
-    for (size_t i = 0; i < self.posts.count; ++i) {
-        
-        // Allocate and initialize the event
-        view = [[UIImageView alloc] initWithFrame:self.wallPhotoImageView.frame];
-        
-        view.top = (self.wallPhotoImageView.height + 10) * i;
-        
-        // Set the labels
-//        view.image = [UIImage imageNamed:@"Thumbnail.png"];
-        PPPPost *post = [self.posts objectAtIndex:i];
-        [self downloadPhoto:post.imageURL forImageView:view];
-        
-        // Add it to the subview
-        [self.feedScrollView addSubview:view];
-        
-    }
+//    // Create 10 events
+//    for (size_t i = 0; i < self.posts.count; ++i) {
+//        
+//        // Allocate and initialize the event
+//        view = [[UIImageView alloc] initWithFrame:self.wallPhotoImageView.frame];
+//        
+//        view.top = (self.wallPhotoImageView.height + 10) * i;
+//        
+//        // Set the labels
+////        view.image = [UIImage imageNamed:@"Thumbnail.png"];
+//        PPPPost *post = [self.posts objectAtIndex:i];
+//        [self downloadPhoto:post.imageURL forImageView:view];
+//        
+//        // Add it to the subview
+//        [self.feedScrollView addSubview:view];
+    
+//    }
     
 }
 
@@ -143,11 +145,11 @@
     }
 }
 
-- (void)didPullFeedWithCallBack:(void (^)(void))callback; {
+- (void)pullMessagePostsWithCallBack:(void (^)(void))callback; {
     
     FBRequestConnection *requester = [[FBRequestConnection alloc] init];
     NSString *graphPath = [NSString stringWithFormat:@"/%@/feed", self.event.eventId];
-    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:nil HTTPMethod:@"GET"];
+    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:FEED_PARAMS HTTPMethod:@"GET"];
     [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
                                                       FBGraphObject *response,
                                                       NSError *error) {
@@ -159,28 +161,19 @@
             // temp event array to hold
             NSMutableArray *tempPostArray = [NSMutableArray array];
             for (id dict in eventArrayFromGraphObject) {
-//                NSString *photoURL = [dict objectForKey:@"source"];
-//                NSString *dateString = [dict objectForKey:@"created_time"];
-//                PPPPost *post = [[PPPPost alloc] initWithImageUrl:photoURL andDateString:dateString];
-//                [tempPostArray addObject:post];
+                if ([dict objectForKey:@"message"]) {
+                    NSString *poster = [[dict objectForKey:@"from"] objectForKey:@"name"];
+                    NSString *message = [dict objectForKey:@"message"];
+                    NSString *dateString = [dict objectForKey:@"created_time"];
+                    PPPPost *post = [[PPPPost alloc] initWithMessage:message andDateString:dateString andPoster:poster];
+                    [tempPostArray addObject:post];
+                }
+                
             }
             
             // Create an immutable copy for the property
-            self.posts = [tempPostArray copy];
+            self.messagePosts = [tempPostArray copy];
             callback();
-            
-            //            // Ok, events are loaded, set up the Main Events scroll view
-            //            [self setupMainEventsScrollView];
-            //
-            //            // Grab the current page and number of pages while we're here
-            //            self.pageControl.currentPage = 0;
-            //            self.pageControl.numberOfPages = self.events.count;
-            //
-            //            // Show that page control
-            //            self.pageControl.hidden = NO;
-            //
-            //            // Dismiss our SVProgressHUD
-            //            [SVProgressHUD showSuccessWithStatus:@"Done!"];
         }
         
     }];
@@ -207,26 +200,15 @@
             for (id dict in eventArrayFromGraphObject) {
                 NSString *photoURL = [dict objectForKey:@"source"];
                 NSString *dateString = [dict objectForKey:@"created_time"];
-                PPPPost *post = [[PPPPost alloc] initWithImageUrl:photoURL andDateString:dateString];
+                NSString *poster = [[dict objectForKey:@"from"] objectForKey:@"name"];
+                PPPPost *post = [[PPPPost alloc] initWithImageUrl:photoURL andDateString:dateString andPoster:poster];
                 [tempPostArray addObject:post];
             }
             
             // Create an immutable copy for the property
-            self.posts = [tempPostArray copy];
+            self.imagePosts = [tempPostArray copy];
             callback();
             
-//            // Ok, events are loaded, set up the Main Events scroll view
-//            [self setupMainEventsScrollView];
-//            
-//            // Grab the current page and number of pages while we're here
-//            self.pageControl.currentPage = 0;
-//            self.pageControl.numberOfPages = self.events.count;
-//            
-//            // Show that page control
-//            self.pageControl.hidden = NO;
-//            
-//            // Dismiss our SVProgressHUD
-//            [SVProgressHUD showSuccessWithStatus:@"Done!"];
         }
         
     }];
@@ -259,19 +241,7 @@
             // Create an immutable copy for the property
             self.attendingFriendsUrls = [tempPhotoArray copy];
             callback();
-            
-            //            // Ok, events are loaded, set up the Main Events scroll view
-            //            [self setupMainEventsScrollView];
-            //
-            //            // Grab the current page and number of pages while we're here
-            //            self.pageControl.currentPage = 0;
-            //            self.pageControl.numberOfPages = self.events.count;
-            //
-            //            // Show that page control
-            //            self.pageControl.hidden = NO;
-            //
-            //            // Dismiss our SVProgressHUD
-            //            [SVProgressHUD showSuccessWithStatus:@"Done!"];
+
         }
         
     }];
@@ -289,7 +259,8 @@
 - (void)viewDidUnload {
     [self setAttendingScrollView:nil];
     [self setFeedScrollView:nil];
-    [self setPosts:nil];
+    [self setImagePosts:nil];
+    [self setMessagePosts:nil];
     [super viewDidUnload];
 }
 @end
