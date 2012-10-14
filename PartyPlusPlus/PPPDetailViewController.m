@@ -70,12 +70,8 @@
     [SAViewManipulator setGradientBackgroundImageForView:self.photosScrollViewBackgroundView withTopColor:[UIColor colorWithRed:0.11 green:0.11 blue:0.11 alpha:1] /*#1c1c1c*/ andBottomColor:[UIColor colorWithRed:0.278 green:0.278 blue:0.278 alpha:1] /*#474747*/];
     
     [SAViewManipulator setGradientBackgroundImageForView:self.friendsHeaderView withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1]];
-//    [SAViewManipulator addBorderToView:self.friendsHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
     
     [SAViewManipulator setGradientBackgroundImageForView:self.photoStreamHeaderView withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1]];
-//    [SAViewManipulator addBorderToView:self.photoStreamHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
-    
-//    [SAViewManipulator setGradientBackgroundImageForView:self.feedScrollView withTopColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1] andBottomColor:[UIColor colorWithRed:0.81 green:0.81 blue:0.81 alpha:1]];
     
     // Round the navigation bar
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
@@ -125,8 +121,12 @@
         view.left = (self.wallPhotoImageView.width + 10) * i;
         
         // Set the labels
+        view.hidden = YES;
         PPPImagePost *imagePost = [self.imagePosts objectAtIndex:i];
         [self downloadPhoto:imagePost.imageURL forImageView:view];
+        
+        [SAViewManipulator addBorderToView:view withWidth:3 color:[UIColor whiteColor] andRadius:0];
+        [SAViewManipulator addShadowToView:view withOpacity:.8 radius:3 andOffset:CGSizeMake(1, 1)];
         
         // Add it to the subview
         [self.photosScrollView addSubview:view];
@@ -160,6 +160,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [imageView setImage:[UIImage imageWithData:imgUrl]];
+                imageView.hidden = NO;
                 [loading stopAnimating];
                 [loading removeFromSuperview];
             });

@@ -9,6 +9,7 @@
 #import "SAMenuViewController.h"
 #import "PPPAppDelegate.h"
 #import "PPPViewController.h"
+#import "SAViewManipulator.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -40,6 +41,9 @@
     [self.panGesture setMaximumNumberOfTouches:2];
     [self.panGesture setDelegate:self];
     [self.screenShotImageView addGestureRecognizer:self.panGesture];
+    
+    [SAViewManipulator addBorderToView:self.screenShotImageView withWidth:0 color:[UIColor blackColor] andRadius:8];
+    self.screenShotImageView.clipsToBounds = YES;
 }
 
 - (void)viewDidUnload
