@@ -64,10 +64,10 @@
     [SAViewManipulator setGradientBackgroundImageForView:self.feedScrollViewBackgroundView withTopColor:[UIColor colorWithRed:0.11 green:0.11 blue:0.11 alpha:1] /*#1c1c1c*/ andBottomColor:[UIColor colorWithRed:0.278 green:0.278 blue:0.278 alpha:1] /*#474747*/];
     
     [SAViewManipulator setGradientBackgroundImageForView:self.friendsHeaderView withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1]];
-    [SAViewManipulator addBorderToView:self.friendsHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
+//    [SAViewManipulator addBorderToView:self.friendsHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
     
     [SAViewManipulator setGradientBackgroundImageForView:self.photoStreamHeaderView withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1]];
-    [SAViewManipulator addBorderToView:self.photoStreamHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
+//    [SAViewManipulator addBorderToView:self.photoStreamHeaderView withWidth:.5 color:[UIColor blackColor] andRadius:1];
     
 //    [SAViewManipulator setGradientBackgroundImageForView:self.feedScrollView withTopColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1] andBottomColor:[UIColor colorWithRed:0.81 green:0.81 blue:0.81 alpha:1]];
     
@@ -81,7 +81,7 @@
     // Create a main event view pointer
     UIImageView *view;
     
-    self.attendingScrollView.contentSize = CGSizeMake((self.thumbnailImageView.width + 5) * self.attendingFriendsUrls.count, self.thumbnailImageView.height);
+    self.attendingScrollView.contentSize = CGSizeMake((self.thumbnailImageView.width + 5) * self.attendingFriendsUrls.count - 5, self.thumbnailImageView.height);
 
     
     // Create 10 events
@@ -108,7 +108,7 @@
     // Create a main event view pointer
     UIImageView *view;
     
-    self.feedScrollView.contentSize = CGSizeMake((self.wallPhotoImageView.width + 10) * self.wallPhotoURLs.count, self.wallPhotoImageView.height);
+    self.feedScrollView.contentSize = CGSizeMake((self.wallPhotoImageView.width + 10) * self.posts.count - 10, self.wallPhotoImageView.height);
 
     // Create 10 events
     for (size_t i = 0; i < self.posts.count; ++i) {
