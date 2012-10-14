@@ -45,9 +45,8 @@
 		F73B6B061629E65100F7A832 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B031629E65100F7A832 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F73B6B071629E65100F7A832 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B041629E65100F7A832 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F73B6B0D1629ED4400F7A832 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B6B0C1629ED4400F7A832 /* FacebookSDK.framework */; };
-		F78F81E6162AAE24008207FE /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F78F81E3162AAE24008207FE /* SVProgressHUD.bundle */; };
-		F78F81E7162AAE24008207FE /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F78F81E5162AAE24008207FE /* SVProgressHUD.m */; };
 		F792230616290D6400ED0964 /* PPPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F792230516290D6400ED0964 /* PPPLoginViewController.m */; };
+		F79ABF47162AB53200881A86 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79ABF46162AB53200881A86 /* MobileCoreServices.framework */; };
 		F7E53BD61629EDA70044B9A7 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7E53BD31629EDA70044B9A7 /* FacebookSDKResources.bundle */; };
 		F7E53BD71629EDA70044B9A7 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7E53BD41629EDA70044B9A7 /* FBUserSettingsViewResources.bundle */; };
 		F7E53BD81629EDA70044B9A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7E53BD51629EDA70044B9A7 /* Info.plist */; };
@@ -107,11 +106,9 @@
 		F73B6B031629E65100F7A832 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		F73B6B041629E65100F7A832 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F73B6B0C1629ED4400F7A832 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		F78F81E3162AAE24008207FE /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		F78F81E4162AAE24008207FE /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		F78F81E5162AAE24008207FE /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		F792230416290D6400ED0964 /* PPPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPLoginViewController.h; sourceTree = "<group>"; };
 		F792230516290D6400ED0964 /* PPPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPLoginViewController.m; sourceTree = "<group>"; };
+		F79ABF46162AB53200881A86 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F7E53BD31629EDA70044B9A7 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		F7E53BD41629EDA70044B9A7 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		F7E53BD51629EDA70044B9A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F79ABF47162AB53200881A86 /* MobileCoreServices.framework in Frameworks */,
 				F73B6B051629E65100F7A832 /* Accounts.framework in Frameworks */,
 				F73B6B061629E65100F7A832 /* AdSupport.framework in Frameworks */,
 				F73B6B071629E65100F7A832 /* Social.framework in Frameworks */,
@@ -199,6 +197,7 @@
 		D2D4E306162900F9001EE23B = {
 			isa = PBXGroup;
 			children = (
+				F79ABF46162AB53200881A86 /* MobileCoreServices.framework */,
 				D2D4E31B162900F9001EE23B /* PartyPlusPlus */,
 				D2D4E314162900F9001EE23B /* Frameworks */,
 				D2D4E312162900F9001EE23B /* Products */,

@@ -10,7 +10,7 @@
 #import "PPPMainEventView.h"
 #import "PPPTertiaryEventView.h"
 
-@interface PPPViewController : UIViewController <UIScrollViewDelegate>
+@interface PPPViewController : UIViewController <UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 // Non-IB
 @property (strong, nonatomic) NSArray *events;
@@ -29,5 +29,8 @@
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 @property (strong, nonatomic) IBOutlet UILabel *pageLabel;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+
+// IBActions
+- (IBAction)showCameraUI:(id)sender;
 
 @end
