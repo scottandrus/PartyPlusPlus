@@ -57,9 +57,13 @@
                 // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
                 
+                
                 // Grab the current page and number of pages while we're here
                 self.pageControl.currentPage = 0;
                 self.pageControl.numberOfPages = self.events.count;
+                
+                // Set initial current event
+                self.currentEvent = [self.events objectAtIndex:0];
                 
                 // Show that page control
                 self.pageControl.hidden = NO;
