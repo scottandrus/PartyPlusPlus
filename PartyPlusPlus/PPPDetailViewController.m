@@ -46,7 +46,9 @@
     [self pullAttendingPhotoURLsWithCallBack:^{
         [self setupAttendingScrollView];
     }];
-    [self pullMessagePostsWithCallBack:nil];
+    [self pullMessagePostsWithCallBack:^{
+        // nothing to do
+    }];
 
     
     [self customizeUI];
