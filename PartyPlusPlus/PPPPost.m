@@ -21,7 +21,7 @@
     return self;
 }
 - (id)initWithText:(NSString *)text andDate:(NSDate *)date {
-    
+    return self;
 }
 
 

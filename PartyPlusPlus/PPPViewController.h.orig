@@ -11,7 +11,11 @@
 #import "PPPTertiaryEventView.h"
 #import "SAContentViewController.h"
 
-@interface PPPViewController : SAContentViewController <UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+<<<<<<< HEAD
+@interface PPPViewController : UIViewController <UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+=======
+@interface PPPViewController : SAContentViewController <UIScrollViewDelegate>
+>>>>>>> master
 
 // Non-IB
 @property (strong, nonatomic) NSArray *events;

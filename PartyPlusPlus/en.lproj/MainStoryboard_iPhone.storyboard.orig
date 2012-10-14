@@ -69,7 +69,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="PartyPlusPlus" id="zkW-2b-UpU"/>
+                    <navigationItem key="navigationItem" title="PartyPlusPlus" id="zkW-2b-UpU">
+<<<<<<< HEAD
+                        <barButtonItem key="rightBarButtonItem" title="CAM" id="KP7-3K-ugp">
+                            <connections>
+                                <action selector="showCameraUI:" destination="2" id="Atk-3Q-Jdp"/>
+=======
+                        <barButtonItem key="leftBarButtonItem" image="three_lines@2x.png" id="DAj-JQ-YFh">
+                            <connections>
+                                <action selector="slideMenuButtonTouched" destination="2" id="EQ6-Od-Gey"/>
+>>>>>>> master
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="backgroundView" destination="kuh-ZZ-bV9" id="j7G-XW-di5"/>
@@ -96,21 +108,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="tTT-EV-5al">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="bbz-ua-WJb">
-                                        <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                             </scrollView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="nrl-SX-Bxw">
-                                <rect key="frame" x="0.0" y="92" width="320" height="310"/>
+                                <rect key="frame" x="0.0" y="54" width="320" height="348"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="lRL-qN-1mt">
-                                        <rect key="frame" x="0.0" y="-9" width="320" height="339"/>
+                                        <rect key="frame" x="27" y="0.0" width="267" height="348"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -227,6 +239,7 @@
     </scenes>
     <resources>
         <image name="PartyPlusPlusLogo.png" width="480" height="256"/>
+        <image name="three_lines@2x.png" width="20" height="20"/>
     </resources>
     <classes>
         <class className="PPPDetailViewController" superclassName="UIViewController">
@@ -243,10 +256,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPLoginViewController.h"/>
             <relationships>
                 <relationship kind="action" name="loginButtonClicked:"/>
-<<<<<<< HEAD
-=======
                 <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
->>>>>>> login_ui
             </relationships>
         </class>
         <class className="PPPMainEventView" superclassName="UIView">
@@ -270,9 +280,10 @@
                 <relationship kind="outlet" name="label" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="PPPViewController" superclassName="UIViewController">
+        <class className="PPPViewController" superclassName="SAContentViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPViewController.h"/>
             <relationships>
+                <relationship kind="action" name="showCameraUI:"/>
                 <relationship kind="outlet" name="backgroundView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="currentEventView" candidateClass="PPPMainEventView"/>
                 <relationship kind="outlet" name="currentTEventView" candidateClass="PPPTertiaryEventView"/>
@@ -280,6 +291,12 @@
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
                 <relationship kind="outlet" name="pageLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tertiaryEventsScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="SAContentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SAContentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="slideMenuButtonTouched"/>
             </relationships>
         </class>
     </classes>
