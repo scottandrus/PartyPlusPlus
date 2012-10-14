@@ -28,16 +28,20 @@
 @end
 
 @implementation PPPViewController
+@synthesize pickedTEvent = _pickedTEvent;
 
 #pragma mark - Helper methods
 // Get write permissions
-- (void)getWritePermissions {
+- (void)getWritePermissionsWithCompletionBlock:(void (^)(void))block {
     // include any of the "publish" or "manage" permissions
-    NSArray *writePermissions = [NSArray arrayWithObjects:@"publish_stream", nil];
+    NSArray *writePermissions = [NSArray arrayWithObjects:@"publish_stream", @"rsvp_event",
+ nil];
     [[FBSession activeSession] reauthorizeWithPublishPermissions:writePermissions
                                                  defaultAudience:FBSessionDefaultAudienceFriends
                                                completionHandler:^(FBSession *session, NSError *error) {
-                                                   /* handle success + failure in block */
+                                                   if (!error) {
+                                                       block();
+                                                   }
                                                }];
 }
 
@@ -91,6 +95,7 @@
                 
                 // Dismiss our SVProgressHUD
                 [SVProgressHUD showSuccessWithStatus:@"Done!"];
+                
             }
             
         }];
@@ -114,6 +119,7 @@
     }];
 }
 
+#pragma mark - Facebook API Calls
 - (void)pullOtherEventsWithCompetionBlock:(void (^)(void))block {
     // Query to fetch the active user's friends, limit to 25.
     NSString *query =
@@ -145,6 +151,36 @@
                               }
                               block();
                           }];
+}
+
+- (void)uploadImage:(UIImage *)image {
+    
+    image = image.fixOrientation;
+    FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+    NSString *graphPath = [NSString stringWithFormat:@"/%@/photos", self.currentEvent.eventId];
+    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:[NSDictionary dictionaryWithObject:image forKey:PHOTO_PARAMS] HTTPMethod:@"POST"];
+    [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                      FBGraphObject *response,
+                                                      NSError *error) {
+    }];
+    
+    [requester start];
+}
+
+- (void)rsvpEventWithEID:(NSString *)eid andRSVP:(NSString *)rsvp {
+    FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+    NSString *graphPath = [NSString stringWithFormat:@"%@/%@", eid, rsvp];
+    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:nil HTTPMethod:@"POST"];
+    [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                      FBGraphObject *response,
+                                                      NSError *error) {
+        if (!error) {
+            // do stuff
+        }
+    }];
+    
+    [requester start];
+    
 }
 
 #pragma mark - View Controller lifecycle
@@ -199,6 +235,7 @@
     }    
     
     [self loadNavBarLogo];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -402,8 +439,13 @@
     PPPTertiaryEventView *eventView = (PPPTertiaryEventView *)sender.superview;
     PPPEvent *tEvent = eventView.event;
     NSString *title = [NSString stringWithFormat:@"RSVP for %@", tEvent.eventName];
+    self.pickedTEvent = tEvent;
    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Attending", @"Maybe", @"Not Attending", nil];
-    [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
+    
+    [self getWritePermissionsWithCompletionBlock:^{
+        [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
+    }];
+    
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
@@ -479,9 +521,10 @@
 }
 
 - (IBAction)showCameraUI:(id)sender {
-    [self startCameraControllerFromViewController: self
-                                    usingDelegate: self];
-    [self getWritePermissions];
+    [self getWritePermissionsWithCompletionBlock:^{
+        [self startCameraControllerFromViewController: self
+                                        usingDelegate: self];
+    }];
 }
 
 #pragma mark - Camera Delegate Methods
@@ -536,22 +579,6 @@
     [self dismissModalViewControllerAnimated: YES];
 }
 
-#pragma mark - Facebook Uploading Methods
-
-- (void)uploadImage:(UIImage *)image {
-    
-    image = image.fixOrientation;
-    FBRequestConnection *requester = [[FBRequestConnection alloc] init];
-    NSString *graphPath = [NSString stringWithFormat:@"/%@/photos", self.currentEvent.eventId];
-    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:[NSDictionary dictionaryWithObject:image forKey:PHOTO_PARAMS] HTTPMethod:@"POST"];
-    [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
-                                                      FBGraphObject *response,
-                                                      NSError *error) {
-    }];
-    
-    [requester start];
-
-}
 
 #pragma mark - Downloading Images
 - (void)downloadPhoto:(NSString *)urlStr forImageView:(UIImageView*)imageView {
@@ -585,12 +612,20 @@
 #pragma mark - Actionsheet Delegate Methods
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    PPPEvent *tEvent = self.pickedTEvent;
+    NSString *rsvpString = nil;
     if (buttonIndex == 0) {
         NSLog(@"Attending");
+        rsvpString = @"attending";
     } else if (buttonIndex == 1) {
         NSLog(@"Maybe");
+        rsvpString = @"unsure";
     } else if (buttonIndex == 2) {
         NSLog(@"Not Attending");
+        rsvpString = @"declined";
+    }
+    if (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2) {
+        [self rsvpEventWithEID:[tEvent.eventId stringValue] andRSVP:rsvpString];
     }
 }
 

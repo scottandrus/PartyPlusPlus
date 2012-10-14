@@ -21,6 +21,9 @@
 @property (strong, nonatomic) NSArray *tEventViews;
 
 @property (strong, nonatomic) PPPEvent *currentEvent;
+// HACK bc I can't figure anything else right now
+@property (strong, nonatomic) PPPEvent *pickedTEvent;
+
 
 
 // IBOutlets
@@ -34,5 +37,6 @@
 
 // IBActions
 - (IBAction)showCameraUI:(id)sender;
+
 
 @end
