@@ -10,4 +10,6 @@
 
 @interface PPPLoginViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+
 @end

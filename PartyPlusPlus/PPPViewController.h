@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PPPMainEventView.h"
+#import "PPPTertiaryEventView.h"
 
 @interface PPPViewController : UIViewController <UIScrollViewDelegate>
 
@@ -22,8 +23,9 @@
 
 // IBOutlets
 @property (strong, nonatomic) IBOutlet PPPMainEventView *currentEventView;
+@property (strong, nonatomic) IBOutlet PPPTertiaryEventView *currentTEventView;
 @property (strong, nonatomic) IBOutlet UIScrollView *mainEventsScrollView;
-@property (strong, nonatomic) IBOutlet UIScrollView *tertiaryEventsScrollview;
+@property (strong, nonatomic) IBOutlet UIScrollView *tertiaryEventsScrollView;
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 @property (strong, nonatomic) IBOutlet UILabel *pageLabel;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;

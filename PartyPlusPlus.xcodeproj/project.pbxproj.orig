@@ -311,9 +311,15 @@
 		F78F81E2162AAE24008207FE /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+				F78F81E3162AAE24008207FE /* SVProgressHUD.bundle */,
+				F78F81E4162AAE24008207FE /* SVProgressHUD.h */,
+				F78F81E5162AAE24008207FE /* SVProgressHUD.m */,
+=======
 				D21C46FD162A803E007D8307 /* SVProgressHUD.bundle */,
 				D21C46FE162A803E007D8307 /* SVProgressHUD.h */,
 				D21C46FF162A803E007D8307 /* SVProgressHUD.m */,
+>>>>>>> login_ui
 			);
 			path = SVProgressHUD;
 			sourceTree = "<group>";
@@ -395,12 +401,16 @@
 				F7E53BD71629EDA70044B9A7 /* FBUserSettingsViewResources.bundle in Resources */,
 				F7E53BD81629EDA70044B9A7 /* Info.plist in Resources */,
 				D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */,
+<<<<<<< HEAD
+				F78F81E6162AAE24008207FE /* SVProgressHUD.bundle in Resources */,
+=======
 				D21C4700162A803E007D8307 /* SVProgressHUD.bundle in Resources */,
 				D21C470B162A87E2007D8307 /* three_lines@2x.png in Resources */,
 				D21C4710162A8A20007D8307 /* PartyPlusPlusLogo.png in Resources */,
 				D21C4714162A923E007D8307 /* fb.png in Resources */,
 				D21C4716162A92E8007D8307 /* fb64.png in Resources */,
 				D21C4718162A9332007D8307 /* fb36.png in Resources */,
+>>>>>>> login_ui
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +434,11 @@
 				D2B00B5416293E3A008DF306 /* PPPDetailViewController.m in Sources */,
 				D2B00B671629E970008DF306 /* PPPEvent.m in Sources */,
 				D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */,
+<<<<<<< HEAD
+				F78F81E7162AAE24008207FE /* SVProgressHUD.m in Sources */,
+=======
 				D21C4701162A803E007D8307 /* SVProgressHUD.m in Sources */,
+>>>>>>> login_ui
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

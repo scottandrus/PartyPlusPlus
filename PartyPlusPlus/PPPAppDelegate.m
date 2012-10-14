@@ -7,7 +7,7 @@
 //
 
 #import "PPPAppDelegate.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 NSString *const FBSessionStateChangedNotification =
 @"com.partyplusplus.partyplusplus:FBSessionStateChangedNotification";

@@ -56,6 +56,8 @@
                 
                 // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
+                [self generateTertiaryEvents];
+                [self setupTertiaryEventsScrollView];
                 
                 
                 // Grab the current page and number of pages while we're here
@@ -153,10 +155,11 @@
 - (void)viewDidUnload {
     [self setCurrentEventView:nil];
     [self setMainEventsScrollView:nil];
-    [self setTertiaryEventsScrollview:nil];
+    [self setTertiaryEventsScrollView:nil];
     [self setBackgroundView:nil];
     [self setPageLabel:nil];
     [self setPageControl:nil];
+    [self setCurrentTEventView:nil];
     [super viewDidUnload];
 }
 
@@ -174,7 +177,28 @@
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
 }
 
-//- (void)generate
+- (void)generateTertiaryEvents {
+    // Create a mutable array to mutate events
+    NSMutableArray *mutableEvents = [NSMutableArray array];
+    
+    PPPEvent *event;
+    
+    for (size_t i = 0; i < 5; ++i) {
+        event = [[PPPEvent alloc] init];
+        // Set the event properties
+        // TODO: Change this to dynamic events
+        event.eventName = [NSString stringWithFormat:@"HackNashville %zu", i + 1];
+        event.locationString = @"7 Lea Ave.";
+        event.dateString = @"Tonight\n7 PM";
+        event.image = [UIImage imageNamed:@"480"];
+        
+        // Add it to the list of mutable events
+        [mutableEvents addObject:event];
+    }
+    
+    // Put it into the events array
+    self.tEvents = [mutableEvents copy];
+}
 
 - (void)generateEvents {
     // Create a mutable array to mutate events
@@ -248,6 +272,51 @@
 
 - (void)setupTertiaryEventsScrollView {
     
+    // Set the content size first
+    self.tertiaryEventsScrollView.contentSize = CGSizeMake(self.tEvents.count * self.tertiaryEventsScrollView.width / 3, self.tertiaryEventsScrollView.height);
+    
+    // Create a mutable array of event views
+    NSMutableArray *mutableEventViews = [NSMutableArray array];
+    
+    // Create an event view pointer
+    PPPTertiaryEventView *view;
+    
+    // For each event
+    for (size_t i = 0; i < self.tEvents.count; ++i) {
+        
+        // Allocate and initialize the associated view
+        view = [[PPPTertiaryEventView alloc] init];
+        [view addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPTertiaryEventView" owner:view options:nil] objectAtIndex:0]];
+        
+        // Grab the one from interface builder
+        view.frame = self.currentTEventView.frame;
+        
+        view.left += (self.currentTEventView.width + 21) * (i % 3);
+        view.left += self.tertiaryEventsScrollView.width * (i / 3);
+        
+        // Load the corresponding event
+        [view loadEvent:[self.tEvents objectAtIndex:i]];
+        
+        // Add a target to the button
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
+        [button addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Add the detail button to the view
+        [view addSubview:button];
+        button.size = view.size;
+        
+        // Add it to the scroll view
+        [self.tertiaryEventsScrollView addSubview:view];
+        
+        // Style the event view
+        [self styleTertiaryEventView:view];
+        
+        // Add object to the mutable event views array
+        [mutableEventViews addObject:view];
+    }
+    
+    // Copy into the event views property
+    self.tEventViews = [mutableEventViews copy];
 }
 
 - (void)goToDetail:(UIButton *)sender {
@@ -255,8 +324,13 @@
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
-    [SAViewManipulator addBorderToView:mainEventView withWidth:2 color:[UIColor blackColor] andRadius:10];
+    [SAViewManipulator addBorderToView:mainEventView withWidth:1 color:[UIColor blackColor] andRadius:10];
     mainEventView.clipsToBounds = YES;
+}
+
+- (void)styleTertiaryEventView:(PPPTertiaryEventView *)eventView {
+    [SAViewManipulator addBorderToView:eventView.imageView withWidth:1 color:[UIColor blackColor] andRadius:8];
+    eventView.imageView.clipsToBounds = YES;
 }
 
 #pragma mark - UIScrollView delegate
