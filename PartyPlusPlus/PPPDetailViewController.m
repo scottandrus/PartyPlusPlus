@@ -18,6 +18,8 @@
 
 @interface PPPDetailViewController ()
 
+@property (strong, nonatomic) IBOutlet UILabel *noPhotosLabel;
+
 @end
 
 @implementation PPPDetailViewController
@@ -54,6 +56,10 @@
     
     [self customizeUI];
 }
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [self clearNavBarLogo];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -62,6 +68,16 @@
 }
 
 #pragma mark - Utility methods 
+
+- (void)clearNavBarLogo {
+    NSArray *navSubviews = [self.navigationController.navigationBar subviews];
+    //    NSLog(@"%@", navSubviews);
+    for (UIView * subview in navSubviews) {
+        if ([subview isKindOfClass:[UIImageView class]] && subview != [navSubviews objectAtIndex:0]) {
+            [subview removeFromSuperview];
+        }
+    }
+}
 
 - (void)customizeUI {
     [SAViewManipulator setGradientBackgroundImageForView:self.view withTopColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] andBottomColor:[UIColor colorWithRed:0.69 green:0.69 blue:0.69 alpha:1]];
@@ -75,6 +91,8 @@
     
     // Round the navigation bar
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
+    
+    [self downloadPhoto:self.event.imageURL];
 }
 
 #pragma mark - ScrollView Methods
@@ -97,6 +115,10 @@
         // Set the labels
         [self downloadPhoto:[self.attendingFriendsUrls objectAtIndex:i] forImageView:view];
         
+        [SAViewManipulator addBorderToView:view withWidth:1.5 color:[UIColor whiteColor] andRadius:22];
+        view.clipsToBounds = YES;
+//        [SAViewManipulator addShadowToView:view withOpacity:.8 radius:3 andOffset:CGSizeMake(1, 1)];
+        
         // Add it to the subview
         [self.attendingScrollView addSubview:view];
         
@@ -106,6 +128,10 @@
 
 #pragma mark - ScrollView Methods
 - (void)setupPhotosScrollView {
+    
+    if (imagePosts.count == 0) {
+        self.noPhotosLabel.hidden = NO;
+    } else self.noPhotosLabel.hidden = YES;
     
     // Create a main event view pointer
     UIImageView *view;
@@ -133,8 +159,42 @@
         
     }
     
+    
 //    }
     
+}
+
+- (void)downloadPhoto:(NSString *)urlStr {
+    self.coverImageView.clipsToBounds = YES;
+    if (!self.event.image) {
+        // Download photo
+        UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [loading startAnimating];
+        [self.navigationController.navigationItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithCustomView:loading]];
+        
+        dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            // TODO: Add a different image for each location
+            NSData *imgUrl;
+            if (!urlStr) {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://placekitten.com/g/480/480"]];
+            } else {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *image = [UIImage imageWithData:imgUrl];
+                if (image.size.width >= self.coverImageView.size.width && image.size.height >= self.coverImageView.size.height) {
+                    self.coverImageView.contentMode = UIViewContentModeCenter;
+                }
+                [self.coverImageView setImage:[UIImage imageWithData:imgUrl]];
+                [loading stopAnimating];
+                [loading removeFromSuperview];
+            });
+        });
+        dispatch_release(downloadQueue);
+    } else [self.coverImageView setImage:self.event.image];
 }
 
 #pragma mark - Facebook API Calls
@@ -290,6 +350,8 @@
     [self setPhotoStreamHeaderView:nil];
     [self setAttendingScrollViewBackgroundView:nil];
     [self setPhotosScrollViewBackgroundView:nil];
+    [self setNoPhotosLabel:nil];
+    [self setCoverImageView:nil];
      [super viewDidUnload];
 }
 @end

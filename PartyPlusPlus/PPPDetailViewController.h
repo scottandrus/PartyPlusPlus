@@ -18,7 +18,6 @@
 
 @property (strong, nonatomic) PPPViewController *delegate;
 
-
 @property (strong, nonatomic) IBOutlet UIView *friendsHeaderView;
 @property (strong, nonatomic) IBOutlet UIView *photoStreamHeaderView;
 
@@ -31,5 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *photosScrollView;
 @property (strong, nonatomic) IBOutlet UIView *photosScrollViewBackgroundView;
 @property (strong, nonatomic) IBOutlet UIImageView *wallPhotoImageView;
+
+@property (strong, nonatomic) IBOutlet UIImageView *coverImageView;
 
 @end
