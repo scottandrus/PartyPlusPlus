@@ -31,7 +31,7 @@
                                             <outlet property="delegate" destination="2" id="dfR-Ch-iVK"/>
                                         </connections>
                                     </scrollView>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="4Ku-xV-OeP">
+                                    <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="4Ku-xV-OeP">
                                         <rect key="frame" x="0.0" y="330" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <subviews>
@@ -192,6 +192,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postToTwitter" destination="mKA-1G-Ktm" eventType="touchUpInside" id="xn9-9T-YK3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="orr-fc-CGf">
                                 <rect key="frame" x="8" y="361" width="144" height="36"/>

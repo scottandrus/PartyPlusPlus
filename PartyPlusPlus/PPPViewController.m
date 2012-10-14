@@ -85,6 +85,7 @@
                 // Set initial current event
                 self.currentEvent = [self.events objectAtIndex:0];
                 
+                self.tertiaryEventsScrollView.hidden = NO;
                 
                 // Show that page control
                 self.pageControl.hidden = NO;
