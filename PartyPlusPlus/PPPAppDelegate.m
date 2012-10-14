@@ -43,7 +43,7 @@ NSString *const FBMenuDataChangedNotification =
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1] /*#ebebeb*/];
     
     self.menuViewController = [[SAMenuViewController alloc] initWithNibName:@"SAMenuViewController" bundle:nil];
-    
+        
     return YES;
 }
 							
@@ -147,8 +147,9 @@ NSString *const FBMenuDataChangedNotification =
                             @"friends_photos",
                             @"read_stream",
                             nil];
+
     
-    return [FBSession openActiveSessionWithReadPermissions:permissions
+     return [FBSession openActiveSessionWithReadPermissions:permissions
                                               allowLoginUI:allowLoginUI
                                          completionHandler:^(FBSession *session,
                                                              FBSessionState state,

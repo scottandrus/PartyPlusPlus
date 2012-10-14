@@ -24,7 +24,8 @@
 
 @property (assign, nonatomic) CLLocationCoordinate2D location;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (id)initWithGraphDictionary:(NSDictionary *)dictionary;
+- (id)initWithFQLDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)eventDictionary;
 
 @end

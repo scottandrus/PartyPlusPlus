@@ -9,6 +9,7 @@
 #import "PPPEvent.h"
 
 #define ID_KEY @"id"
+#define EID_KEY @"eid"
 #define PEOPLE_ATTENDING_KEY @"attending"
 #define EVENT_NAME_KEY @"name"
 #define DATE_STRING_KEY @"start_time"
@@ -18,6 +19,7 @@
 #define URL_KEY @"url"
 #define DESCRIPTION_KEY @"description"
 #define IMAGE_URL_KEY @"image_url"
+#define BIG_PIC @"pic_big"
 
 
 @implementation PPPEvent
@@ -36,7 +38,7 @@
 @synthesize image;
 
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
+- (id)initWithGraphDictionary:(NSDictionary *)dictionary {
 	self = [super init];
 	if (self) {
 		self.eventId = [dictionary objectForKey:ID_KEY];
@@ -54,6 +56,26 @@
 	}
 	return self;
 }
+
+- (id)initWithFQLDictionary:(NSDictionary *)dictionary {
+    self = [super init];
+	if (self) {
+		self.eventId = [dictionary objectForKey:EID_KEY];
+        //		self.peopleAttending = [self convertDateToFormattedStringWithJSONString:[dictionary objectForKey:DATE_KEY]];
+		self.eventName = [dictionary objectForKey:EVENT_NAME_KEY];
+        
+        NSDictionary *dateDict = [self parseDateFromString:[dictionary objectForKey:DATE_STRING_KEY]];
+        
+		self.date = [dateDict objectForKey:@"DATE"];
+		self.dateString = [dateDict objectForKey:@"DATESTR"];
+        self.timeString = [dateDict objectForKey:@"TIMESTR"];
+       //		self.location = [dictionary objectForKey:LOCATION_KEY];
+		self.locationString = [dictionary objectForKey:LOCATION_STRING_KEY] ? [dictionary objectForKey:LOCATION_STRING_KEY] : [[NSNull alloc] init];
+        self.imageURL = [dictionary objectForKey:BIG_PIC];
+	}
+	return self;
+}
+
 
 // http://stackoverflow.com/questions/4329485/how-to-format-facebook-twitter-dates-from-the-json-feed-in-objective-c
 - (NSDictionary *)parseDateFromString:(NSString *)string {

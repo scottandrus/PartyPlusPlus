@@ -22,6 +22,7 @@
 
 @property (strong, nonatomic) PPPEvent *currentEvent;
 
+
 // IBOutlets
 @property (strong, nonatomic) IBOutlet PPPMainEventView *currentEventView;
 @property (strong, nonatomic) IBOutlet PPPTertiaryEventView *currentTEventView;

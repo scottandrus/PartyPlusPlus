@@ -30,6 +30,17 @@
 @implementation PPPViewController
 
 #pragma mark - Helper methods
+// Get write permissions
+- (void)getWritePermissions {
+    // include any of the "publish" or "manage" permissions
+    NSArray *writePermissions = [NSArray arrayWithObjects:@"publish_stream", nil];
+    [[FBSession activeSession] reauthorizeWithPublishPermissions:writePermissions
+                                                 defaultAudience:FBSessionDefaultAudienceFriends
+                                               completionHandler:^(FBSession *session, NSError *error) {
+                                                   /* handle success + failure in block */
+                                               }];
+}
+
 /*
  * Configure the logged in versus logged out UX
  */
@@ -37,6 +48,7 @@
     if (FBSession.activeSession.isOpen) {
 //        [self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
 //        self.userInfoTextView.hidden = NO;
+
         
         FBRequestConnection *requester = [[FBRequestConnection alloc] init];
         FBRequest *request = [FBRequest requestWithGraphPath:@"me/events" parameters:[NSDictionary dictionaryWithObject:EVENT_PARAMS forKey:@"fields"] HTTPMethod:@"GET"];
@@ -51,7 +63,7 @@
                 // temp event array to hold 
                 NSMutableArray *tempEventArray = [NSMutableArray array];
                 for (id dict in eventArrayFromGraphObject) {
-                    PPPEvent *event = [[PPPEvent alloc] initWithDictionary:dict];
+                    PPPEvent *event = [[PPPEvent alloc] initWithGraphDictionary:dict];
                     [tempEventArray addObject:event];
                 }
                 
@@ -64,8 +76,7 @@
                 
                 // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
-                [self generateTertiaryEvents];
-                [self setupTertiaryEventsScrollView];
+
                 
                 // Grab the current page and number of pages while we're here
                 self.pageControl.currentPage = 0;
@@ -73,6 +84,7 @@
                 
                 // Set initial current event
                 self.currentEvent = [self.events objectAtIndex:0];
+                
                 
                 // Show that page control
                 self.pageControl.hidden = NO;
@@ -84,8 +96,12 @@
         }];
         
         [requester start];
+        [self pullOtherEventsWithCompetionBlock:^{
+            [self setupTertiaryEventsScrollView];
+        }];
+
     }
-        
+
 }
 
 
@@ -96,6 +112,39 @@
 //        self.userProfilePictureView.profileID = [user objectForKey:@"id"];
 //        NSLog(@"%@", user.name);
     }];
+}
+
+- (void)pullOtherEventsWithCompetionBlock:(void (^)(void))block {
+    // Query to fetch the active user's friends, limit to 25.
+    NSString *query =
+    @"SELECT eid, name, venue, location, start_time, pic_big FROM event WHERE eid IN"
+    @"(SELECT eid from event_member WHERE uid = me() LIMIT 25)";
+    // Set up the query parameter
+    NSDictionary *queryParam =
+    [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+    // Make the API request that uses FQL
+    [FBRequestConnection startWithGraphPath:@"/fql"
+                                 parameters:queryParam
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+                              if (error) {
+                                  NSLog(@"Error: %@", [error localizedDescription]);
+                              } else {                                  
+                                  // Ok, so grab an event array
+                                  NSArray *eventArrayFromGraphObject = [result objectForKey:@"data"];
+                                  
+                                  // temp event array to hold
+                                  NSMutableArray *tempEventArray = [NSMutableArray array];
+                                  for (id dict in eventArrayFromGraphObject) {
+                                      PPPEvent *event = [[PPPEvent alloc] initWithFQLDictionary:dict];
+                                      [tempEventArray addObject:event];
+                                  }
+                                  self.tEvents = tempEventArray;
+                              }
+                              block();
+                          }];
 }
 
 #pragma mark - View Controller lifecycle
@@ -147,8 +196,7 @@
                FBSession.activeSession.state == FBSessionStateCreatedOpening) {
     } else {
         [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
-    }
-    
+    }    
     
 }
 
@@ -294,6 +342,10 @@
         view = [[PPPTertiaryEventView alloc] init];
         [view addSubview:[[[NSBundle mainBundle] loadNibNamed:@"PPPTertiaryEventView" owner:view options:nil] objectAtIndex:0]];
         
+        // Start asychroniously downloading the photo
+        PPPEvent *event = [self.tEvents objectAtIndex:i];
+        [self downloadPhoto:event.imageURL forImageView:view.imageView];
+        
         // Grab the one from interface builder
         view.frame = self.currentTEventView.frame;
         
@@ -403,6 +455,7 @@
 - (IBAction)showCameraUI:(id)sender {
     [self startCameraControllerFromViewController: self
                                     usingDelegate: self];
+    [self getWritePermissions];
 }
 
 #pragma mark - Camera Delegate Methods
@@ -473,4 +526,34 @@
     [requester start];
 
 }
+
+#pragma mark - Downloading Images
+- (void)downloadPhoto:(NSString *)urlStr forImageView:(UIImageView*)imageView {
+        // Download photo
+        UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [loading startAnimating];
+        //        [self addSubview:loading];
+        //        loading.center = self.center;
+        
+        dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            // TODO: Add a different image for each location
+            NSData *imgUrl;
+            if (!urlStr) {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://placekitten.com/g/480/480"]];
+            } else {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [imageView setImage:[UIImage imageWithData:imgUrl]];
+                [loading stopAnimating];
+                [loading removeFromSuperview];
+            });
+        });
+        dispatch_release(downloadQueue);
+}
+
 @end
