@@ -374,7 +374,7 @@
         
         // Add a target to the button
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
-        [button addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(rsvpToEvent:) forControlEvents:UIControlEventTouchUpInside];
         
         // Add the detail button to the view
         [view addSubview:button];
@@ -396,6 +396,14 @@
 
 - (void)goToDetail:(UIButton *)sender {
     [self performSegueWithIdentifier:@"goToDetail" sender:self.currentEvent];
+}
+
+- (void)rsvpToEvent:(UIButton *)sender {
+    PPPTertiaryEventView *eventView = (PPPTertiaryEventView *)sender.superview;
+    PPPEvent *tEvent = eventView.event;
+    NSString *title = [NSString stringWithFormat:@"RSVP for %@", tEvent.eventName];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Attending", @"Maybe", @"Not Attending", nil];
+    [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
 }
 
 - (void)styleMainEventView:(PPPMainEventView *)mainEventView {
@@ -572,6 +580,18 @@
             });
         });
         dispatch_release(downloadQueue);
+}
+
+#pragma mark - Actionsheet Delegate Methods
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"Attending");
+    } else if (buttonIndex == 1) {
+        NSLog(@"Maybe");
+    } else if (buttonIndex == 2) {
+        NSLog(@"Not Attending");
+    }
 }
 
 @end
