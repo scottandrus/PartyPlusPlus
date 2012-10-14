@@ -9,18 +9,24 @@
 #import "PPPPost.h"
 
 @implementation PPPPost
-@synthesize image = _image;
+@synthesize imageURL = _imageUrl;
 @synthesize text = _text;
 @synthesize date = _date;
 
-- (id)initWithImage:(UIImage *)image andDate:(NSDate *)date {
-    self.image = image;
-    self.date = date;
-    self.text = @"";
+- (id)initWithImageUrl:(NSString *)image andDateString:(NSString *)date {
+    self.imageURL = image;
+    self.dateString = date;
+    self.text = nil;
+    self.date = nil;
     
     return self;
 }
-- (id)initWithText:(NSString *)text andDate:(NSDate *)date {
+- (id)initWithText:(NSString *)text andDateString:(NSString *)date {
+    self.imageURL = nil;
+    self.dateString = date;
+    self.text = text;
+    self.date = nil;
+    
     return self;
 }
 

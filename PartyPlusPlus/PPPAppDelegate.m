@@ -142,6 +142,9 @@ NSString *const FBMenuDataChangedNotification =
     // custom photos.
     NSArray *permissions = [[NSArray alloc] initWithObjects:
                             @"user_events",
+                            @"user_photos",
+                            @"friends_events",
+                            @"friends_photos",
                             nil];
     
     return [FBSession openActiveSessionWithReadPermissions:permissions
