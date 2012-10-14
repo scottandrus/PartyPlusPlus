@@ -58,6 +58,7 @@
                 // Create an immutable copy for the property
 //                self.events = [tempEventArray copy];
                 
+
                 NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)];
                 self.events = [tempEventArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
                 
