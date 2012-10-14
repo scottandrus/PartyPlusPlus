@@ -10,6 +10,7 @@
 #import "SAViewManipulator.h"
 #import "UIView+Frame.h"
 #import "SVProgressHUD.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PPPMainEventView
 
@@ -49,10 +50,24 @@
     }
    
     self.dateLabel.text = self.event.dateString;
+    self.timeLabel.text = self.event.timeString;
     
     self.imageView.left = CGRectGetMidX(self.bounds) - CGRectGetMidX(self.imageView.bounds);
     self.imageView.top = CGRectGetMidY(self.bounds) - CGRectGetMidY(self.imageView.bounds);
     
+    self.eventNameLabel.size = [self.eventNameLabel.text sizeWithFont:self.eventNameLabel.font constrainedToSize:CGSizeMake(self.eventNameLabel.width, self.eventNameLabel.height)];
+    self.placeLabel.size = [self.placeLabel.text sizeWithFont:self.placeLabel.font constrainedToSize:CGSizeMake(self.placeLabel.width, self.placeLabel.height)];
+    self.dateLabel.size = [self.dateLabel.text sizeWithFont:self.dateLabel.font constrainedToSize:CGSizeMake(self.dateLabel.width, self.dateLabel.height)];
+    self.timeLabel.size = [self.timeLabel.text sizeWithFont:self.timeLabel.font constrainedToSize:CGSizeMake(self.timeLabel.width, self.timeLabel.height)];
+
+    
+    // Width calculations based on Interface Builder dimensions
+    self.topOverlayView.width = MAX(self.eventNameLabel.width, self.placeLabel.width) + 15;
+    self.topOverlayView.layer.cornerRadius = 10;
+    self.bottomOverlayView.width = MAX(self.dateLabel.width, self.timeLabel.width) + 15;
+    self.bottomOverlayView.layer.cornerRadius = 10;
+    
+
 
     self.imageView.image = self.event.image;
     [self downloadPhoto:event.imageURL];

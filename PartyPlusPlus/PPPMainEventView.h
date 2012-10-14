@@ -16,9 +16,14 @@
 @property (strong, nonatomic) NSArray *attendingThumbnails;
 
 // IBOutlets
+@property (strong, nonatomic) IBOutlet UIView *topOverlayView;
 @property (strong, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *placeLabel;
+
+@property (strong, nonatomic) IBOutlet UIView *bottomOverlayView;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIScrollView *thumbnailScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *thumbnailImageView;

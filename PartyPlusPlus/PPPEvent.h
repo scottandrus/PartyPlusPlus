@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *eventName;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *dateString;
+@property (strong, nonatomic) NSString *timeString;
 @property (strong, nonatomic) NSString *locationString;
 @property (strong, nonatomic) NSString *imageURL;
 @property (strong, nonatomic) UIImage *image;

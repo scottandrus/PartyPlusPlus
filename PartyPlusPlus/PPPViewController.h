@@ -14,6 +14,10 @@
 // Non-IB
 @property (strong, nonatomic) NSArray *events;
 @property (strong, nonatomic) NSArray *eventViews;
+
+@property (strong, nonatomic) NSArray *tEvents;
+@property (strong, nonatomic) NSArray *tEventViews;
+
 @property (strong, nonatomic) PPPEvent *currentEvent;
 
 // IBOutlets
@@ -22,5 +26,6 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *tertiaryEventsScrollview;
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
 @property (strong, nonatomic) IBOutlet UILabel *pageLabel;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @end

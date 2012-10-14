@@ -52,13 +52,18 @@
                                             </view>
                                         </subviews>
                                     </scrollView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="X out of Y" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bZ9-e0-GYw">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="X out of Y" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bZ9-e0-GYw">
                                         <rect key="frame" x="89" y="309" width="142" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="0.14923469387755106" green="0.14923469387755106" blue="0.14923469387755106" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="UPG-5d-ik7">
+                                        <rect key="frame" x="141" y="302" width="38" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="currentPageIndicatorTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -71,6 +76,7 @@
                         <outlet property="backgroundView" destination="kuh-ZZ-bV9" id="j7G-XW-di5"/>
                         <outlet property="currentEventView" destination="8O3-6d-1DL" id="dRF-vm-OjG"/>
                         <outlet property="mainEventsScrollView" destination="Lyc-C8-tCf" id="Z83-Ay-wvP"/>
+                        <outlet property="pageControl" destination="UPG-5d-ik7" id="gX1-id-NqI"/>
                         <outlet property="pageLabel" destination="bZ9-e0-GYw" id="84k-ML-BCr"/>
                         <outlet property="tertiaryEventsScrollview" destination="4Ku-xV-OeP" id="MCA-P9-RID"/>
                         <segue destination="fbr-lu-avH" kind="modal" identifier="goToDetail" modalTransitionStyle="flipHorizontal" id="m3I-fg-Rll"/>
@@ -190,6 +196,45 @@
             <point key="canvasLocation" x="1282" y="107"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="PPPDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPDetailViewController.h"/>
+        </class>
+        <class className="PPPLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPLoginViewController.h"/>
+        </class>
+        <class className="PPPMainEventView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPMainEventView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bottomOverlayView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="placeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="thumbnailImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="thumbnailScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="topOverlayView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="PPPTertiaryEventView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPTertiaryEventView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PPPViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PPPViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backgroundView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="currentEventView" candidateClass="PPPMainEventView"/>
+                <relationship kind="outlet" name="mainEventsScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="pageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tertiaryEventsScrollview" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

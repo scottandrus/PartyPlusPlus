@@ -40,16 +40,31 @@
                                                             FBGraphObject *response,
                                                             NSError *error) {
             if (!error) {
+                
+                // Ok, so grab an event array
                 NSArray *eventArrayFromGraphObject = [response objectForKey:@"data"];
-                NSMutableArray *tempEventArray = [[NSMutableArray alloc] initWithCapacity:4];
+                
+                // temp event array to hold 
+                NSMutableArray *tempEventArray = [NSMutableArray array];
                 for (id dict in eventArrayFromGraphObject) {
                     PPPEvent *event = [[PPPEvent alloc] initWithDictionary:dict];
                     [tempEventArray addObject:event];
                 }
+                
+                // Create an immutable copy for the property
                 self.events = [tempEventArray copy];
+                
+                // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
-                self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", 1, self.events.count];
-                self.pageLabel.hidden = NO;
+                
+                // Grab the current page and number of pages while we're here
+                self.pageControl.currentPage = 0;
+                self.pageControl.numberOfPages = self.events.count;
+                
+                // Show that page control
+                self.pageControl.hidden = NO;
+                
+                // Dismiss our SVProgressHUD
                 [SVProgressHUD showSuccessWithStatus:@"Done!"];
             }
             
@@ -67,7 +82,7 @@
     [appDelegate requestUserData:^(id sender, id<FBGraphUser> user) {
 //        self.userNameLabel.text = user.name;
 //        self.userProfilePictureView.profileID = [user objectForKey:@"id"];
-        NSLog(@"%@", user.name);
+//        NSLog(@"%@", user.name);
     }];
 }
 
@@ -112,6 +127,9 @@
     // stack to "unwind"
     if (FBSession.activeSession.isOpen) {
         //        [self goToSelectedMenu];
+        if (self.pageLabel.hidden && self.pageControl.hidden) {
+            [SVProgressHUD showWithStatus:@"Loading..."];
+        }
     } else if (FBSession.activeSession.isOpen ||
                FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded ||
                FBSession.activeSession.state == FBSessionStateCreatedOpening) {
@@ -119,9 +137,7 @@
         [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
     }
     
-    if (self.pageLabel.hidden) {
-        [SVProgressHUD showWithStatus:@"Loading..."];
-    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,18 +152,19 @@
     [self setTertiaryEventsScrollview:nil];
     [self setBackgroundView:nil];
     [self setPageLabel:nil];
+    [self setPageControl:nil];
     [super viewDidUnload];
 }
 
 #pragma mark - Utility methods
 
 - (void)customizeUI {
-    [SAViewManipulator setGradientBackgroundImageForView:self.backgroundView withTopColor:[UIColor colorWithRed:0.875 green:0.875 blue:0.875 alpha:1] /*#dfdfdf*/ andBottomColor:[UIColor colorWithRed:0.549 green:0.549 blue:0.549 alpha:1] /*#8c8c8c*/];
+    // Set a gradient on the background
+    [SAViewManipulator setGradientBackgroundImageForView:self.backgroundView withTopColor:[UIColor colorWithRed:0.11 green:0.11 blue:0.11 alpha:1] /*#1c1c1c*/ andBottomColor:[UIColor colorWithRed:0.278 green:0.278 blue:0.278 alpha:1] /*#474747*/];
     
-    // Set a gradient on the navigation bar
-//    [SAViewManipulator setGradientBackgroundImageForView:self.navigationController.navigationBar withTopColor:[UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1] /*#f7f7f7*/ andBottomColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1] /*#e8e8e8*/];
-    
+    // Have the page label initially hidden until cards are loaded
     self.pageLabel.hidden = YES;
+    self.pageControl.hidden = YES;
     
     // Round the navigation bar
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
@@ -203,7 +220,6 @@
         // Load the corresponding event
         [view loadEvent:[self.events objectAtIndex:i]];
 
-        
         // Add a target to the button
         UIButton *detailButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, view.width, view.height)];
         [detailButton addTarget:self action:@selector(goToDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -226,6 +242,10 @@
     self.eventViews = [mutableEventViews copy];
 }
 
+- (void)setupTertiaryEventsScrollView {
+    
+}
+
 - (void)goToDetail:(UIButton *)sender {
     [self performSegueWithIdentifier:@"goToDetail" sender:self.currentEvent];
 }
@@ -243,6 +263,7 @@
     int page = floor((self.mainEventsScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
 
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", page + 1, self.events.count];
+    self.pageControl.currentPage = page;
     
     if (page != [self.events indexOfObject:self.currentEvent] && page <= self.events.count && page >= 0) {
         self.currentEvent = [self.events objectAtIndex:page];
