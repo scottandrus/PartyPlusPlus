@@ -153,6 +153,8 @@
     [SAViewManipulator roundNavigationBar:self.navigationController.navigationBar];
 }
 
+//- (void)generate
+
 - (void)generateEvents {
     // Create a mutable array to mutate events
     NSMutableArray *mutableEvents = [NSMutableArray array];
@@ -239,9 +241,12 @@
     // Update the page when more than 50% of the previous/next page is visible
     CGFloat pageWidth = self.mainEventsScrollView.width;
     int page = floor((self.mainEventsScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+
     self.pageLabel.text = [NSString stringWithFormat:@"%d out of %d", page + 1, self.events.count];
     
-    self.currentEvent = [self.events objectAtIndex:page];
+    if (page != [self.events indexOfObject:self.currentEvent] && page <= self.events.count && page >= 0) {
+        self.currentEvent = [self.events objectAtIndex:page];
+    }
 }
 
 

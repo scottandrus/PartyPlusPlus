@@ -39,12 +39,13 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="643246235">
 						<reference key="NSNextResponder" ref="411582980"/>
-						<int key="NSvFlags">1298</int>
+						<int key="NSvFlags">1325</int>
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrameSize">{280, 280}</string>
 						<reference key="NSSuperview" ref="411582980"/>
 						<reference key="NSWindow"/>
-						<int key="IBUIContentMode">4</int>
+						<reference key="NSNextKeyView" ref="897964654"/>
+						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">

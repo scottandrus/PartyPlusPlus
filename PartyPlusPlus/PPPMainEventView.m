@@ -50,7 +50,10 @@
    
     self.dateLabel.text = self.event.dateString;
     
-    self.imageView.contentMode = UIViewContentModeCenter;
+    self.imageView.left = CGRectGetMidX(self.bounds) - CGRectGetMidX(self.imageView.bounds);
+    self.imageView.top = CGRectGetMidY(self.bounds) - CGRectGetMidY(self.imageView.bounds);
+    
+
     self.imageView.image = self.event.image;
     [self downloadPhoto:event.imageURL];
 }
