@@ -211,7 +211,7 @@
                 
                 callback();
                 // Create an immutable copy for the property
-                    [[self.eventViews objectAtIndex:i] setAttendingThumbnails:[tempPhotoArray copy]];
+                [[self.eventViews objectAtIndex:i] setAttendingThumbnails:[tempPhotoArray copy]];
                 [[self.eventViews objectAtIndex:i] showThumbnails];
                 
             }
@@ -373,6 +373,7 @@
 }
 
 - (void)refresh {
+    [SVProgressHUD showWithStatus:@"Refreshing..."];
     if (FBSession.activeSession.isOpen) {
         //        [self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
         //        self.userInfoTextView.hidden = NO;
@@ -408,13 +409,15 @@
                 
                 
                 // Grab the current page and number of pages while we're here
-                self.pageControl.currentPage = 0;
+//                self.pageControl.currentPage = 0;
                 self.pageControl.numberOfPages = self.events.count;
                 
                 // Set initial current event
-                self.currentEvent = [self.events objectAtIndex:0];
+//                self.currentEvent = [self.events objectAtIndex:0];
                 
                 self.tertiaryEventsScrollView.hidden = NO;
+                
+                [self.mainEventsScrollView scrollRectToVisible:CGRectMake(0, 0, self.mainEventsScrollView.width, self.mainEventsScrollView.height) animated:YES];
                 
                 // Show that page control
                 self.pageControl.hidden = NO;
@@ -423,13 +426,14 @@
                 [SVProgressHUD showSuccessWithStatus:@"Done!"];
                 
             }
-            
+            else [SVProgressHUD showErrorWithStatus:@"Didn't work. :("];
         }];
         
         [requester start];
         [self pullOtherEventsWithCompetionBlock:^{
             [self setupTertiaryEventsScrollView];
         }];
+        
         
     }
     [self setupMainEventsScrollView];
@@ -741,6 +745,7 @@
     if (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2) {
         [self rsvpEventWithEID:[tEvent.eventId stringValue] andRSVP:rsvpString];
     }
+    [self refresh];
 }
 
 @end
