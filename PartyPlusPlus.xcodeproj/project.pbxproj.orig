@@ -16,9 +16,6 @@
 		D21C4714162A923E007D8307 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = D21C4713162A923E007D8307 /* fb.png */; };
 		D21C4716162A92E8007D8307 /* fb64.png in Resources */ = {isa = PBXBuildFile; fileRef = D21C4715162A92E8007D8307 /* fb64.png */; };
 		D21C4718162A9332007D8307 /* fb36.png in Resources */ = {isa = PBXBuildFile; fileRef = D21C4717162A9332007D8307 /* fb36.png */; };
-		D21C471B162AA7CE007D8307 /* SAContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C471A162AA7CE007D8307 /* SAContentViewController.m */; };
-		D21C471E162AA934007D8307 /* SAMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21C471D162AA934007D8307 /* SAMenuViewController.m */; };
-		D21C4720162AB2D0007D8307 /* SAMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21C471F162AB2D0007D8307 /* SAMenuViewController.xib */; };
 		D282555D162914E500A498A6 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825554162914E500A498A6 /* OBGradientView.m */; };
 		D282555E162914E500A498A6 /* SAViewManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825556162914E500A498A6 /* SAViewManipulator.m */; };
 		D282555F162914E500A498A6 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D2825558162914E500A498A6 /* UIImage+Color.m */; };
@@ -68,11 +65,6 @@
 		D21C4713162A923E007D8307 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
 		D21C4715162A92E8007D8307 /* fb64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb64.png; sourceTree = "<group>"; };
 		D21C4717162A9332007D8307 /* fb36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb36.png; sourceTree = "<group>"; };
-		D21C4719162AA7CE007D8307 /* SAContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAContentViewController.h; sourceTree = "<group>"; };
-		D21C471A162AA7CE007D8307 /* SAContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAContentViewController.m; sourceTree = "<group>"; };
-		D21C471C162AA934007D8307 /* SAMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMenuViewController.h; sourceTree = "<group>"; };
-		D21C471D162AA934007D8307 /* SAMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMenuViewController.m; sourceTree = "<group>"; };
-		D21C471F162AB2D0007D8307 /* SAMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMenuViewController.xib; sourceTree = "<group>"; };
 		D2825553162914E500A498A6 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
 		D2825554162914E500A498A6 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		D2825555162914E500A498A6 /* SAViewManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewManipulator.h; sourceTree = "<group>"; };
@@ -306,11 +298,6 @@
 		D2D4E349162908EE001EE23B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D21C471C162AA934007D8307 /* SAMenuViewController.h */,
-				D21C471D162AA934007D8307 /* SAMenuViewController.m */,
-				D21C471F162AB2D0007D8307 /* SAMenuViewController.xib */,
-				D21C4719162AA7CE007D8307 /* SAContentViewController.h */,
-				D21C471A162AA7CE007D8307 /* SAContentViewController.m */,
 				F792230416290D6400ED0964 /* PPPLoginViewController.h */,
 				F792230516290D6400ED0964 /* PPPLoginViewController.m */,
 				D2D4E333162900F9001EE23B /* PPPViewController.h */,
@@ -324,9 +311,15 @@
 		F78F81E2162AAE24008207FE /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+				F78F81E3162AAE24008207FE /* SVProgressHUD.bundle */,
+				F78F81E4162AAE24008207FE /* SVProgressHUD.h */,
+				F78F81E5162AAE24008207FE /* SVProgressHUD.m */,
+=======
 				D21C46FD162A803E007D8307 /* SVProgressHUD.bundle */,
 				D21C46FE162A803E007D8307 /* SVProgressHUD.h */,
 				D21C46FF162A803E007D8307 /* SVProgressHUD.m */,
+>>>>>>> login_ui
 			);
 			path = SVProgressHUD;
 			sourceTree = "<group>";
@@ -408,13 +401,16 @@
 				F7E53BD71629EDA70044B9A7 /* FBUserSettingsViewResources.bundle in Resources */,
 				F7E53BD81629EDA70044B9A7 /* Info.plist in Resources */,
 				D21C467A162A0DD0007D8307 /* PPPTertiaryEventView.xib in Resources */,
+<<<<<<< HEAD
+				F78F81E6162AAE24008207FE /* SVProgressHUD.bundle in Resources */,
+=======
 				D21C4700162A803E007D8307 /* SVProgressHUD.bundle in Resources */,
 				D21C470B162A87E2007D8307 /* three_lines@2x.png in Resources */,
 				D21C4710162A8A20007D8307 /* PartyPlusPlusLogo.png in Resources */,
 				D21C4714162A923E007D8307 /* fb.png in Resources */,
 				D21C4716162A92E8007D8307 /* fb64.png in Resources */,
 				D21C4718162A9332007D8307 /* fb36.png in Resources */,
-				D21C4720162AB2D0007D8307 /* SAMenuViewController.xib in Resources */,
+>>>>>>> login_ui
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,9 +434,11 @@
 				D2B00B5416293E3A008DF306 /* PPPDetailViewController.m in Sources */,
 				D2B00B671629E970008DF306 /* PPPEvent.m in Sources */,
 				D21C4676162A0DA7007D8307 /* PPPTertiaryEventView.m in Sources */,
+<<<<<<< HEAD
+				F78F81E7162AAE24008207FE /* SVProgressHUD.m in Sources */,
+=======
 				D21C4701162A803E007D8307 /* SVProgressHUD.m in Sources */,
-				D21C471B162AA7CE007D8307 /* SAContentViewController.m in Sources */,
-				D21C471E162AA934007D8307 /* SAMenuViewController.m in Sources */,
+>>>>>>> login_ui
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
