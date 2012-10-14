@@ -9,6 +9,7 @@
 #import "PPPMainEventView.h"
 #import "SAViewManipulator.h"
 #import "UIView+Frame.h"
+#import "SVProgressHUD.h"
 
 @implementation PPPMainEventView
 
@@ -48,9 +49,41 @@
     }
    
     self.dateLabel.text = self.event.dateString;
+    
+    self.imageView.contentMode = UIViewContentModeCenter;
     self.imageView.image = self.event.image;
+    [self downloadPhoto:event.imageURL];
 }
 
+- (void)downloadPhoto:(NSString *)urlStr {
+    if (!self.event.image) {
+        // Download photo
+        UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [loading startAnimating];
+        [self addSubview:loading];
+        loading.center = self.center;
+        
+        dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            // TODO: Add a different image for each location
+            NSData *imgUrl;
+            if (!urlStr) {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://placekitten.com/g/480/480"]];
+            } else {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.imageView setImage:[UIImage imageWithData:imgUrl]];
+                [loading stopAnimating];
+                [loading removeFromSuperview];
+            });
+        });
+        dispatch_release(downloadQueue);
+    }
+}
 
 - (void)setupAttendingScrollView {
     
