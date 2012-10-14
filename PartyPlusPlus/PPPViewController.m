@@ -58,7 +58,7 @@
                 // Create an immutable copy for the property
                 self.events = [tempEventArray copy];
                 
-                self.events = [self.events sortedArrayUsingSelector:@selector(compare:)];
+//                self.events = [self.events sortedArrayUsingSelector:@selector(compare:)];
                 
                 // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
