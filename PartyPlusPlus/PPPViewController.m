@@ -56,9 +56,11 @@
                 }
                 
                 // Create an immutable copy for the property
-                self.events = [tempEventArray copy];
+//                self.events = [tempEventArray copy];
                 
-//                self.events = [self.events sortedArrayUsingSelector:@selector(compare:)];
+
+                NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)];
+                self.events = [tempEventArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
                 
                 // Ok, events are loaded, set up the Main Events scroll view
                 [self setupMainEventsScrollView];
@@ -83,10 +85,9 @@
         
         [requester start];
     }
-    
-
         
 }
+
 
 - (void)populateUserDetails {
     PPPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
