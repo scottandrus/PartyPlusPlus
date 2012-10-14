@@ -10,12 +10,13 @@
 
 @interface PPPPost : NSObject
 
-@property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSString *imageURL;
 @property (strong, nonatomic) NSString *text;
+@property (strong, nonatomic) NSString *dateString;
 @property (strong, nonatomic) NSDate *date;
 
-- (id)initWithImage:(UIImage *)image andDate:(NSDate *)date;
-- (id)initWithText:(NSString *)text andDate:(NSDate *)date;
+- (id)initWithImageUrl:(NSString *)image andDateString:(NSString *)date;
+- (id)initWithText:(NSString *)text andDateString:(NSString *)date;
 
 
 @end

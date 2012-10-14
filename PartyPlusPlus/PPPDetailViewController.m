@@ -9,6 +9,7 @@
 #import "PPPDetailViewController.h"
 #import "SAViewManipulator.h"
 #import "UIView+Frame.h"
+#import "PPPPost.h"
 
 #define WALL_PHOTO_PARAMS @"source"
 #define ATTENDING_PARAMS @"picture"
@@ -18,7 +19,7 @@
 @end
 
 @implementation PPPDetailViewController
-@synthesize wallPhotoURLs;
+@synthesize posts;
 @synthesize attendingScrollView;
 @synthesize attendingFriendsUrls;
 @synthesize feedScrollView;
@@ -88,11 +89,11 @@
     // Create a main event view pointer
     UIImageView *view;
     
-    self.feedScrollView.contentSize = CGSizeMake(self.wallPhotoImageView.width, self.wallPhotoImageView.height * self.wallPhotoURLs.count);
+    self.feedScrollView.contentSize = CGSizeMake(self.wallPhotoImageView.width, self.wallPhotoImageView.height * self.posts.count);
     
     
     // Create 10 events
-    for (size_t i = 0; i < self.wallPhotoURLs.count; ++i) {
+    for (size_t i = 0; i < self.posts.count; ++i) {
         
         // Allocate and initialize the event
         view = [[UIImageView alloc] initWithFrame:self.wallPhotoImageView.frame];
@@ -101,7 +102,8 @@
         
         // Set the labels
 //        view.image = [UIImage imageNamed:@"Thumbnail.png"];
-        [self downloadPhoto:[self.wallPhotoURLs objectAtIndex:i] forImageView:view];
+        PPPPost *post = [self.posts objectAtIndex:i];
+        [self downloadPhoto:post.imageURL forImageView:view];
         
         // Add it to the subview
         [self.feedScrollView addSubview:view];
@@ -141,6 +143,51 @@
     }
 }
 
+- (void)didPullFeedWithCallBack:(void (^)(void))callback; {
+    
+    FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+    NSString *graphPath = [NSString stringWithFormat:@"/%@/feed", self.event.eventId];
+    FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:nil HTTPMethod:@"GET"];
+    [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                      FBGraphObject *response,
+                                                      NSError *error) {
+        if (!error) {
+            
+            // Ok, so grab an event array
+            NSArray *eventArrayFromGraphObject = [response objectForKey:@"data"];
+            
+            // temp event array to hold
+            NSMutableArray *tempPostArray = [NSMutableArray array];
+            for (id dict in eventArrayFromGraphObject) {
+//                NSString *photoURL = [dict objectForKey:@"source"];
+//                NSString *dateString = [dict objectForKey:@"created_time"];
+//                PPPPost *post = [[PPPPost alloc] initWithImageUrl:photoURL andDateString:dateString];
+//                [tempPostArray addObject:post];
+            }
+            
+            // Create an immutable copy for the property
+            self.posts = [tempPostArray copy];
+            callback();
+            
+            //            // Ok, events are loaded, set up the Main Events scroll view
+            //            [self setupMainEventsScrollView];
+            //
+            //            // Grab the current page and number of pages while we're here
+            //            self.pageControl.currentPage = 0;
+            //            self.pageControl.numberOfPages = self.events.count;
+            //
+            //            // Show that page control
+            //            self.pageControl.hidden = NO;
+            //
+            //            // Dismiss our SVProgressHUD
+            //            [SVProgressHUD showSuccessWithStatus:@"Done!"];
+        }
+        
+    }];
+    
+    [requester start];
+    
+}
 
 - (void)didPullEventPhotoURLsWithCallBack:(void (^)(void))callback; {
     
@@ -156,14 +203,16 @@
             NSArray *eventArrayFromGraphObject = [response objectForKey:@"data"];
             
             // temp event array to hold
-            NSMutableArray *tempPhotoArray = [NSMutableArray array];
+            NSMutableArray *tempPostArray = [NSMutableArray array];
             for (id dict in eventArrayFromGraphObject) {
                 NSString *photoURL = [dict objectForKey:@"source"];
-                [tempPhotoArray addObject:photoURL];
+                NSString *dateString = [dict objectForKey:@"created_time"];
+                PPPPost *post = [[PPPPost alloc] initWithImageUrl:photoURL andDateString:dateString];
+                [tempPostArray addObject:post];
             }
             
             // Create an immutable copy for the property
-            self.wallPhotoURLs = [tempPhotoArray copy];
+            self.posts = [tempPostArray copy];
             callback();
             
 //            // Ok, events are loaded, set up the Main Events scroll view
@@ -203,6 +252,7 @@
             NSMutableArray *tempPhotoArray = [NSMutableArray array];
             for (id dict in eventArrayFromGraphObject) {
                 NSString *photoURL = [[[dict objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+
                 [tempPhotoArray addObject:photoURL];
             }
             
@@ -238,9 +288,8 @@
 
 - (void)viewDidUnload {
     [self setAttendingScrollView:nil];
-    [self setThumbnailImageView:nil];
     [self setFeedScrollView:nil];
-    [self setWallPhotoImageView:nil];
+    [self setPosts:nil];
     [super viewDidUnload];
 }
 @end
