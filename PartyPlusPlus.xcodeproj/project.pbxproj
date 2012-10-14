@@ -138,8 +138,7 @@
 				D21C46B1162A4AAF007D8307 /* SVProgressHUD.h */,
 				D21C46B2162A4AAF007D8307 /* SVProgressHUD.m */,
 			);
-			name = SVProgressHUD;
-			path = SVProgressHUD/SVProgressHUD;
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		D2825563162914EB00A498A6 /* Utilities */ = {
