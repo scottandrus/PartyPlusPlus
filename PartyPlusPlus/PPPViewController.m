@@ -117,8 +117,8 @@
 - (void)pullOtherEventsWithCompetionBlock:(void (^)(void))block {
     // Query to fetch the active user's friends, limit to 25.
     NSString *query =
-    @"SELECT eid, name, venue, location, start_time, pic_big FROM event WHERE eid IN"
-    @"(SELECT eid from event_member WHERE uid = me() LIMIT 25)";
+    @"SELECT eid, name, venue, location, start_time, pic_big FROM event where eid IN "
+    @"(SELECT eid from event_member WHERE uid = me() AND rsvp_status = 'not_replied')";
     // Set up the query parameter
     NSDictionary *queryParam =
     [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
@@ -133,11 +133,11 @@
                                   NSLog(@"Error: %@", [error localizedDescription]);
                               } else {                                  
                                   // Ok, so grab an event array
-                                  NSArray *eventArrayFromGraphObject = [result objectForKey:@"data"];
+                                  NSArray *eventArrayFromFQL = [result objectForKey:@"data"];
                                   
                                   // temp event array to hold
                                   NSMutableArray *tempEventArray = [NSMutableArray array];
-                                  for (id dict in eventArrayFromGraphObject) {
+                                  for (id dict in eventArrayFromFQL) {
                                       PPPEvent *event = [[PPPEvent alloc] initWithFQLDictionary:dict];
                                       [tempEventArray addObject:event];
                                   }
