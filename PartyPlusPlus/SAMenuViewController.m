@@ -10,14 +10,71 @@
 #import "PPPAppDelegate.h"
 #import "PPPViewController.h"
 #import "SAViewManipulator.h"
+#import "UIView+Frame.h"
 
 #import <QuartzCore/QuartzCore.h>
+
+#define ME_PARAMS @"name,picture.type(normal)"
+#define PHOTO_PARAMS @"source"
 
 @interface SAMenuViewController ()
 
 @end
 
 @implementation SAMenuViewController
+
+#pragma mark - FB
+
+- (void)pullUserInfo {
+    if (FBSession.activeSession.isOpen) {
+        //        [self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
+        //        self.userInfoTextView.hidden = NO;
+        
+        FBRequestConnection *requester = [[FBRequestConnection alloc] init];
+        FBRequest *request = [FBRequest requestWithGraphPath:@"me" parameters:[NSDictionary dictionaryWithObject:ME_PARAMS forKey:@"fields"] HTTPMethod:@"GET"];
+        [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
+                                                          FBGraphObject *response,
+                                                          NSError *error) {
+            if (!error) {
+                [self downloadPhoto:[[[response objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];
+                [SAViewManipulator addBorderToView:self.userProfilePictureView withWidth:2 color:[UIColor whiteColor] andRadius:0];
+            }
+        }];
+        
+        [requester start];
+    }
+
+}
+
+- (void)downloadPhoto:(NSString *)urlStr {
+    self.userProfilePictureView.clipsToBounds = YES;
+    // Download photo
+    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [loading startAnimating];
+    [self.navigationController.navigationItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithCustomView:loading]];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("image downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        
+        // TODO: Add a different image for each location
+        NSData *imgUrl;
+        if (!urlStr) {
+            imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://placekitten.com/g/480/480"]];
+        } else {
+            imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.userProfilePictureView.contentMode = UIViewContentModeScaleAspectFill;
+            [self.userProfilePictureView setImage:[UIImage imageWithData:imgUrl]];
+            [loading stopAnimating];
+            [loading removeFromSuperview];
+        });
+    });
+    dispatch_release(downloadQueue);
+}
+
+#pragma mark - View Controller lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +88,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self pullUserInfo];
     // create a UITapGestureRecognizer to detect when the screenshot recieves a single tap
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapScreenShot:)];
     [self.screenShotImageView addGestureRecognizer:self.tapGesture];
@@ -42,18 +99,31 @@
     [self.panGesture setDelegate:self];
     [self.screenShotImageView addGestureRecognizer:self.panGesture];
     
-    [SAViewManipulator addBorderToView:self.screenShotImageView withWidth:0 color:[UIColor blackColor] andRadius:8];
-    self.screenShotImageView.clipsToBounds = YES;
+//    [SAViewManipulator addBorderToView:self.screenShotImageView withWidth:0 color:[UIColor blackColor] andRadius:8];
+    [SAViewManipulator addShadowToView:self.screenShotImageView withOpacity:1 radius:2 andOffset:CGSizeMake(-3, 0)];
+    
+    [self populateUserDetails];
 }
 
 - (void)viewDidUnload
 {
     [self setTableView:nil];
+    [self setUserProfilePictureView:nil];
+    [self setUserNameLabel:nil];
     [super viewDidUnload];
     
     // remove the gesture recognizers
     [self.screenShotImageView removeGestureRecognizer:self.tapGesture];
     [self.screenShotImageView removeGestureRecognizer:self.panGesture];
+}
+
+- (void)populateUserDetails {
+    PPPAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate requestUserData:^(id sender, id<FBGraphUser> user) {
+        self.userNameLabel.text = user.name;
+//        self.userProfilePictureView.image = [user objectForKey:@"id"];
+        NSLog(@"%@", user.name);
+    }];
 }
 
 - (void)singleTapScreenShot:(UITapGestureRecognizer *)gestureRecognizer

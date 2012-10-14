@@ -16,4 +16,8 @@
 @property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
 
+@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *userProfilePictureView;
+
+
 @end

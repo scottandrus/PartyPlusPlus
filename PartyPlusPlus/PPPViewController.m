@@ -465,7 +465,8 @@
     
     cameraUI.delegate = delegate;
     
-    [controller presentModalViewController: cameraUI animated: YES];
+    cameraUI.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [controller presentViewController:cameraUI animated:YES completion:nil];
     return YES;
 }
 
