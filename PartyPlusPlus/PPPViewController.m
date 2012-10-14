@@ -17,6 +17,8 @@
 #import "PPPAppDelegate.h"
 #import "SVProgressHUD.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "UIImage+fixOrientation.h"
+
 
 #define EVENT_PARAMS @"name,picture.type(large),attending,description,location"
 #define PHOTO_PARAMS @"source"
@@ -456,15 +458,13 @@
 
 - (void)uploadImage:(UIImage *)image {
     
+    image = image.fixOrientation;
     FBRequestConnection *requester = [[FBRequestConnection alloc] init];
     NSString *graphPath = [NSString stringWithFormat:@"/%@/photos", self.currentEvent.eventId];
     FBRequest *request = [FBRequest requestWithGraphPath:graphPath parameters:[NSDictionary dictionaryWithObject:image forKey:PHOTO_PARAMS] HTTPMethod:@"POST"];
     [requester addRequest:request completionHandler:^(FBRequestConnection *connection,
                                                       FBGraphObject *response,
                                                       NSError *error) {
-        if (!error) {
-            //
-        }
     }];
     
     [requester start];
