@@ -99,10 +99,10 @@
     [self.panGesture setDelegate:self];
     [self.screenShotImageView addGestureRecognizer:self.panGesture];
     
-//    [SAViewManipulator addBorderToView:self.screenShotImageView withWidth:0 color:[UIColor blackColor] andRadius:8];
     [SAViewManipulator addShadowToView:self.screenShotImageView withOpacity:1 radius:2 andOffset:CGSizeMake(-3, 0)];
     
     [self populateUserDetails];
+    [self customizeUI];
 }
 
 - (void)viewDidUnload
@@ -115,6 +115,10 @@
     // remove the gesture recognizers
     [self.screenShotImageView removeGestureRecognizer:self.tapGesture];
     [self.screenShotImageView removeGestureRecognizer:self.panGesture];
+}
+
+- (void)customizeUI {
+    [SAViewManipulator setGradientBackgroundImageForView:self.tableView withTopColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1] /*#333333*/ andBottomColor:[UIColor colorWithRed:0.439 green:0.439 blue:0.439 alpha:1] /*#707070*/];
 }
 
 - (void)populateUserDetails {

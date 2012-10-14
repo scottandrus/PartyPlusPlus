@@ -12,6 +12,9 @@
 #import "PPPImagePost.h"
 #import "PPPMessagePost.h"
 
+#import <Twitter/Twitter.h>
+#import <Accounts/Accounts.h>
+
 #define WALL_PHOTO_PARAMS @"source"
 #define ATTENDING_PARAMS @"picture"
 #define FEED_PARAMS @"message,from"
@@ -53,6 +56,7 @@
         // nothing to do
     }];
 
+    
     
     [self customizeUI];
 }
@@ -153,6 +157,9 @@
         
         [SAViewManipulator addBorderToView:view withWidth:3 color:[UIColor whiteColor] andRadius:0];
         [SAViewManipulator addShadowToView:view withOpacity:.8 radius:3 andOffset:CGSizeMake(1, 1)];
+        view.clipsToBounds = YES;
+        
+        view.contentMode = UIViewContentModeScaleAspectFill;
         
         // Add it to the subview
         [self.photosScrollView addSubview:view];
@@ -186,7 +193,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIImage *image = [UIImage imageWithData:imgUrl];
                 if (image.size.width >= self.coverImageView.size.width && image.size.height >= self.coverImageView.size.height) {
-                    self.coverImageView.contentMode = UIViewContentModeCenter;
+//                    self.coverImageView.contentMode = UIViewContentModeCenter;
                 }
                 [self.coverImageView setImage:[UIImage imageWithData:imgUrl]];
                 [loading stopAnimating];
@@ -196,6 +203,39 @@
         dispatch_release(downloadQueue);
     } else [self.coverImageView setImage:self.event.image];
 }
+
+#pragma mark - Twitter
+
+- (IBAction)postToTwitter {
+    // Create the view controller
+    TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
+    
+    // Optional: set an image, url and initial text
+    [twitter setInitialText:[NSString stringWithFormat:@"#%@", self.event.eventName]];
+    
+    // Show the controller
+    [self presentModalViewController:twitter animated:YES];
+    
+//    // Called when the tweet dialog has been closed
+//    twitter.completionHandler = ^(TWTweetComposeViewControllerResult result)
+//    {
+//        NSString *title = @"Tweet Status";
+//        NSString *msg;
+//        
+//        if (result == TWTweetComposeViewControllerResultCancelled)
+//            msg = @"Tweet compostion was canceled.";
+//        else if (result == TWTweetComposeViewControllerResultDone)
+//            msg = @"Tweet composition completed.";
+//
+//        // Show alert to see how things went...
+//        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+//        [alertView show];
+//        
+//        // Dismiss the controller
+//        [self dismissModalViewControllerAnimated:YES];
+//    };
+}
+
 
 #pragma mark - Facebook API Calls
 - (void)downloadPhoto:(NSString *)urlStr forImageView:(UIImageView*)imageView {
