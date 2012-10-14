@@ -86,7 +86,6 @@
     
     [self customizeUI];
 //    [self generateEvents];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -120,7 +119,9 @@
         [self performSegueWithIdentifier:@"SegueToLogin" sender:self];
     }
     
-    [SVProgressHUD showWithStatus:@"Loading..."];
+    if (self.pageLabel.hidden) {
+        [SVProgressHUD showWithStatus:@"Loading..."];
+    }
 }
 
 - (void)didReceiveMemoryWarning

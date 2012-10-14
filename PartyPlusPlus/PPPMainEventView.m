@@ -50,8 +50,9 @@
    
     self.dateLabel.text = self.event.dateString;
     
+    self.imageView.contentMode = UIViewContentModeCenter;
     self.imageView.image = self.event.image;
-    [self downloadPhoto:nil];
+    [self downloadPhoto:event.imageURL];
 }
 
 - (void)downloadPhoto:(NSString *)urlStr {
@@ -66,7 +67,13 @@
         dispatch_async(downloadQueue, ^{
             
             // TODO: Add a different image for each location
-            NSData *imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://placekitten.com/g/480/480"]];
+            NSData *imgUrl;
+            if (!urlStr) {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://placekitten.com/g/480/480"]];
+            } else {
+                imgUrl = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+            }
+            
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.imageView setImage:[UIImage imageWithData:imgUrl]];
