@@ -609,7 +609,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Documents/FacebookSDK\"",
-					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PartyPlusPlus/PartyPlusPlus-Prefix.pch";
